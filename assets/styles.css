@@ -440,3 +440,14 @@ textarea {
     justify-content: flex-start;
   }
 }
+
+/* Version display */
+.version {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary, #666);
+  opacity: 0.5;
+  margin-top: 0.5rem;
+  text-align: right;
+  direction: ltr; /* Always LTR for version numbers */
+}
+
