@@ -7,6 +7,9 @@
     <loc>https://example.com/about.html</loc>
   </url>
   <url>
+    <loc>https://example.com/articles/</loc>
+  </url>
+  <url>
     <loc>https://example.com/articles/article-01.html</loc>
   </url>
   <url>
@@ -127,9 +130,6 @@
     <loc>https://example.com/articles/article-40.html</loc>
   </url>
   <url>
-    <loc>https://example.com/articles/index.html</loc>
-  </url>
-  <url>
     <loc>https://example.com/contact.html</loc>
   </url>
   <url>
@@ -137,6 +137,9 @@
   </url>
   <url>
     <loc>https://example.com/en/about.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/en/articles/</loc>
   </url>
   <url>
     <loc>https://example.com/en/articles/article-01.html</loc>
@@ -259,9 +262,6 @@
     <loc>https://example.com/en/articles/article-40.html</loc>
   </url>
   <url>
-    <loc>https://example.com/en/articles/index.html</loc>
-  </url>
-  <url>
     <loc>https://example.com/en/contact.html</loc>
   </url>
   <url>
@@ -274,6 +274,9 @@
     <loc>https://example.com/en/legal/terms.html</loc>
   </url>
   <url>
+    <loc>https://example.com/en/services/</loc>
+  </url>
+  <url>
     <loc>https://example.com/en/services/ben-gurion-emergency.html</loc>
   </url>
   <url>
@@ -281,9 +284,6 @@
   </url>
   <url>
     <loc>https://example.com/en/services/entry-permits.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/en/services/index.html</loc>
   </url>
   <url>
     <loc>https://example.com/en/services/tourist-visas.html</loc>
@@ -301,6 +301,168 @@
     <loc>https://example.com/legal/terms.html</loc>
   </url>
   <url>
+    <loc>https://example.com/ru/</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/about.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-01.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-02.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-03.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-04.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-05.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-06.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-07.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-08.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-09.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-10.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-11.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-12.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-13.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-14.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-15.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-16.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-17.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-18.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-19.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-20.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-21.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-22.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-23.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-24.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-25.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-26.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-27.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-28.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-29.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-30.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-31.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-32.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-33.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-34.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-35.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-36.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-37.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-38.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-39.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/articles/article-40.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/contact.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/legal/editorial-policy.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/legal/privacy.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/legal/terms.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/services/</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/services/ben-gurion-emergency.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/services/citizenship.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/services/entry-permits.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/services/tourist-visas.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/ru/services/work-visas.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/services/</loc>
+  </url>
+  <url>
     <loc>https://example.com/services/ben-gurion-emergency.html</loc>
   </url>
   <url>
@@ -310,12 +472,168 @@
     <loc>https://example.com/services/entry-permits.html</loc>
   </url>
   <url>
-    <loc>https://example.com/services/index.html</loc>
-  </url>
-  <url>
     <loc>https://example.com/services/tourist-visas.html</loc>
   </url>
   <url>
     <loc>https://example.com/services/work-visas.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/about.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-01.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-02.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-03.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-04.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-05.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-06.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-07.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-08.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-09.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-10.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-11.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-12.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-13.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-14.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-15.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-16.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-17.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-18.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-19.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-20.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-21.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-22.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-23.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-24.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-25.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-26.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-27.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-28.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-29.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-30.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-31.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-32.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-33.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-34.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-35.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-36.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-37.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-38.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-39.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/articles/article-40.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/contact.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/legal/editorial-policy.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/legal/privacy.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/legal/terms.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/services/</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/services/ben-gurion-emergency.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/services/citizenship.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/services/entry-permits.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/services/tourist-visas.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/uk/services/work-visas.html</loc>
   </url>
 </urlset>

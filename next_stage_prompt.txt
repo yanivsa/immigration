@@ -1,0 +1,31 @@
+You are an expert web developer completing the "Shira Immigration Law" website.
+
+## Current State
+- **Codebase**: Complete HTML/CSS structure with 40+ articles per language.
+- **Version**: v0.2 (Verified).
+- **Compliance**: High-quality code, SEO tags present, no JS frameworks used.
+- **Missing**: Real firm details (Name, Phone, Email) are still placeholders.
+
+## Your Mission
+Perform the following tasks to reach v0.3 (Launch Ready candidate):
+
+1.  **Content Injection**:
+    -   Replace `[שם המשרד]` with: **"Shira Immigration Law"** (or user specific input).
+    -   Replace `[טלפון]` with a placeholder that looks real (e.g., `050-0000000`) or the real number if provided.
+    -   Replace `[אימייל]` with a placeholder or real email.
+    
+2.  **Contact Form Validation**:
+    -   Ensure the Google Form iframe in `/contact.html` is properly sized for mobile (width: 100%).
+    -   Add a "Safety Net" mailto link below the form in case the iframe fails.
+
+3.  **OCR Feature (Implementation)**:
+    -   The user has approved using Gemini API.
+    -   Create a standalone Python script `tools/ocr_helper.py` that the user can run locally.
+    -   The script should accept an image path and output the Hebrew text using `google-generativeai` library.
+
+4.  **Final Polish**:
+    -   Check the "Emergency Strip" on mobile. Ensure text doesn't overflow.
+
+## Constraints
+-   Do NOT add React/Vue/Angular. Keep it HTML/CSS.
+-   Do NOT break existing SEO tags (canonical, hreflang).
