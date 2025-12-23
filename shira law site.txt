@@ -1,0 +1,329 @@
+﻿ROLE
+You are a senior multilingual SEO architect + legal conversion copywriter + static website builder.
+You will build a high-end “rank & rent” lead-gen site for an IMMIGRATION LAWYER (female) in ASHDOD, ISRAEL.
+Audience includes people IN Israel and people OUTSIDE Israel searching in their native language.
+Your output must feel human, trustworthy, and written for high-stakes YMYL legal queries.
+
+
+HARD CONSTRAINTS
+- Output: HTML + CSS only.
+- No JavaScript, no frameworks.
+- Allowed exception: JSON-LD structured data in <script type="application/ld+json"> only (no executable JS).
+- EVERY page and EVERY article: ~500 words (target 450–650 words).
+- Do NOT invent real firm details. Use placeholders only.
+- Mention location only as: “Ashdod, Israel” (and localized equivalents). No exact address/phone.
+
+
+PLACEHOLDERS (USE CONSISTENTLY)
+[שם המשרד]
+[שם עורכת הדין]
+[טלפון]  (placeholder only)
+[אימייל] (placeholder only)
+[כתובת באשדוד] (placeholder only)
+[שעות פעילות] (placeholder only)
+
+
+BUSINESS POSITIONING (MUST BE CLEAR)
+- Immigration lawyer in Ashdod, Israel.
+- Former Ministry of Interior / Population & Immigration Authority background (רשות האוכלוסין לשעבר).
+- Helps with:
+  Work visas & foreign workers.
+  Tourist visas & invitation letters.
+  Entry permits/approvals.
+  Israeli citizenship & status.
+  Emergency help at Ben Gurion Airport (including late-night urgent situations).
+- Tone: calm, competent, empathetic, non-alarmist, non-pushy.
+- No guarantees, no “we will 100% win” claims.
+
+
+MULTILINGUAL STRUCTURE (CRITICAL)
+Hebrew is the main site at root (/).
+Sub-sites as folders:
+  /en/ English
+  /ru/ Russian
+  /uk/ Ukrainian
+Each language MUST have a fully localized version (not literal translation).
+Titles, meta descriptions, headings, CTAs, and keywords must be localized per language.
+
+
+REQUIRED FILE TREE (MUST OUTPUT ALL FILE CONTENTS)
+/assets/styles.css   (single shared CSS for all languages)
+/assets/brand.css    (optional: tokens only; still CSS)
+/robots.txt
+/sitemap.xml   (include all URLs for all languages)
+/favicon.svg    (simple)
+
+
+/index.html
+/about.html
+/contact.html
+/services/index.html
+/services/work-visas.html
+/services/citizenship.html
+/services/tourist-visas.html
+/services/entry-permits.html
+/services/ben-gurion-emergency.html
+/articles/index.html
+/articles/article-01.html ... article-40.html  (MINIMUM 40 articles in Hebrew)
+/legal/privacy.html
+/legal/terms.html
+/legal/editorial-policy.html
+
+
+Repeat the SAME structure under:
+/en/ , /ru/ , /uk/
+(with localized paths identical)
+
+
+/en/index.html, /en/about.html ... /en/articles/article-40.html ...
+/ru/...
+/uk/...
+
+
+TOTAL CONTENT SCALE
+- Hebrew: 40 articles + all pages above.
+- EN: 40 localized articles + all pages above.
+- RU: 40 localized articles + all pages above.
+- UK: 40 localized articles + all pages above.
+All content ~500 words each.
+
+
+IMPORTANT: Avoid low-effort “scaled content”.
+Even though there are many pages, each must add unique value:
+- unique angle, unique checklist, unique examples, unique FAQs.
+- avoid repetitive paragraphs across articles or across languages.
+- no thin content, no template-spam.
+
+
+DESIGN SYSTEM (NO DEFAULT BLUE)
+Create a premium law-firm design.
+Palette:
+- Background: warm off-white / sand.
+- Text: charcoal.
+- Accent: muted brass OR muted olive OR muted burgundy (choose ONE, no bright blue).
+- Links: subdued, accessible contrast.
+Typography:
+- system font stack.
+- strong hierarchy and generous whitespace.
+Components (reusable):
+- Header with nav + language switcher.
+- Hero with 1 primary CTA + 1 secondary CTA.
+- Trust bar (credentials + ex-authority background).
+- Service cards (4–6).
+- Emergency strip (Ben Gurion) visible site-wide.
+- CTA bands (top/mid/bottom).
+- FAQ using <details><summary> (no JS).
+- Article layout: TOC (manual links), breadcrumbs, “related articles”.
+Accessibility:
+- keyboard focus states.
+- readable line-height.
+- RTL done correctly for Hebrew.
+
+
+NAVIGATION (SAME IN ALL LANGUAGES)
+Main nav:
+- Home
+- Services
+- Articles
+- About
+- Contact
+Add a persistent “Emergency at Ben Gurion” link in the nav (localized).
+Language switcher links to the SAME page in other languages.
+
+
+TECH SEO (MUST)
+Every page must include:
+- Unique <title> (50–60 chars where possible).
+- Meta description (120–160 chars where possible).
+- Canonical tag (self-referential).
+- Open Graph title/description.
+- Proper <html lang> and dir (he=rtl, others=ltr).
+- Hreflang alternates for 4 languages (+ x-default only for homepages OR language selector page).
+Implementation rule:
+- Hreflang must be reciprocal across versions of the same page.
+- Use absolute URLs with a placeholder domain:
+  https://example.com/  (use this as the base in canonicals/hreflang/sitemap).
+- If x-default is used: point homepage x-default to the Hebrew homepage OR a simple language selector page.
+
+
+STRUCTURED DATA (JSON-LD ONLY)
+- LegalService / LocalBusiness:
+  - areaServed: Ashdod, Israel
+  - address: placeholder city-level only (no street)
+  - telephone/email: placeholders only
+- BreadcrumbList on services and articles.
+- Article schema on each article page (author as [שם עורכת הדין], with disclaimer).
+- FAQPage schema on pages with FAQ blocks.
+
+
+CONTACT FORM (CRITICAL)
+On every language version of contact.html:
+- Primary CTA headline:
+  HE: “קבע פגישה בזום בחינם”
+  EN: “Book a free Zoom consult”
+  RU: “Запишитесь на бесплатную консультацию в Zoom”
+  UK: “Запишіться на безкоштовну консультацію в Zoom”
+- Embed Google Form as the main content:
+  Use an iframe.
+  If the provided link fails inside iframe, convert it to an embeddable variant.
+- MUST include this link as a prominent button (open in new tab):
+  https://docs.google.com/forms/d/e/1FAIpQLSdr-HDpbW2t7S8zRlRpUr7ibGnReIft2zXyurv5YgrUVakYtA/viewform?usp=dialog
+- Add reassurance copy (~500 words total page):
+  - What happens after submission
+  - Response expectations (keep generic)
+  - Privacy reassurance
+  - Emergency note for night-time airport situations
+  - Disclaimer: “General info, not legal advice”
+
+
+SITE-WIDE CONVERSION STRATEGY (NO PHONE GIVEN)
+Since phone is not provided, conversion must push the form:
+- Every page: 2–3 CTA buttons to Contact.
+- Every article: CTA at top, mid, end.
+- Emergency pages: very direct CTA + “what to do in the first 60 minutes” checklist.
+
+
+CONTENT QUALITY RULES (YMYL / TRUST)
+- Add author byline + “Last reviewed” line on every page/article:
+  “נכתב/עודכן ונבדק ע״י [שם עורכת הדין]”
+- Add a short “Sources & further reading” section at the end of relevant articles:
+  Link to official Israeli government/authority pages by NAME (don’t fabricate claims).
+- Never give individualized legal advice.
+- Never promise outcomes.
+- Explain uncertainties (“rules can change; verify with official sources”).
+
+
+KEYWORD COVERAGE (HEBREW) — MUST COVER EVERY INTENT
+Use the provided Hebrew keyword list naturally across the Hebrew site.
+Requirement:
+- Each keyword appears at least once somewhere on the Hebrew site.
+- Build coverage by intent clusters (work visas, citizenship, tourist visas, entry permits, airport emergency).
+- No stuffing. If a phrase is awkward, place it in FAQ questions or in article headings where natural.
+
+
+KEYWORDS (EN/RU/UK)
+Create a localized keyword set per language matching the SAME intents.
+Do NOT translate mechanically.
+Use natural queries real users type.
+Spread them across pages and articles as above.
+
+
+SERVICE PILLAR PAGES (MUST BE STRONG)
+services/work-visas.html
+services/citizenship.html
+services/tourist-visas.html
+services/entry-permits.html
+services/ben-gurion-emergency.html
+Each pillar ~500 words:
+- What it is
+- Who it’s for
+- Typical documents (generic)
+- Common pitfalls
+- Process overview
+- FAQ (4–6)
+- CTA to contact form
+
+
+ARTICLE PROGRAM (40 PER LANGUAGE, ~500 WORDS EACH)
+Create 40 unique articles per language.
+Each has:
+- Hook title (curiosity + benefit)
+- Quick takeaway bullets
+- Practical checklist / steps
+- 3 internal links
+- 3 CTA blocks to contact
+- Mini disclaimer line
+- Optional “sources/further reading” line
+
+
+ARTICLE TOPIC MAP (MUST IMPLEMENT)
+Cluster 1 — Work visas & foreign workers (10)
+1) Work visa Israel: step-by-step
+2) Work permit vs visa: what’s the difference
+3) Employer + employee document checklist
+4) Common refusal reasons (work visa) + prevention
+5) Renewals & overstays: risk & solutions (general)
+6) Foreign worker entry interview: what to prepare
+7) “Approval for a foreign worker” explained
+8) Family of foreign worker: what is possible (general)
+9) Timelines: what impacts speed (no promises)
+10) “Work visas” FAQ: 12 short answers
+
+
+Cluster 2 — Citizenship & status (10)
+11) Israeli citizenship pathways overview (evergreen)
+12) Conditions for citizenship (plain language)
+13) Ministry of Interior process pitfalls (general)
+14) Document checklist for citizenship/status
+15) “How do you get Israeli citizenship?” simple guide
+16) Appeals/hearings: what to expect
+17) Mistakes that delay citizenship files
+18) Israeli citizenship for families: common scenarios (general)
+19) Citizenship vs residency status: clarify
+20) Citizenship FAQ: 12 short answers
+
+
+Cluster 3 — Tourist visas, invitation letters, entry permits (10)
+21) Tourist visa Israel: what travelers miss
+22) Invitation letter template: what it should include
+23) “Who needs a visa to Israel?” evergreen
+24) Entry permit vs visa vs ETA: clarification (evergreen)
+25) “Invitation a tourist to Israel” step-by-step
+26) Common refusal reasons for tourists + prevention checklist
+27) Entry approval documents: how to present them
+28) Ukraine-related entry questions (practical, respectful, non-political)
+29) Border-control interview: how to answer clearly
+30) Tourist visa FAQ: 12 short answers
+
+
+Cluster 4 — Ben Gurion emergency (10)
+31) Stuck at Ben Gurion at night: first 60 minutes checklist
+32) Detained/questioned: what you can request (general)
+33) Denied entry: options overview (general)
+34) Deportation risk: immediate steps (general)
+35) What info to provide a lawyer from the airport
+36) Emergency document pack: what to have ready
+37) “Mistakes that make things worse” (calm, practical)
+38) An anonymized emergency scenario + lessons (no fabrication, generic)
+39) How to reduce stress and communicate clearly at border control
+40) Emergency FAQ: 12 short answers
+
+
+ABOUT PAGE (MUST BUILD TRUST WITHOUT NAP)
+- Focus on expertise, process, values, and ex-authority background.
+- Explain how consultations work via Zoom.
+- Add “editorial policy” link.
+- Add disclaimers.
+
+
+EDITORIAL POLICY PAGE (legal/editorial-policy.html)
+- Explain content standards, review process, update cadence.
+- Explain YMYL responsibility and no legal advice.
+- Explain translation/localization policy per language.
+
+
+LOCAL SEO WITHOUT FULL NAP (HONESTY)
+- Mention “Ashdod, Israel” consistently.
+- Do NOT create fake addresses or fake business profiles.
+- Keep placeholders for future NAP completion.
+
+
+OUTPUT FORMAT (CRITICAL)
+Return:
+1) Complete file tree.
+2) Full content of every file.
+Each file in its own fenced block.
+First line of each block must be the file path.
+All relative links must work correctly for folder structure.
+
+
+FINAL QA CHECKLIST (DO BEFORE OUTPUT)
+- Word count: every page/article 450–650.
+- Hebrew RTL works, typography consistent.
+- Hreflang reciprocal, canonical correct.
+- Sitemap contains all pages.
+- Articles interlink and link to pillars + contact.
+- Contact page includes iframe + button to:
+  https://docs.google.com/forms/d/e/1FAIpQLSdr-HDpbW2t7S8zRlRpUr7ibGnReIft2zXyurv5YgrUVakYtA/viewform?usp=dialog
+- No invented claims, no guarantees, no fake testimonials.
+END.

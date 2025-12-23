@@ -1,0 +1,20 @@
+please review my entire codebase and do a full security check. fix all the bugs that you found. 
+make sure you write the versin number in the front page ( make sure that everytime update you add 0.1 to the version number)
+open the url of the app with chrome dev tools. check the grafics. 
+
+Explain the project structure and what frameworks are being used. Specifically what is being used for the front end and what is being used for the back end. Please reference the corresponding files.
+what is the best way to do the ocr? i am looking for a free way. does gemini api will do ? 
+כמו כן צריך פה שימוש ב oce באמצעות ai. האם ה api של gemini מספיק בשביל זה? תדריך אותי מה עושים.
+
+
+תכתוב את הפרומפט הבא  שהוא עבור השלב הבא. 
+וכולל כל מה שתכננת, בנוסף, הפרומפט צריך לתקן את הדברים שכתבת בפורמפט הקודם אם צריך לתקן, ובראייה 
+עד סוף התוכנית. 
+כמה עוד פרומפטים נשאר לך לעשות? 
+
+תבצע את הפרומפט 
+
+בוא נעשה חיתוך מצב.
+מה נדרש עוד לשפר ? 
+
+תבצע את התיקונים
