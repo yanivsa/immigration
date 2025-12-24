@@ -41,7 +41,7 @@ Hebrew is the main site at root (/).
 Sub-sites as folders:
   /en/ English
   /ru/ Russian
-  /uk/ Ukrainian
+  /ua/ Ukrainian
 Each language MUST have a fully localized version (not literal translation).
 Titles, meta descriptions, headings, CTAs, and keywords must be localized per language.
 
@@ -71,13 +71,13 @@ REQUIRED FILE TREE (MUST OUTPUT ALL FILE CONTENTS)
 
 
 Repeat the SAME structure under:
-/en/ , /ru/ , /uk/
+/en/ , /ru/ , /ua/
 (with localized paths identical)
 
 
 /en/index.html, /en/about.html ... /en/articles/article-40.html ...
 /ru/...
-/uk/...
+/ua/...
 
 
 TOTAL CONTENT SCALE
