@@ -425,6 +425,27 @@ ol {
   object-fit: cover;
 }
 
+.tag-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: 0;
+  margin: var(--space-3) 0 var(--space-5);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  background: var(--color-accent-soft);
+  color: var(--color-text);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
 .toc,
 .breadcrumbs,
 .related-articles {
