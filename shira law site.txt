@@ -10,17 +10,18 @@ HARD CONSTRAINTS
 - No JavaScript, no frameworks.
 - Allowed exception: JSON-LD structured data in <script type="application/ld+json"> only (no executable JS).
 - EVERY page and EVERY article: ~500 words (target 450–650 words).
-- Do NOT invent real firm details. Use generic labels until real details are provided.
+- Do NOT invent real firm details. If details are missing, omit them and keep wording generic (e.g., "the office attorney").
 - Mention location only as: “Ashdod, Israel” (and localized equivalents). No exact address/phone.
 
 
-IDENTIFIERS (PROVIDED BY CLIENT)
-Office name
-Attorney name
-Phone
-Email
-Ashdod address
-Office hours
+IDENTIFIERS (PROVIDED BY CLIENT, OPTIONAL)
+- Office name
+- Attorney name
+- Phone
+- Email
+- Ashdod address
+- Office hours
+If any of the above are not provided, do not insert placeholders and do not fabricate details.
 
 
 BUSINESS POSITIONING (MUST BE CLEAR)
@@ -149,8 +150,8 @@ Implementation rule:
 STRUCTURED DATA (JSON-LD ONLY)
 - LegalService / LocalBusiness:
   - areaServed: Ashdod, Israel
-  - address: placeholder city-level only (no street)
-  - telephone/email: placeholders only
+  - address: city-level only (no street); omit if not provided
+  - telephone/email: include only if real details are provided; otherwise omit
 - BreadcrumbList on services and articles.
 - Article schema on each article page (author as the office attorney, with disclaimer).
 - FAQPage schema on pages with FAQ blocks.
@@ -305,7 +306,7 @@ EDITORIAL POLICY PAGE (legal/editorial-policy.html)
 LOCAL SEO WITHOUT FULL NAP (HONESTY)
 - Mention “Ashdod, Israel” consistently.
 - Do NOT create fake addresses or fake business profiles.
-- Keep placeholders for future NAP completion.
+- If NAP details are missing, omit them entirely (no placeholders).
 
 
 OUTPUT FORMAT (CRITICAL)
