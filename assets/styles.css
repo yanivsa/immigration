@@ -450,6 +450,34 @@ ol {
   margin-top: var(--space-2);
 }
 
+.article-tags {
+  background: var(--color-surface);
+  border: 1px solid rgba(226, 214, 196, 0.8);
+  padding: var(--space-4);
+  border-radius: var(--radius-2);
+  box-shadow: 0 10px 28px rgba(31, 26, 20, 0.06);
+}
+
+.article-tags .tag-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-3) 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.article-tags .tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(152, 123, 81, 0.12);
+  border: 1px solid rgba(152, 123, 81, 0.35);
+  color: var(--color-text);
+  font-size: 0.9rem;
+}
+
 .form-card {
   background: var(--color-surface);
   padding: var(--space-6);
