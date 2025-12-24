@@ -142,7 +142,7 @@ Every page must include:
 Implementation rule:
 - Hreflang must be reciprocal across versions of the same page.
 - Use absolute URLs with a placeholder domain:
-  https://example.com/  (use this as the base in canonicals/hreflang/sitemap).
+  https://immigration.the-israeli-lawyer.com/  (use this as the base in canonicals/hreflang/sitemap).
 - If x-default is used: point homepage x-default to the Hebrew homepage OR a simple language selector page.
 
 
