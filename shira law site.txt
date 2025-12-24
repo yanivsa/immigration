@@ -10,17 +10,17 @@ HARD CONSTRAINTS
 - No JavaScript, no frameworks.
 - Allowed exception: JSON-LD structured data in <script type="application/ld+json"> only (no executable JS).
 - EVERY page and EVERY article: ~500 words (target 450–650 words).
-- Do NOT invent real firm details. Use placeholders only.
+- Do NOT invent real firm details. Use generic labels until real details are provided.
 - Mention location only as: “Ashdod, Israel” (and localized equivalents). No exact address/phone.
 
 
-PLACEHOLDERS (USE CONSISTENTLY)
-[שם המשרד]
-[שם עורכת הדין]
-[טלפון]  (placeholder only)
-[אימייל] (placeholder only)
-[כתובת באשדוד] (placeholder only)
-[שעות פעילות] (placeholder only)
+IDENTIFIERS (PROVIDED BY CLIENT)
+Office name
+Attorney name
+Phone
+Email
+Ashdod address
+Office hours
 
 
 BUSINESS POSITIONING (MUST BE CLEAR)
@@ -152,7 +152,7 @@ STRUCTURED DATA (JSON-LD ONLY)
   - address: placeholder city-level only (no street)
   - telephone/email: placeholders only
 - BreadcrumbList on services and articles.
-- Article schema on each article page (author as [שם עורכת הדין], with disclaimer).
+- Article schema on each article page (author as the office attorney, with disclaimer).
 - FAQPage schema on pages with FAQ blocks.
 
 
@@ -185,7 +185,7 @@ Since phone is not provided, conversion must push the form:
 
 CONTENT QUALITY RULES (YMYL / TRUST)
 - Add author byline + “Last reviewed” line on every page/article:
-  “נכתב/עודכן ונבדק ע״י [שם עורכת הדין]”
+  “נכתב/עודכן ונבדק ע״י עורכת הדין של המשרד”
 - Add a short “Sources & further reading” section at the end of relevant articles:
   Link to official Israeli government/authority pages by NAME (don’t fabricate claims).
 - Never give individualized legal advice.

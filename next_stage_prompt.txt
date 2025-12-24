@@ -10,9 +10,8 @@ You are an expert web developer completing the "Shira Immigration Law" website.
 Perform the following tasks to reach v0.3 (Launch Ready candidate):
 
 1.  **Content Injection**:
-    -   Replace `[שם המשרד]` with: **"Shira Immigration Law"** (or user specific input).
-    -   Replace `[טלפון]` with a placeholder that looks real (e.g., `050-0000000`) or the real number if provided.
-    -   Replace `[אימייל]` with a placeholder or real email.
+    -   Replace the office name with the real firm name when provided.
+    -   Replace phone and email with real contact details when provided.
     
 2.  **Contact Form Validation**:
     -   Ensure the Google Form iframe in `/contact.html` is properly sized for mobile (width: 100%).
