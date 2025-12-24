@@ -22,7 +22,7 @@ const items = [
   "legal",
   "ru",
   "services",
-  "uk"
+  "ua"
 ];
 
 await fs.rm(dist, { recursive: true, force: true });
