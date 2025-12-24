@@ -356,6 +356,15 @@ ol {
   font-weight: 600;
 }
 
+.emergency-strip .container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 .emergency-strip a {
   color: #ffffff;
   text-decoration: underline;
@@ -378,6 +387,12 @@ ol {
   flex-wrap: wrap;
   gap: var(--space-3);
   margin-top: var(--space-3);
+}
+
+.form-fallback {
+  margin-top: var(--space-3);
+  font-size: 0.95rem;
+  text-align: center;
 }
 
 .faq {
