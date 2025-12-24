@@ -35,3 +35,14 @@ await Promise.all(
     await fs.cp(src, dest, { recursive: true });
   })
 );
+
+// Copy _redirects file to dist for Cloudflare Pages
+const redirectsSrc = path.join(root, "_redirects");
+const redirectsDest = path.join(dist, "_redirects");
+try {
+  await fs.copyFile(redirectsSrc, redirectsDest);
+} catch (err) {
+  // If _redirects doesn't exist, create it
+  const redirectsContent = "/* /index.html 200\n";
+  await fs.writeFile(redirectsDest, redirectsContent);
+}
