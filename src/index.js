@@ -1,5 +1,8 @@
 export default {
   async fetch(request, env) {
+    const nonceBytes = crypto.getRandomValues(new Uint8Array(16));
+    const nonce = btoa(String.fromCharCode(...nonceBytes));
+
     const response = await env.ASSETS.fetch(request);
     const headers = new Headers(response.headers);
     headers.set(
@@ -12,7 +15,8 @@ export default {
         "img-src 'self' data:",
         "font-src 'self'",
         "style-src 'self'",
-        "script-src 'self' 'unsafe-inline'",
+        `script-src 'self' 'nonce-${nonce}'`,
+        "script-src-attr 'none'",
         "frame-src https://docs.google.com",
         "form-action 'self' https://docs.google.com",
         "connect-src 'self' https://docs.google.com https://www.gstatic.com",
@@ -35,6 +39,21 @@ export default {
       "Strict-Transport-Security",
       "max-age=31536000; includeSubDomains"
     );
+
+    const contentType = headers.get("content-type") ?? "";
+    if (contentType.includes("text/html")) {
+      const body = await response.text();
+      const updatedBody = body.replace(
+        /<script\b(?![^>]*\bnonce=)/g,
+        `<script nonce="${nonce}"`
+      );
+      headers.delete("Content-Length");
+      return new Response(updatedBody, {
+        status: response.status,
+        statusText: response.statusText,
+        headers,
+      });
+    }
 
     return new Response(response.body, {
       status: response.status,
