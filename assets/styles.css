@@ -60,6 +60,10 @@ ol {
   padding-inline-start: var(--space-5);
 }
 
+li + li {
+  margin-top: var(--space-2);
+}
+
 :focus-visible {
   outline: 3px solid var(--color-accent);
   outline-offset: 3px;
@@ -90,6 +94,31 @@ ol {
 
 .section {
   padding: var(--space-8) 0;
+}
+
+.breadcrumbs {
+  margin: 0 0 var(--space-4);
+  font-size: 0.95rem;
+  color: var(--color-muted);
+}
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.breadcrumbs li + li::before {
+  content: "›";
+  margin-inline: 6px;
+  color: var(--color-muted);
+}
+
+:dir(rtl) .breadcrumbs li + li::before {
+  content: "‹";
 }
 
 .eyebrow {
