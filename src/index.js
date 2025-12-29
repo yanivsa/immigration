@@ -15,7 +15,8 @@ export default {
         "script-src 'self' 'unsafe-inline'",
         "frame-src https://docs.google.com",
         "form-action 'self' https://docs.google.com",
-        "connect-src 'self'",
+        "connect-src 'self' https://docs.google.com https://www.gstatic.com",
+        "preconnect-src 'self' https://docs.google.com https://www.gstatic.com",
       ].join("; ")
     );
     headers.set("Referrer-Policy", "strict-origin-when-cross-origin");

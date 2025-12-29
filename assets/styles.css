@@ -329,9 +329,10 @@ li + li {
 }
 
 .button--secondary {
-  border-color: var(--color-accent);
+  border-color: var(--color-accent-strong);
   color: var(--color-accent-strong);
-  background: rgba(255, 255, 255, 0.6);
+  background: #ffffff;
+  box-shadow: 0 8px 18px rgba(31, 26, 20, 0.12);
 }
 
 .button--ghost {
@@ -358,6 +359,37 @@ li + li {
   display: grid;
   gap: var(--space-4);
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.gallery-grid {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.gallery-card {
+  background: var(--color-surface);
+  padding: var(--space-3);
+  border-radius: var(--radius-2);
+  border: 1px solid rgba(226, 214, 196, 0.8);
+  box-shadow: var(--shadow-1);
+}
+
+.gallery-card picture {
+  display: block;
+}
+
+.gallery-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-2);
+}
+
+.gallery-caption {
+  margin-top: var(--space-2);
+  font-size: 0.9rem;
+  color: var(--color-muted);
 }
 
 .service-card {
@@ -640,7 +672,7 @@ textarea {
 .version {
   font-size: 0.75rem;
   color: var(--color-text-secondary, #666);
-  opacity: 0.5;
+  opacity: 1;
   margin-top: 0.5rem;
   text-align: right;
   direction: ltr; /* Always LTR for version numbers */
