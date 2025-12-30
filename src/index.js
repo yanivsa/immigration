@@ -1,9 +1,45 @@
+const hasFileExtension = (pathname) => /\.[^/]+$/.test(pathname);
+
+const buildAssetRequest = (request, pathname) => {
+  const url = new URL(request.url);
+  url.pathname = pathname;
+  return new Request(url, request);
+};
+
+const fetchAsset = async (request, env, pathname) => {
+  const assetRequest = buildAssetRequest(request, pathname);
+  const response = await env.ASSETS.fetch(assetRequest);
+  return response.status === 404 ? null : response;
+};
+
 export default {
   async fetch(request, env) {
     const nonceBytes = crypto.getRandomValues(new Uint8Array(16));
     const nonce = btoa(String.fromCharCode(...nonceBytes));
 
-    const response = await env.ASSETS.fetch(request);
+    const url = new URL(request.url);
+    const { pathname } = url;
+    let response = null;
+
+    if (hasFileExtension(pathname)) {
+      response = await env.ASSETS.fetch(request);
+    } else {
+      if (pathname === "/") {
+        response = await fetchAsset(request, env, "/index.html");
+      } else if (pathname.endsWith("/")) {
+        response = await fetchAsset(request, env, `${pathname}index.html`);
+      } else {
+        response = await fetchAsset(request, env, `${pathname}.html`);
+        if (!response) {
+          response = await fetchAsset(request, env, `${pathname}/index.html`);
+        }
+      }
+
+      if (!response) {
+        response = await env.ASSETS.fetch(request);
+      }
+    }
+
     const headers = new Headers(response.headers);
     headers.set(
       "Content-Security-Policy",
