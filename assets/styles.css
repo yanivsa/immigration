@@ -361,35 +361,24 @@ li + li {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
-.gallery-grid {
-  display: grid;
-  gap: var(--space-4);
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-}
-
-.gallery-card {
-  background: var(--color-surface);
-  padding: var(--space-3);
+.content-media {
+  margin: var(--space-4) 0;
   border-radius: var(--radius-2);
+  overflow: hidden;
   border: 1px solid rgba(226, 214, 196, 0.8);
   box-shadow: var(--shadow-1);
+  background: var(--color-surface);
 }
 
-.gallery-card picture {
+.content-media picture {
   display: block;
 }
 
-.gallery-card img {
+.content-media img {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: var(--radius-2);
-}
-
-.gallery-caption {
-  margin-top: var(--space-2);
-  font-size: 0.9rem;
-  color: var(--color-muted);
+  object-fit: cover;
 }
 
 .service-card {

@@ -1,0 +1,54 @@
+scheduled_at,cluster,intent,keyword_he,keyword_en,keyword_ru,keyword_uk
+2025-12-30 11:00,immigration,immigration-to-israel,הגירה לישראל,immigration to Israel,иммиграция в Израиль,імміграція до Ізраїлю
+2025-12-31 11:00,immigration,immigration-lawyer-israel,עורך דין הגירה לישראל,immigration lawyer Israel,адвокат по иммиграции Израиль,адвокат з імміграції Ізраїль
+2026-01-01 11:00,immigration,immigration-law,דיני הגירה,Israel immigration law,иммиграционное право Израиля,імміграційне право Ізраїлю
+2026-01-02 11:00,law-of-return,law-of-return-eligibility,חוק השבות מי זכאי,Law of Return eligibility,закон о возвращении кто имеет право,закон про повернення хто має право
+2026-01-03 11:00,law-of-return,law-of-return-section-4a,חוק השבות סעיף 4א,Law of Return section 4A,закон о возвращении статья 4А,закон про повернення стаття 4А
+2026-01-04 11:00,law-of-return,law-of-return-grandchild-clause,חוק השבות הנכד,grandchild clause Israel,внуки евреев Израиль,онуки євреїв Ізраїль
+2026-01-05 11:00,law-of-return,fourth-generation-repatriation,רפטריאציה דור רביעי,4th generation repatriation Israel,репатриация 4 поколения,репатріація 4 покоління
+2026-01-06 11:00,law-of-return,repatriation-to-israel,רפטריאציה לישראל,repatriation to Israel,репатриация в Израиль,репатріація в Ізраїль
+2026-01-07 11:00,law-of-return,aliyah-to-israel,עלייה לישראל,aliyah to Israel,алия в Израиль,алія до Ізраїлю
+2026-01-08 11:00,immigration,moving-to-israel,מעבר לישראל,moving to Israel,переезд в Израиль,переїзд до Ізраїлю
+2026-01-09 11:00,admin,ministry-interior-appointment,משרד הפנים קביעת תור,Ministry of Interior appointment Israel,запись в МВД Израиля,запис до МВС Ізраїлю
+2026-01-10 11:00,documents,proof-of-jewish-heritage,אישור יהדות,proof of Jewish heritage,подтверждение еврейского происхождения,підтвердження єврейського походження
+2026-01-11 11:00,citizenship,israeli-citizenship,אזרחות ישראלית,Israeli citizenship,гражданство Израиля,громадянство Ізраїлю
+2026-01-12 11:00,citizenship,how-to-get-citizenship,איך מקבלים אזרחות ישראלית,how to get Israeli citizenship,как получить гражданство Израиля,як отримати громадянство Ізраїлю
+2026-01-13 11:00,citizenship,citizenship-requirements,תנאים לקבלת אזרחות ישראלית,Israeli citizenship requirements,условия получения гражданства Израиля,умови отримання громадянства Ізраїлю
+2026-01-14 11:00,citizenship,citizenship-law,חוק האזרחות,Israeli citizenship law,закон о гражданстве Израиля,закон про громадянство Ізраїлю
+2026-01-15 11:00,citizenship,citizenship-for-foreigners,אזרחות ישראלית לזרים,Israeli citizenship for foreigners,гражданство Израиля для иностранцев,громадянство Ізраїлю для іноземців
+2026-01-16 11:00,citizenship,citizenship-for-non-jews,אזרחות ישראלית ללא יהודים,Israeli citizenship for non-Jews,гражданство Израиля для неевреев,громадянство Ізраїлю для неєвреїв
+2026-01-17 11:00,citizenship,citizenship-through-marriage,אזרחות ישראלית דרך נישואין,citizenship through marriage Israel,гражданство Израиля через брак,громадянство Ізраїлю через шлюб
+2026-01-18 11:00,citizenship,citizenship-ministry-interior,קבלת אזרחות ישראלית משרד הפנים,Ministry of Interior citizenship application,получение гражданства Израиля в МВД,отримання громадянства Ізраїлю в МВС
+2026-01-19 11:00,citizenship,citizenship-application-form,טופס בקשה אזרחות ישראלית,Israeli citizenship application form,форма заявления на гражданство Израиля,форма заяви на громадянство Ізраїлю
+2026-01-20 11:00,status,a5-status,סטטוס A/5,A/5 visa Israel,статус A/5 Израиль,статус A/5 Ізраїль
+2026-01-21 11:00,status,permanent-residence,תושבות קבע בישראל,permanent residence Israel,ПМЖ Израиля,постійне проживання в Ізраїлі
+2026-01-22 11:00,status,temporary-residence,תושבות זמנית בישראל,temporary residence Israel,временное проживание в Израиле,тимчасове проживання в Ізраїлі
+2026-01-23 11:00,status,israeli-passport,דרכון ישראלי,Israeli passport,израильский паспорт,ізраїльський паспорт
+2026-01-24 11:00,status,citizenship-vs-residency,אזרחות מול תושבות,citizenship vs residency Israel,гражданство или ВНЖ в Израиле,громадянство чи ВНЖ в Ізраїлі
+2026-01-25 11:00,work-visa,work-visa-israel,ויזת עבודה בישראל,work visa Israel,рабочая виза Израиль,робоча віза Ізраїль
+2026-01-26 11:00,work-visa,work-permit-vs-visa,היתר עבודה מול ויזה,work permit vs visa,разрешение на работу и виза,дозвіл на роботу та віза
+2026-01-27 11:00,work-visa,foreign-workers-israel,עובדים זרים בישראל,foreign workers Israel,иностранные работники в Израиле,іноземні працівники в Ізраїлі
+2026-01-28 11:00,work-visa,employer-employee-documents,מסמכים למעסיק ולעובד זר,employer and employee document checklist,документы для работодателя и работника,документи для роботодавця та працівника
+2026-01-29 11:00,work-visa,work-visa-refusal-reasons,סיבות לסירוב ויזת עבודה,work visa refusal reasons,причины отказа в рабочей визе,причини відмови у робочій візі
+2026-01-30 11:00,work-visa,work-visa-extension,הארכת אשרת עבודה,work visa extension Israel,продление рабочей визы в Израиле,продовження робочої візи в Ізраїлі
+2026-01-31 11:00,work-visa,b1-visa-israel,ויזה B1 בישראל,B1 visa Israel,виза B1 Израиль,віза B1 Ізраїль
+2026-02-01 11:00,work-visa,b1-visa-rights,ויזה B1 זכויות,B1 visa rights,права по визе B1,права за візою B1
+2026-02-02 11:00,work-visa,b1-visa-national-insurance,ויזה B1 ביטוח לאומי,B1 visa national insurance,виза B1 и национальное страхование,віза B1 та національне страхування
+2026-02-03 11:00,work-visa,work-visa-status-check,בדיקת אשרת עבודה,check work visa status,проверка рабочей визы,перевірка робочої візи
+2026-02-04 11:00,work-visa,work-visa-processing-times,זמני טיפול בויזות עבודה,work visa processing times,сроки оформления рабочей визы,строки оформлення робочої візи
+2026-02-05 11:00,work-visa,foreign-worker-approval,אישור עובד זר,foreign worker approval,одобрение иностранного работника,схвалення іноземного працівника
+2026-02-06 11:00,tourist-visa,tourist-visa-israel,ויזת תייר לישראל,tourist visa Israel,туристическая виза в Израиль,туристична віза в Ізраїль
+2026-02-07 11:00,entry-permit,entry-permit-israel,אישור כניסה לישראל,entry permit Israel,разрешение на въезд в Израиль,дозвіл на в'їзд до Ізраїлю
+2026-02-08 11:00,entry-permit,entry-visa-israel,אשרת כניסה לישראל,entry visa Israel,виза для въезда в Израиль,віза для в'їзду в Ізраїль
+2026-02-09 11:00,entry-permit,who-needs-visa,מי צריך אשרה כניסה לישראל,who needs a visa to Israel,кому нужна виза в Израиль,кому потрібна віза в Ізраїль
+2026-02-10 11:00,entry-permit,eta-il,ויזה אלקטרונית לישראל,ETA-IL Israel,электронное разрешение ETA-IL Израиль,електронний дозвіл ETA-IL Ізраїль
+2026-02-11 11:00,tourist-visa,invitation-letter-template,מכתב הזמנה לאורח מחו״ל דוגמא,invitation letter to Israel template,письмо-приглашение в Израиль образец,лист-запрошення до Ізраїлю зразок
+2026-02-12 11:00,tourist-visa,invite-tourist,הזמנת תייר לישראל,invite a tourist to Israel,приглашение туриста в Израиль,запрошення туриста до Ізраїлю
+2026-02-13 11:00,entry-permit,entry-permit-for-tourists,אישור כניסה לישראל לתיירים,entry permit for tourists,разрешение на въезд для туристов в Израиль,дозвіл на в'їзд для туристів до Ізраїлю
+2026-02-14 11:00,entry-permit,entry-permit-documents,מסמכי אישור כניסה,entry permit documents,документы для разрешения на въезд,документи для дозволу на в'їзд
+2026-02-15 11:00,tourist-visa,tourist-visa-refusal-reasons,סיבות לסירוב ויזת תייר,tourist visa refusal reasons,причины отказа в туристической визе,причини відмови у туристичній візі
+2026-02-16 11:00,entry-permit,border-control-interview,ראיון גבול,border control interview Israel,интервью на границе Израиля,співбесіда на кордоні Ізраїлю
+2026-02-17 11:00,entry-permit,types-of-entry-visas,סוגי אשרות כניסה לישראל,types of entry visas Israel,виды виз для въезда в Израиль,типи віз для в'їзду до Ізраїлю
+2026-02-18 11:00,family,family-reunification,איחוד משפחות,family reunification Israel,воссоединение семьи в Израиле,возз'єднання сім'ї в Ізраїлі
+2026-02-19 11:00,family,family-reunification-application-form,טופס בקשה לאיחוד משפחות,family reunification application form,форма заявления на воссоединение семьи,форма заяви на возз'єднання сім'ї
+2026-02-20 11:00,entry-permit,eta-israel-short,ETA לישראל,ETA Israel,ETA Израиль,ETA Ізраїль
