@@ -2,9 +2,6 @@
   const mount =
     document.querySelector(".lang-switch") ||
     document.querySelector(".header-inner");
-  if (!mount || document.querySelector(".search-trigger")) {
-    return;
-  }
 
   const baseLang = (document.documentElement.lang || "en")
     .toLowerCase()
@@ -51,29 +48,59 @@
 
   const copy = strings[baseLang] || strings.en;
 
-  const trigger = document.createElement("button");
-  trigger.type = "button";
-  trigger.className = "search-trigger";
-  trigger.setAttribute("aria-label", copy.openLabel);
-  trigger.setAttribute("aria-expanded", "false");
-  trigger.innerHTML = `
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path
-        d="M15.5 15.5L20 20M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.6"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-    </svg>
-  `;
+  const triggers = new Set();
+  const registerTrigger = (element) => {
+    if (!element || triggers.has(element)) {
+      return;
+    }
+    if (element.tagName === "BUTTON" && !element.type) {
+      element.type = "button";
+    }
+    if (!element.hasAttribute("aria-label") && !element.textContent.trim()) {
+      element.setAttribute("aria-label", copy.openLabel);
+    }
+    element.setAttribute("aria-expanded", "false");
+    triggers.add(element);
+  };
+
+  document.querySelectorAll("[data-search-trigger]").forEach(registerTrigger);
+
+  const existingTrigger = document.querySelector(".search-trigger");
+  if (existingTrigger) {
+    registerTrigger(existingTrigger);
+  }
+
+  if (!existingTrigger && mount) {
+    const trigger = document.createElement("button");
+    trigger.type = "button";
+    trigger.className = "search-trigger";
+    trigger.setAttribute("aria-label", copy.openLabel);
+    trigger.innerHTML = `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M15.5 15.5L20 20M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    `;
+    mount.appendChild(trigger);
+    registerTrigger(trigger);
+  }
+
+  if (!triggers.size) {
+    return;
+  }
 
   const backdrop = document.createElement("div");
   backdrop.className = "search-backdrop";
 
   const panel = document.createElement("div");
   panel.className = "search-panel";
+  panel.id = "site-search-panel";
   panel.setAttribute("role", "dialog");
   panel.setAttribute("aria-label", copy.panelLabel);
   panel.innerHTML = `
@@ -106,7 +133,6 @@
     </div>
   `;
 
-  mount.appendChild(trigger);
   document.body.appendChild(backdrop);
   document.body.appendChild(panel);
 
@@ -114,6 +140,11 @@
   const results = panel.querySelector("[data-search-results]");
   const hint = panel.querySelector("[data-search-hint]");
   const closeButton = panel.querySelector(".search-close");
+  const triggerList = Array.from(triggers);
+
+  triggerList.forEach((element) => {
+    element.setAttribute("aria-controls", panel.id);
+  });
 
   let fuse = null;
   let items = null;
@@ -211,10 +242,16 @@
     renderResults(matches);
   };
 
+  const setExpanded = (expanded) => {
+    triggerList.forEach((element) => {
+      element.setAttribute("aria-expanded", expanded ? "true" : "false");
+    });
+  };
+
   const openPanel = async () => {
     panel.classList.add("is-open");
     backdrop.classList.add("is-visible");
-    trigger.setAttribute("aria-expanded", "true");
+    setExpanded(true);
     input.focus();
     if (!items) {
       results.innerHTML = `<p class="search-loading">${copy.loading}</p>`;
@@ -232,18 +269,22 @@
   const closePanel = () => {
     panel.classList.remove("is-open");
     backdrop.classList.remove("is-visible");
-    trigger.setAttribute("aria-expanded", "false");
+    setExpanded(false);
     input.value = "";
     results.innerHTML = "";
     hint.hidden = false;
   };
 
-  trigger.addEventListener("click", () => {
+  const togglePanel = () => {
     if (panel.classList.contains("is-open")) {
       closePanel();
     } else {
       openPanel();
     }
+  };
+
+  triggerList.forEach((element) => {
+    element.addEventListener("click", togglePanel);
   });
 
   closeButton.addEventListener("click", closePanel);
