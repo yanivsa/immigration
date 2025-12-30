@@ -145,13 +145,64 @@
 <section class="section" id="form">
   <div class="container stack">
     <h2 class="title-lg">Форма заявки</h2>
-    <p>Це найшвидший спосіб передачі основної інформації. Якщо форма не відкривається, скористайтеся кнопкою
-      щоб відкрити в новій вкладці.</p>
+    <p>
+      Коротка форма нижче — найшвидший спосіб передати основні дані. Надсилання йде прямо до захищеної форми
+      Google. За потреби відкрийте повну форму в новій вкладці.
+    </p>
     <div class="form-card">
-      <iframe title="Форма заявки" src="https://docs.google.com/forms/d/e/1FAIpQLSdr-HDpbW2t7S8zRlRpUr7ibGnReIft2zXyurv5YgrUVakYtA/viewform?embedded=true" width="100%" height="1200" frameborder="0" marginheight="0" marginwidth="0" sandbox="allow-forms allow-scripts allow-same-origin" referrerpolicy="strict-origin-when-cross-origin">Завантаження...</iframe>
+      <form
+        class="form-grid js-google-form"
+        action="https://docs.google.com/forms/d/e/1FAIpQLSdr-HDpbW2t7S8zRlRpUr7ibGnReIft2zXyurv5YgrUVakYtA/formResponse"
+        method="POST"
+        autocomplete="on"
+      >
+        <div>
+          <label for="contact-name">Повне ім'я</label>
+          <input
+            id="contact-name"
+            name="entry.1423562739"
+            type="text"
+            placeholder="Повне ім'я"
+            autocomplete="name"
+            required
+          />
+        </div>
+        <div>
+          <label for="contact-email">Електронна пошта</label>
+          <input
+            id="contact-email"
+            name="entry.1867450234"
+            type="email"
+            placeholder="name@example.com"
+            autocomplete="email"
+            required
+          />
+        </div>
+        <div>
+          <label for="contact-phone">Телефон</label>
+          <input
+            id="contact-phone"
+            name="entry.2035157097"
+            type="tel"
+            inputmode="tel"
+            placeholder="Номер телефону"
+            autocomplete="tel"
+            required
+          />
+        </div>
+        <button class="button button--primary" type="submit">Надіслати</button>
+        <p
+          class="form-status"
+          data-form-status
+          data-success="Дякуємо, дані надіслано. Ми зв'яжемося з вами."
+          data-error="Щось пішло не так. Спробуйте ще раз або відкрийте повну форму."
+          role="status"
+          aria-live="polite"
+          hidden
+        ></p>
+      </form>
       <div class="cta-actions">
-        <a class="button button--primary" href="https://docs.google.com/forms/d/e/1FAIpQLSdr-HDpbW2t7S8zRlRpUr7ibGnReIft2zXyurv5YgrUVakYtA/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">Відкрити форму в новій вкладці</a>
-        <a class="button button--secondary" href="/ua/contact#form">Повернення до форми</a>
+        <a class="button button--secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSdr-HDpbW2t7S8zRlRpUr7ibGnReIft2zXyurv5YgrUVakYtA/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">Відкрити повну форму в новій вкладці</a>
       </div>
     </div>
   </div>
@@ -175,8 +226,8 @@
   <div class="container stack">
     <h2 class="title-lg">Конфіденційність і керування даними</h2>
     <p>Інформація використовується лише для спілкування, початкової оцінки та для того, щоб побачити, чи можемо ми допомогти. Ми цього не робимо
-      Ми передаємо дані третім особам, які не мають відношення до звернення. Форма вбудовується через сторонній сервіс і
-      може бути предметом його політики конфіденційності.</p>
+      Ми передаємо дані третім особам, які не мають відношення до звернення. Надсилання обробляється через сторонній
+      сервіс і може підпадати під його політику конфіденційності.</p>
     <p>Пам'ятайте: інформація на сайті та в початковій бесіді носить загальний характер і не є законною
       консультація. Персональна рекомендація можлива тільки після детальної перевірки.</p>
     <div class="cta-band">
@@ -217,5 +268,8 @@
 </section>
 
     </main>
-  </body>
+    <script src="/assets/form-submit.js" defer></script>
+    <script src="/assets/vendor/fuse.min.js" defer></script>
+    <script src="/assets/search.js" defer></script>
+</body>
 </html>
