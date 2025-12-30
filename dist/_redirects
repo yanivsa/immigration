@@ -1,0 +1,54 @@
+# Canonicalize directory slashes
+/en /en/ 301
+/ru /ru/ 301
+/ua /ua/ 301
+/services /services/ 301
+/en/services /en/services/ 301
+/ru/services /ru/services/ 301
+/ua/services /ua/services/ 301
+/articles /articles/ 301
+/en/articles /en/articles/ 301
+/ru/articles /ru/articles/ 301
+/ua/articles /ua/articles/ 301
+
+# .html to clean URLs
+/about.html /about 301
+/contact.html /contact 301
+/legal/privacy.html /legal/privacy 301
+/legal/terms.html /legal/terms 301
+/legal/editorial-policy.html /legal/editorial-policy 301
+/en/about.html /en/about 301
+/en/contact.html /en/contact 301
+/ru/about.html /ru/about 301
+/ru/contact.html /ru/contact 301
+/ua/about.html /ua/about 301
+/ua/contact.html /ua/contact 301
+/services/:slug.html /services/:slug 301
+/en/services/:slug.html /en/services/:slug 301
+/ru/services/:slug.html /ru/services/:slug 301
+/ua/services/:slug.html /ua/services/:slug 301
+/articles/:slug.html /articles/:slug 301
+/en/articles/:slug.html /en/articles/:slug 301
+/ru/articles/:slug.html /ru/articles/:slug 301
+/ua/articles/:slug.html /ua/articles/:slug 301
+
+# Clean URL rewrites to .html
+/about /about.html 200
+/contact /contact.html 200
+/legal/privacy /legal/privacy.html 200
+/legal/terms /legal/terms.html 200
+/legal/editorial-policy /legal/editorial-policy.html 200
+/en/about /en/about.html 200
+/en/contact /en/contact.html 200
+/ru/about /ru/about.html 200
+/ru/contact /ru/contact.html 200
+/ua/about /ua/about.html 200
+/ua/contact /ua/contact.html 200
+/services/:slug /services/:slug.html 200
+/en/services/:slug /en/services/:slug.html 200
+/ru/services/:slug /ru/services/:slug.html 200
+/ua/services/:slug /ua/services/:slug.html 200
+/articles/:slug /articles/:slug.html 200
+/en/articles/:slug /en/articles/:slug.html 200
+/ru/articles/:slug /ru/articles/:slug.html 200
+/ua/articles/:slug /ua/articles/:slug.html 200

@@ -1,0 +1,39 @@
+:root {
+  --font-sans: "Avenir Next", "Avenir", "Optima", "Candara", "Segoe UI", "Trebuchet MS", sans-serif;
+  --font-display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "Palatino", "Georgia", serif;
+  --font-mono: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+
+  --color-bg: #f7f2ea;
+  --color-surface: #fffaf4;
+  --color-text: #2a241f;
+  --color-muted: #6f6258;
+  --color-text-secondary: #6a5a50;
+  --color-accent: #88663a;
+  --color-accent-strong: #7a5b2e;
+  --color-accent-soft: #f1e5d4;
+  --color-border: #e2d6c4;
+  --color-link: #5b4a2f;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  --radius-1: 6px;
+  --radius-2: 12px;
+  --radius-3: 20px;
+  --radius-pill: 999px;
+
+  --shadow-1: 0 12px 32px rgba(31, 26, 20, 0.08);
+  --shadow-2: 0 20px 60px rgba(31, 26, 20, 0.16);
+
+  --max-width: 1180px;
+  --line-height: 1.7;
+  --transition-fast: 160ms ease;
+  --transition-slow: 420ms ease;
+}
