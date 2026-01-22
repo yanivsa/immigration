@@ -1,28 +1,4 @@
 scheduled_at,cluster,intent,keyword_he,keyword_en,keyword_ru,keyword_uk
-2025-12-30 11:00,immigration,immigration-to-israel,הגירה לישראל,immigration to Israel,иммиграция в Израиль,імміграція до Ізраїлю
-2025-12-31 11:00,immigration,immigration-lawyer-israel,עורך דין הגירה לישראל,immigration lawyer Israel,адвокат по иммиграции Израиль,адвокат з імміграції Ізраїль
-2026-01-01 11:00,immigration,immigration-law,דיני הגירה,Israel immigration law,иммиграционное право Израиля,імміграційне право Ізраїлю
-2026-01-02 11:00,law-of-return,law-of-return-eligibility,חוק השבות מי זכאי,Law of Return eligibility,закон о возвращении кто имеет право,закон про повернення хто має право
-2026-01-03 11:00,law-of-return,law-of-return-section-4a,חוק השבות סעיף 4א,Law of Return section 4A,закон о возвращении статья 4А,закон про повернення стаття 4А
-2026-01-04 11:00,law-of-return,law-of-return-grandchild-clause,חוק השבות הנכד,grandchild clause Israel,внуки евреев Израиль,онуки євреїв Ізраїль
-2026-01-05 11:00,law-of-return,fourth-generation-repatriation,רפטריאציה דור רביעי,4th generation repatriation Israel,репатриация 4 поколения,репатріація 4 покоління
-2026-01-06 11:00,law-of-return,repatriation-to-israel,רפטריאציה לישראל,repatriation to Israel,репатриация в Израиль,репатріація в Ізраїль
-2026-01-07 11:00,law-of-return,aliyah-to-israel,עלייה לישראל,aliyah to Israel,алия в Израиль,алія до Ізраїлю
-2026-01-08 11:00,immigration,moving-to-israel,מעבר לישראל,moving to Israel,переезд в Израиль,переїзд до Ізраїлю
-2026-01-09 11:00,admin,ministry-interior-appointment,משרד הפנים קביעת תור,Ministry of Interior appointment Israel,запись в МВД Израиля,запис до МВС Ізраїлю
-2026-01-10 11:00,documents,proof-of-jewish-heritage,אישור יהדות,proof of Jewish heritage,подтверждение еврейского происхождения,підтвердження єврейського походження
-2026-01-11 11:00,citizenship,israeli-citizenship,אזרחות ישראלית,Israeli citizenship,гражданство Израиля,громадянство Ізраїлю
-2026-01-12 11:00,citizenship,how-to-get-citizenship,איך מקבלים אזרחות ישראלית,how to get Israeli citizenship,как получить гражданство Израиля,як отримати громадянство Ізраїлю
-2026-01-13 11:00,citizenship,citizenship-requirements,תנאים לקבלת אזרחות ישראלית,Israeli citizenship requirements,условия получения гражданства Израиля,умови отримання громадянства Ізраїлю
-2026-01-14 11:00,citizenship,citizenship-law,חוק האזרחות,Israeli citizenship law,закон о гражданстве Израиля,закон про громадянство Ізраїлю
-2026-01-15 11:00,citizenship,citizenship-for-foreigners,אזרחות ישראלית לזרים,Israeli citizenship for foreigners,гражданство Израиля для иностранцев,громадянство Ізраїлю для іноземців
-2026-01-16 11:00,citizenship,citizenship-for-non-jews,אזרחות ישראלית ללא יהודים,Israeli citizenship for non-Jews,гражданство Израиля для неевреев,громадянство Ізраїлю для неєвреїв
-2026-01-17 11:00,citizenship,citizenship-through-marriage,אזרחות ישראלית דרך נישואין,citizenship through marriage Israel,гражданство Израиля через брак,громадянство Ізраїлю через шлюб
-2026-01-18 11:00,citizenship,citizenship-ministry-interior,קבלת אזרחות ישראלית משרד הפנים,Ministry of Interior citizenship application,получение гражданства Израиля в МВД,отримання громадянства Ізраїлю в МВС
-2026-01-19 11:00,citizenship,citizenship-application-form,טופס בקשה אזרחות ישראלית,Israeli citizenship application form,форма заявления на гражданство Израиля,форма заяви на громадянство Ізраїлю
-2026-01-20 11:00,status,a5-status,סטטוס A/5,A/5 visa Israel,статус A/5 Израиль,статус A/5 Ізраїль
-2026-01-21 11:00,status,permanent-residence,תושבות קבע בישראל,permanent residence Israel,ПМЖ Израиля,постійне проживання в Ізраїлі
-2026-01-22 11:00,status,temporary-residence,תושבות זמנית בישראל,temporary residence Israel,временное проживание в Израиле,тимчасове проживання в Ізраїлі
 2026-01-23 11:00,status,israeli-passport,דרכון ישראלי,Israeli passport,израильский паспорт,ізраїльський паспорт
 2026-01-24 11:00,status,citizenship-vs-residency,אזרחות מול תושבות,citizenship vs residency Israel,гражданство или ВНЖ в Израиле,громадянство чи ВНЖ в Ізраїлі
 2026-01-25 11:00,work-visa,work-visa-israel,ויזת עבודה בישראל,work visa Israel,рабочая виза Израиль,робоча віза Ізраїль
@@ -52,3 +28,27 @@ scheduled_at,cluster,intent,keyword_he,keyword_en,keyword_ru,keyword_uk
 2026-02-18 11:00,family,family-reunification,איחוד משפחות,family reunification Israel,воссоединение семьи в Израиле,возз'єднання сім'ї в Ізраїлі
 2026-02-19 11:00,family,family-reunification-application-form,טופס בקשה לאיחוד משפחות,family reunification application form,форма заявления на воссоединение семьи,форма заяви на возз'єднання сім'ї
 2026-02-20 11:00,entry-permit,eta-israel-short,ETA לישראל,ETA Israel,ETA Израиль,ETA Ізраїль
+2026-02-21 11:00,immigration,immigration-to-israel,הגירה לישראל,immigration to Israel,иммиграция в Израиль,імміграція до Ізраїлю
+2026-02-22 11:00,immigration,immigration-lawyer-israel,עורך דין הגירה לישראל,immigration lawyer Israel,адвокат по иммиграции Израиль,адвокат з імміграції Ізраїль
+2026-02-23 11:00,immigration,immigration-law,דיני הגירה,Israel immigration law,иммиграционное право Израиля,імміграційне право Ізраїлю
+2026-02-24 11:00,law-of-return,law-of-return-eligibility,חוק השבות מי זכאי,Law of Return eligibility,закон о возвращении кто имеет право,закон про повернення хто має право
+2026-02-25 11:00,law-of-return,law-of-return-section-4a,חוק השבות סעיף 4א,Law of Return section 4A,закон о возвращении статья 4А,закон про повернення стаття 4А
+2026-02-26 11:00,law-of-return,law-of-return-grandchild-clause,חוק השבות הנכד,grandchild clause Israel,внуки евреев Израиль,онуки євреїв Ізраїль
+2026-02-27 11:00,law-of-return,fourth-generation-repatriation,רפטריאציה דור רביעי,4th generation repatriation Israel,репатриация 4 поколения,репатріація 4 покоління
+2026-02-28 11:00,law-of-return,repatriation-to-israel,רפטריאציה לישראל,repatriation to Israel,репатриация в Израиль,репатріація в Ізраїль
+2026-03-01 11:00,law-of-return,aliyah-to-israel,עלייה לישראל,aliyah to Israel,алия в Израиль,алія до Ізраїлю
+2026-03-02 11:00,immigration,moving-to-israel,מעבר לישראל,moving to Israel,переезд в Израиль,переїзд до Ізраїлю
+2026-03-03 11:00,admin,ministry-interior-appointment,משרד הפנים קביעת תור,Ministry of Interior appointment Israel,запись в МВД Израиля,запис до МВС Ізраїлю
+2026-03-04 11:00,documents,proof-of-jewish-heritage,אישור יהדות,proof of Jewish heritage,подтверждение еврейского происхождения,підтвердження єврейського походження
+2026-03-05 11:00,citizenship,israeli-citizenship,אזרחות ישראלית,Israeli citizenship,гражданство Израиля,громадянство Ізраїлю
+2026-03-06 11:00,citizenship,how-to-get-citizenship,איך מקבלים אזרחות ישראלית,how to get Israeli citizenship,как получить гражданство Израиля,як отримати громадянство Ізраїлю
+2026-03-07 11:00,citizenship,citizenship-requirements,תנאים לקבלת אזרחות ישראלית,Israeli citizenship requirements,условия получения гражданства Израиля,умови отримання громадянства Ізраїлю
+2026-03-08 11:00,citizenship,citizenship-law,חוק האזרחות,Israeli citizenship law,закон о гражданстве Израиля,закон про громадянство Ізраїлю
+2026-03-09 11:00,citizenship,citizenship-for-foreigners,אזרחות ישראלית לזרים,Israeli citizenship for foreigners,гражданство Израиля для иностранцев,громадянство Ізраїлю для іноземців
+2026-03-10 11:00,citizenship,citizenship-for-non-jews,אזרחות ישראלית ללא יהודים,Israeli citizenship for non-Jews,гражданство Израиля для неевреев,громадянство Ізраїлю для неєвреїв
+2026-03-11 11:00,citizenship,citizenship-through-marriage,אזרחות ישראלית דרך נישואין,citizenship through marriage Israel,гражданство Израиля через брак,громадянство Ізраїлю через шлюб
+2026-03-12 11:00,citizenship,citizenship-ministry-interior,קבלת אזרחות ישראלית משרד הפנים,Ministry of Interior citizenship application,получение гражданства Израиля в МВД,отримання громадянства Ізраїлю в МВС
+2026-03-13 11:00,citizenship,citizenship-application-form,טופס בקשה אזרחות ישראלית,Israeli citizenship application form,форма заявления на гражданство Израиля,форма заяви на громадянство Ізраїлю
+2026-03-14 11:00,status,a5-status,סטטוס A/5,A/5 visa Israel,статус A/5 Израиль,статус A/5 Ізраїль
+2026-03-15 11:00,status,permanent-residence,תושבות קבע בישראל,permanent residence Israel,ПМЖ Израиля,постійне проживання в Ізраїлі
+2026-03-16 11:00,status,temporary-residence,תושבות זמנית בישראל,temporary residence Israel,временное проживание в Израиле,тимчасове проживання в Ізраїлі

@@ -191,6 +191,7 @@
       return fuse;
     }
     if (typeof Fuse === "undefined") {
+      console.error("Fuse.js failed to load.");
       throw new Error("Fuse.js not loaded");
     }
     const data = filterByLang(await loadIndex());
@@ -261,7 +262,8 @@
         results.innerHTML = "";
         hint.hidden = false;
       } catch (error) {
-        results.innerHTML = `<p class="search-empty">${copy.noResults}</p>`;
+        console.error("Search initialization failed:", error);
+        results.innerHTML = `<p class="search-empty">${copy.noResults} (System Error)</p>`;
       }
     }
   };

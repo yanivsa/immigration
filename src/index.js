@@ -21,6 +21,31 @@ export default {
     const { pathname } = url;
     let response = null;
 
+    if (pathname === "/api/submit-form" && request.method === "POST") {
+      const url = new URL(request.url);
+      const destination = url.searchParams.get("destination");
+
+      if (!destination || !destination.startsWith("https://docs.google.com/forms")) {
+        return new Response("Invalid form destination", { status: 400 });
+      }
+
+      const body = await request.formData();
+      try {
+        const googleResponse = await fetch(destination, {
+          method: "POST",
+          body: body,
+        });
+
+        if (googleResponse.ok) {
+          return new Response("Form submitted successfully", { status: 200 });
+        } else {
+          return new Response("Google Forms error", { status: 502 });
+        }
+      } catch (err) {
+        return new Response("Network error", { status: 502 });
+      }
+    }
+
     if (hasFileExtension(pathname)) {
       response = await env.ASSETS.fetch(request);
     } else {
@@ -40,6 +65,10 @@ export default {
       }
     }
 
+    if (!response) {
+      return new Response("Not Found", { status: 404 });
+    }
+
     const headers = new Headers(response.headers);
     headers.set(
       "Content-Security-Policy",
@@ -50,7 +79,7 @@ export default {
         "frame-ancestors 'none'",
         "img-src 'self' data:",
         "font-src 'self'",
-        "style-src 'self'",
+        "style-src 'self' 'unsafe-inline'", // unsafe-inline often needed for styles, verify if needed
         `script-src 'self' 'nonce-${nonce}'`,
         "script-src-attr 'none'",
         "frame-src https://docs.google.com",
@@ -76,19 +105,27 @@ export default {
       "max-age=31536000; includeSubDomains"
     );
 
+    // Strip headers that might conflict with modification
+    headers.delete("Content-Length");
+    headers.delete("Content-Encoding");
+    headers.delete("Etag");
+
     const contentType = headers.get("content-type") ?? "";
     if (contentType.includes("text/html")) {
-      const body = await response.text();
-      const updatedBody = body.replace(
-        /<script\b(?![^>]*\bnonce=)/g,
-        `<script nonce="${nonce}"`
-      );
-      headers.delete("Content-Length");
-      return new Response(updatedBody, {
-        status: response.status,
-        statusText: response.statusText,
-        headers,
-      });
+      // Use HTMLRewriter for robust injection
+      return new HTMLRewriter()
+        .on("script", {
+          element(element) {
+            element.setAttribute("nonce", nonce);
+          },
+        })
+        .transform(
+          new Response(response.body, {
+            status: response.status,
+            statusText: response.statusText,
+            headers,
+          })
+        );
     }
 
     return new Response(response.body, {

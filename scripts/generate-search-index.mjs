@@ -43,17 +43,28 @@ const extractHeadings = (html) => {
     .join(" | ");
 };
 
-const extractContent = (html) => {
+const extractContent = (html, filePath = "unknown file") => {
   const mainMatch = html.match(/<main[\s\S]*?<\/main>/i);
-  const bodyMatch = html.match(/<body[\s\S]*?<\/body>/i);
-  const content = mainMatch ? mainMatch[0] : bodyMatch ? bodyMatch[0] : html;
+  if (!mainMatch) {
+    console.warn(`[Search Index] Warning: <main> tag missing in "${filePath}". Indexing cleaned body content.`);
+    const bodyMatch = html.match(/<body[\s\S]*?<\/body>/i);
+    let content = bodyMatch ? bodyMatch[0] : html;
+    
+    // Remove nav, header, footer to improve snippet quality
+    content = content.replace(/<(nav|header|footer)[\s\S]*?<\/\1>/gi, " ");
+    
+    const cleaned = normalizeText(content);
+    return cleaned.slice(0, 800);
+  }
+  
+  const content = mainMatch[0];
   const cleaned = normalizeText(content);
   return cleaned.slice(0, 800);
 };
 
 const extractLang = (html) => {
   const match = html.match(/<html[^>]*\blang=["']([^"']+)["']/i);
-  return match ? match[1].toLowerCase() : "";
+  return match ? match[1].toLowerCase().split("-")[0] : "";
 };
 
 const toUrl = (relativePath) => {
@@ -106,7 +117,7 @@ const buildIndex = async () => {
       /<meta[^>]*name=["']description["'][^>]*content=["']([^"']+)["']/i
     );
     const headings = extractHeadings(html);
-    const content = extractContent(html);
+    const content = extractContent(html, relativePath);
     const lang = extractLang(html);
     const url = toUrl(relativePath);
 

@@ -1,0 +1,20 @@
+---
+title: how to get Israeli citizenship
+language: en
+keyword: how to get Israeli citizenship
+cluster: citizenship
+intent: how-to-get-citizenship
+scheduled_at: 2026-01-12 11:00
+---
+
+Write a 450-650 word article in English.
+Primary keyword: "how to get Israeli citizenship".
+Location: Ashdod, Israel (use this exact phrasing).
+
+Requirements:
+- Calm, professional, empathetic tone; no alarmism.
+- No individualized legal advice and no outcome guarantees.
+- Use placeholders: [שם המשרד], [שם עורכת הדין], [טלפון], [אימייל].
+- Do not invent real firm details or contact info.
+- Include at least one soft CTA.
+- End with a short disclaimer line: general info only.

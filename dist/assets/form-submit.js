@@ -35,15 +35,20 @@
         submitButton.setAttribute("aria-busy", "true");
       }
 
-      fetch(form.action, {
+      const originalAction = form.action;
+      const proxyUrl = `/api/submit-form?destination=${encodeURIComponent(originalAction)}`;
+
+      fetch(proxyUrl, {
         method: "POST",
-        mode: "no-cors",
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          // 'Content-Type' is not set manually for FormData to let browser set boundary
         },
-        body: serialize(form),
+        body: new FormData(form),
       })
-        .then(() => {
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Form submission failed");
+          }
           if (status) {
             status.textContent =
               status.dataset.success || "Thanks! Your details were sent.";

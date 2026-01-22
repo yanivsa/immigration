@@ -136,61 +136,74 @@ if (opts.dryRun) {
 
 function readCsv(filePath) {
   const text = fs.readFileSync(filePath, "utf8");
-  const lines = text.split(/\r?\n/).filter((line) => line.trim() !== "");
-  if (lines.length === 0) {
+  const rows = [];
+  let currentRow = [];
+  let currentVal = "";
+  let inQuotes = false;
+
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    const nextChar = text[i + 1];
+
+    if (inQuotes) {
+      if (char === '"') {
+        if (nextChar === '"') {
+          currentVal += '"';
+          i++;
+        } else {
+          inQuotes = false;
+        }
+      } else {
+        currentVal += char;
+      }
+    } else {
+      if (char === '"') {
+        inQuotes = true;
+      } else if (char === ",") {
+        currentRow.push(currentVal);
+        currentVal = "";
+      } else if (char === "\n" || (char === "\r" && nextChar === "\n")) {
+        currentRow.push(currentVal);
+        rows.push(currentRow);
+        currentRow = [];
+        currentVal = "";
+        if (char === "\r") i++;
+      } else if (char === "\r") {
+        currentRow.push(currentVal);
+        rows.push(currentRow);
+        currentRow = [];
+        currentVal = "";
+      } else {
+        currentVal += char;
+      }
+    }
+  }
+
+  if (currentRow.length > 0 || currentVal !== "") {
+    currentRow.push(currentVal);
+    rows.push(currentRow);
+  }
+
+  // Filter empty rows
+  const nonEmptyRows = rows.filter(row => row.length > 0 && row.some(cell => cell.trim() !== ""));
+
+  if (nonEmptyRows.length === 0) {
     throw new Error("CSV file is empty");
   }
-  const header = parseCsvLine(lines[0]);
-  const rows = lines.slice(1).map((line) => {
-    const values = parseCsvLine(line);
+
+  const header = nonEmptyRows[0];
+  const dataRows = nonEmptyRows.slice(1).map((values) => {
     const row = {};
     for (let i = 0; i < header.length; i += 1) {
       row[header[i]] = values[i] ?? "";
     }
     return row;
   });
-  return { header, rows };
+
+  return { header, rows: dataRows };
 }
 
-function writeCsv(filePath, header, rows) {
-  const lines = [header.join(",")];
-  for (const row of rows) {
-    const values = header.map((key) => escapeCsv(row[key] ?? ""));
-    lines.push(values.join(","));
-  }
-  fs.writeFileSync(filePath, `${lines.join("\n")}\n`, "utf8");
-}
-
-function parseCsvLine(line) {
-  const values = [];
-  let current = "";
-  let inQuotes = false;
-
-  for (let i = 0; i < line.length; i += 1) {
-    const char = line[i];
-    if (inQuotes) {
-      if (char === '"') {
-        if (line[i + 1] === '"') {
-          current += '"';
-          i += 1;
-        } else {
-          inQuotes = false;
-        }
-      } else {
-        current += char;
-      }
-    } else if (char === '"') {
-      inQuotes = true;
-    } else if (char === ",") {
-      values.push(current);
-      current = "";
-    } else {
-      current += char;
-    }
-  }
-  values.push(current);
-  return values;
-}
+// parseCsvLine removed as it is integrated into readCsv
 
 function escapeCsv(value) {
   const needsQuotes = /[",\n]/.test(value);

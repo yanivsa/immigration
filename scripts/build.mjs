@@ -25,6 +25,17 @@ const items = [
   "ua"
 ];
 
+// Pre-flight check: Ensure all source items exist
+await Promise.all(items.map(async (item) => {
+  const src = path.join(root, item);
+  try {
+    await fs.access(src);
+  } catch {
+    console.error(`Error: Source item not found: ${item}`);
+    process.exit(1);
+  }
+}));
+
 await fs.rm(dist, { recursive: true, force: true });
 await fs.mkdir(dist, { recursive: true });
 
