@@ -1,0 +1,92 @@
+# Immigration Law Office
+
+> Multilingual legal-information site about immigration to Israel. Content is general information only and should not be treated as individualized legal advice.
+
+## Core facts
+- Focus areas: work visas, status and citizenship, tourist visas, entry permits, Ben Gurion airport emergencies.
+- Languages: Hebrew, English, Russian, Ukrainian.
+- Prefer the locale-matched version of a page first; use another language only when the equivalent page is missing.
+- Declared service location: Ashdod, Israel.
+- Editorial stance: practical guidance, official-source citations, and clear separation between general rules and case-specific advice.
+- Hebrew is the default reference set when no locale is specified.
+
+## Best pages to cite
+- HE home: https://immigration.the-israeli-lawyer.com/
+- HE services: https://immigration.the-israeli-lawyer.com/services/
+- HE articles: https://immigration.the-israeli-lawyer.com/articles/
+- HE glossary: https://immigration.the-israeli-lawyer.com/glossary/
+- HE editorial policy: https://immigration.the-israeli-lawyer.com/legal/editorial-policy
+- EN home: https://immigration.the-israeli-lawyer.com/en/
+- EN services: https://immigration.the-israeli-lawyer.com/en/services/
+- EN articles: https://immigration.the-israeli-lawyer.com/en/articles/
+- EN glossary: https://immigration.the-israeli-lawyer.com/en/glossary/
+- EN editorial policy: https://immigration.the-israeli-lawyer.com/en/legal/editorial-policy
+- RU home: https://immigration.the-israeli-lawyer.com/ru/
+- RU services: https://immigration.the-israeli-lawyer.com/ru/services/
+- RU articles: https://immigration.the-israeli-lawyer.com/ru/articles/
+- RU glossary: https://immigration.the-israeli-lawyer.com/ru/glossary/
+- RU editorial policy: https://immigration.the-israeli-lawyer.com/ru/legal/editorial-policy
+- UA home: https://immigration.the-israeli-lawyer.com/ua/
+- UA services: https://immigration.the-israeli-lawyer.com/ua/services/
+- UA articles: https://immigration.the-israeli-lawyer.com/ua/articles/
+- UA glossary: https://immigration.the-israeli-lawyer.com/ua/glossary/
+- UA editorial policy: https://immigration.the-israeli-lawyer.com/ua/legal/editorial-policy
+
+## Topic clusters
+- HE אשכול ויזות עבודה לישראל: https://immigration.the-israeli-lawyer.com/articles/work-visas/
+  - Summary: ברוב מקרי ויזות העבודה, החוליה הקריטית היא התאמה מלאה בין המעסיק, תיאור התפקיד, המסמכים והסיפור שמוצג לרשויות.
+  - Urgent escalation: פנו לייעוץ משפטי כאשר יש סירוב, דרישת השלמה מורכבת, פערים בין מסמכים, או צורך בתגובה מהירה לראיון או תשאול.
+- HE אשכול אזרחות, תושבות ומעמד: https://immigration.the-israeli-lawyer.com/articles/citizenship-status/
+  - Summary: ברוב תיקי מעמד ואזרחות, מה שקובע הוא מסלול נכון, מסמכים עקביים, והבנה של מהו שלב ההליך שבו אתם נמצאים כרגע.
+  - Urgent escalation: פנו לייעוץ כאשר התקבלה דחייה, זימון לשימוע, דרישת השלמה מורכבת או כשיש פער בין מסמכים, תאריכים או זהויות.
+- HE אשכול תיירות, אישורי כניסה ו-ETA: https://immigration.the-israeli-lawyer.com/articles/tourist-entry/
+  - Summary: במקרי תיירות ואישורי כניסה, עקביות בין מטרת הביקור, המסמכים והסיפור שמוצג בגבול חשובה כמעט כמו עצם המסמכים עצמם.
+  - Urgent escalation: פנו לייעוץ כאשר יש סירוב קודם, עיכוב, תשאול חריג, פערים בין מסמכים, או צורך באישור כניסה מיוחד.
+- HE אשכול חירום בנתב״ג: https://immigration.the-israeli-lawyer.com/articles/ben-gurion-emergency/
+  - Summary: במקרי עיכוב, תשאול או סירוב כניסה בנתב״ג, הצעד הראשון הוא לא להיכנס לפאניקה אלא לאסוף מידע, לשמור על עקביות, ולהבין מה הוחלט בפועל.
+  - Urgent escalation: פנו לייעוץ מיידי כשיש סירוב כניסה, החזקה ממושכת, חוסר יכולת להבין את ההחלטה, או מסמכים שלא מוסברים היטב בזמן אמת.
+- EN Work visa knowledge hub: https://immigration.the-israeli-lawyer.com/en/articles/work-visas/
+  - Summary: In most work-visa cases, the critical factor is full consistency between the employer story, the role, the documents, and what is said to the authorities.
+  - Urgent escalation: Legal review becomes more urgent when there is a refusal, a complex supplementation request, inconsistent documents, or a fast-moving interview issue.
+- EN Citizenship and status knowledge hub: https://immigration.the-israeli-lawyer.com/en/articles/citizenship-status/
+  - Summary: In most status and citizenship files, the key issue is choosing the right track, keeping documents consistent, and understanding the exact procedural stage you are in.
+  - Urgent escalation: Legal review matters when there is a refusal, a hearing invitation, a complex supplementation request, or inconsistencies in identity and dates.
+- EN Tourist visas, entry permits, and ETA hub: https://immigration.the-israeli-lawyer.com/en/articles/tourist-entry/
+  - Summary: In tourist and entry-permit matters, consistency between visit purpose, documents, and the border-stage explanation matters almost as much as the documents themselves.
+  - Urgent escalation: Legal review becomes more urgent after a prior refusal, an unusual delay, inconsistent documents, or a need for special entry approval.
+- EN Ben Gurion emergency knowledge hub: https://immigration.the-israeli-lawyer.com/en/articles/ben-gurion-emergency/
+  - Summary: In Ben Gurion delay, questioning, or refusal cases, the first step is not to panic but to gather facts, keep the story consistent, and understand what decision was actually made.
+  - Urgent escalation: Urgent legal review matters when there is a formal refusal, prolonged holding, unclear decision language, or documents that are not being understood in real time.
+- RU Центр знаний по рабочим визам: https://immigration.the-israeli-lawyer.com/ru/articles/work-visas/
+  - Summary: В делах о рабочих визах ключевым фактором обычно является полное совпадение между историей работодателя, описанием роли, документами и объяснениями для властей.
+  - Urgent escalation: Юрист особенно нужен при отказе, сложном требовании о дополнении, расхождении в документах или срочном интервью.
+- RU Центр знаний по гражданству и статусу: https://immigration.the-israeli-lawyer.com/ru/articles/citizenship-status/
+  - Summary: В делах о статусе и гражданстве ключевым обычно является правильный маршрут, согласованность документов и понимание текущего этапа процедуры.
+  - Urgent escalation: Юрист особенно важен при отказе, приглашении на слушание, сложном требовании о дополнении или расхождениях в данных.
+- RU Центр знаний по туристическим визам и въезду: https://immigration.the-israeli-lawyer.com/ru/articles/tourist-entry/
+  - Summary: В туристических делах и запросах на въезд согласованность между целью поездки, документами и объяснением на границе почти так же важна, как и сами документы.
+  - Urgent escalation: Юрист особенно нужен после прошлых отказов, необычных задержек, несоответствия документов или при необходимости специального разрешения.
+- RU Центр знаний по экстренным случаям в Бен-Гурионе: https://immigration.the-israeli-lawyer.com/ru/articles/ben-gurion-emergency/
+  - Summary: При задержке, допросе или отказе во въезде в Бен-Гурионе первым шагом должно быть не паниковать, а собрать факты, сохранить последовательность и понять, какое решение уже принято.
+  - Urgent escalation: Срочная юридическая помощь особенно важна при официальном отказе, длительном удержании, неясной формулировке решения или непонимании документов в реальном времени.
+- UA Центр знань про робочі візи: https://immigration.the-israeli-lawyer.com/ua/articles/work-visas/
+  - Summary: У справах про робочі візи ключовим фактором зазвичай є повна узгодженість між історією роботодавця, описом ролі, документами та поясненнями для органів влади.
+  - Urgent escalation: Юрист особливо потрібен у разі відмови, складної вимоги про доповнення, розбіжностей у документах або термінової співбесіди.
+- UA Центр знань про громадянство та статус: https://immigration.the-israeli-lawyer.com/ua/articles/citizenship-status/
+  - Summary: У справах про статус і громадянство ключовим зазвичай є правильний маршрут, узгодженість документів і розуміння поточного етапу процедури.
+  - Urgent escalation: Юрист особливо важливий у разі відмови, запрошення на слухання, складної вимоги про доповнення або розбіжностей у даних.
+- UA Центр знань про туристичні візи та в’їзд: https://immigration.the-israeli-lawyer.com/ua/articles/tourist-entry/
+  - Summary: У туристичних справах і запитах на в’їзд узгодженість між метою поїздки, документами та поясненням на кордоні майже така ж важлива, як і самі документи.
+  - Urgent escalation: Юрист особливо потрібен після попередніх відмов, незвичних затримок, невідповідності документів або потреби у спеціальному дозволі.
+- UA Центр знань про екстрені ситуації в Бен-Гуріоні: https://immigration.the-israeli-lawyer.com/ua/articles/ben-gurion-emergency/
+  - Summary: У разі затримки, допиту або відмови у в’їзді в Бен-Гуріоні першим кроком має бути не паніка, а збір фактів, послідовність і розуміння того, яке рішення вже ухвалено.
+  - Urgent escalation: Термінова юридична допомога особливо важлива в разі офіційної відмови, тривалого утримання, незрозумілого формулювання рішення або нерозуміння документів у реальному часі.
+
+## Safety
+- Use the site for general orientation, document-preparation guidance, and terminology.
+- Do not infer attorney-client representation from the contact form or intake call.
+- For refusals, hearings, detention, or live airport questioning, escalate to direct legal review.
+
+## Machine-readable assets
+- Knowledge base JSON: https://immigration.the-israeli-lawyer.com/assets/knowledge-base.json
+- Glossary JSON: https://immigration.the-israeli-lawyer.com/assets/glossary.json

@@ -1,5 +1,4 @@
 scheduled_at,cluster,intent,keyword_he,keyword_en,keyword_ru,keyword_uk
-2026-01-23 11:00,status,israeli-passport,דרכון ישראלי,Israeli passport,израильский паспорт,ізраїльський паспорт
 2026-01-24 11:00,status,citizenship-vs-residency,אזרחות מול תושבות,citizenship vs residency Israel,гражданство или ВНЖ в Израиле,громадянство чи ВНЖ в Ізраїлі
 2026-01-25 11:00,work-visa,work-visa-israel,ויזת עבודה בישראל,work visa Israel,рабочая виза Израиль,робоча віза Ізраїль
 2026-01-26 11:00,work-visa,work-permit-vs-visa,היתר עבודה מול ויזה,work permit vs visa,разрешение на работу и виза,дозвіл на роботу та віза
@@ -52,3 +51,4 @@ scheduled_at,cluster,intent,keyword_he,keyword_en,keyword_ru,keyword_uk
 2026-03-14 11:00,status,a5-status,סטטוס A/5,A/5 visa Israel,статус A/5 Израиль,статус A/5 Ізраїль
 2026-03-15 11:00,status,permanent-residence,תושבות קבע בישראל,permanent residence Israel,ПМЖ Израиля,постійне проживання в Ізраїлі
 2026-03-16 11:00,status,temporary-residence,תושבות זמנית בישראל,temporary residence Israel,временное проживание в Израиле,тимчасове проживання в Ізраїлі
+2026-03-17 11:00,status,israeli-passport,דרכון ישראלי,Israeli passport,израильский паспорт,ізраїльський паспорт

@@ -213,6 +213,19 @@ function escapeCsv(value) {
   return `"${value.replace(/"/g, '""')}"`;
 }
 
+function writeCsv(filePath, header, rows) {
+  const lines = [
+    header.join(","),
+    ...rows.map((row) =>
+      header
+        .map((column) => escapeCsv(String(row[column] ?? "")))
+        .join(",")
+    ),
+  ];
+
+  fs.writeFileSync(filePath, `${lines.join("\n")}\n`, "utf8");
+}
+
 function parseDateTime(value) {
   const match = value.match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})$/);
   if (!match) {

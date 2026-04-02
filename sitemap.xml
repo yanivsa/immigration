@@ -1,639 +1,460 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/</loc>
-  </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/about</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/articles/</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/about" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/about" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/about" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-01</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-01" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-01" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-01" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-01" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-02</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-02" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-02" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-02" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-02" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-03</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-03" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-03" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-03" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-03" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-04</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-04" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-04" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-04" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-04" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-05</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-05" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-05" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-05" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-05" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-06</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-06" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-06" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-06" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-06" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-07</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-07" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-07" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-07" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-07" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-08</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-08" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-08" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-08" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-08" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-09</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-09" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-09" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-09" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-09" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-10</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-10" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-10" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-10" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-10" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-11</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-11" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-11" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-11" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-11" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-12</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-12" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-12" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-12" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-12" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-13</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-13" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-13" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-13" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-13" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-14</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-14" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-14" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-14" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-14" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-15</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-15" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-15" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-15" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-15" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-16</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-16" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-16" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-16" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-16" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-17</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-17" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-17" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-17" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-17" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-18</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-18" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-18" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-18" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-18" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-19</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-19" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-19" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-19" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-19" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-20</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-20" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-20" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-20" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-20" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-21</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-21" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-21" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-21" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-21" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-22</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-22" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-22" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-22" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-22" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-23</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-23" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-23" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-23" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-23" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-24</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-24" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-24" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-24" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-24" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-25</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-25" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-25" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-25" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-25" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-26</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-26" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-26" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-26" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-26" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-27</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-27" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-27" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-27" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-27" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-28</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-28" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-28" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-28" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-28" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-29</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-29" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-29" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-29" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-29" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-30</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-30" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-30" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-30" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-30" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-31</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-31" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-31" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-31" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-31" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-32</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-32" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-32" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-32" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-32" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-33</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-33" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-33" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-33" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-33" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-34</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-34" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-34" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-34" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-34" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-35</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-35" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-35" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-35" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-35" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-36</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-36" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-36" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-36" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-36" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-37</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-37" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-37" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-37" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-37" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-38</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-38" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-38" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-38" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-38" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-39</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-39" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-39" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-39" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-39" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/articles/article-40</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-40" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-40" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-40" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-40" />
+    <lastmod>2026-04-02</lastmod>
+  </url>
+  <url>
+    <loc>https://immigration.the-israeli-lawyer.com/articles/article-41</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/article-41" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/article-41" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/article-41" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/article-41" />
+    <lastmod>2026-04-02</lastmod>
+  </url>
+  <url>
+    <loc>https://immigration.the-israeli-lawyer.com/articles/ben-gurion-emergency/</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/ben-gurion-emergency/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/ben-gurion-emergency/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/ben-gurion-emergency/" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/ben-gurion-emergency/" />
+    <lastmod>2026-04-02</lastmod>
+  </url>
+  <url>
+    <loc>https://immigration.the-israeli-lawyer.com/articles/citizenship-status/</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/citizenship-status/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/citizenship-status/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/citizenship-status/" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/citizenship-status/" />
+    <lastmod>2026-04-02</lastmod>
+  </url>
+  <url>
+    <loc>https://immigration.the-israeli-lawyer.com/articles/</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/" />
+    <lastmod>2026-04-02</lastmod>
+  </url>
+  <url>
+    <loc>https://immigration.the-israeli-lawyer.com/articles/tourist-entry/</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/tourist-entry/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/tourist-entry/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/tourist-entry/" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/tourist-entry/" />
+    <lastmod>2026-04-02</lastmod>
+  </url>
+  <url>
+    <loc>https://immigration.the-israeli-lawyer.com/articles/work-visas/</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/articles/work-visas/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/articles/work-visas/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/articles/work-visas/" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/articles/work-visas/" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/contact</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/contact" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/contact" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/contact" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/</loc>
+    <loc>https://immigration.the-israeli-lawyer.com/glossary/</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/glossary/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/glossary/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/glossary/" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/glossary/" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/about</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-01</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-02</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-03</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-04</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-05</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-06</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-07</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-08</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-09</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-10</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-11</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-12</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-13</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-14</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-15</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-16</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-17</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-18</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-19</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-20</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-21</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-22</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-23</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-24</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-25</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-26</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-27</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-28</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-29</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-30</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-31</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-32</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-33</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-34</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-35</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-36</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-37</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-38</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-39</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/articles/article-40</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/contact</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/legal/editorial-policy</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/legal/privacy</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/legal/terms</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/services/</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/services/ben-gurion-emergency</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/services/citizenship</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/services/entry-permits</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/services/tourist-visas</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/en/services/work-visas</loc>
+    <loc>https://immigration.the-israeli-lawyer.com/</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://immigration.the-israeli-lawyer.com/" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/legal/editorial-policy</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/legal/privacy</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/legal/terms</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/about</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-01</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-02</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-03</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-04</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-05</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-06</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-07</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-08</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-09</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-10</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-11</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-12</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-13</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-14</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-15</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-16</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-17</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-18</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-19</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-20</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-21</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-22</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-23</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-24</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-25</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-26</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-27</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-28</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-29</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-30</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-31</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-32</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-33</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-34</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-35</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-36</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-37</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-38</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-39</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/articles/article-40</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/contact</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/legal/editorial-policy</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/legal/privacy</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/legal/terms</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/services/</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/services/ben-gurion-emergency</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/services/citizenship</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/services/entry-permits</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/services/tourist-visas</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ru/services/work-visas</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/services/</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/legal/editorial-policy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/legal/editorial-policy" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/legal/editorial-policy" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/legal/editorial-policy" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/services/ben-gurion-emergency</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/services/ben-gurion-emergency" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/services/ben-gurion-emergency" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/services/ben-gurion-emergency" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/services/ben-gurion-emergency" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/services/citizenship</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/services/citizenship" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/services/citizenship" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/services/citizenship" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/services/citizenship" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/services/entry-permits</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/services/entry-permits" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/services/entry-permits" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/services/entry-permits" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/services/entry-permits" />
+    <lastmod>2026-04-02</lastmod>
+  </url>
+  <url>
+    <loc>https://immigration.the-israeli-lawyer.com/services/</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/services/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/services/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/services/" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/services/" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/services/tourist-visas</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/services/tourist-visas" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/services/tourist-visas" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/services/tourist-visas" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/services/tourist-visas" />
+    <lastmod>2026-04-02</lastmod>
   </url>
   <url>
     <loc>https://immigration.the-israeli-lawyer.com/services/work-visas</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/about</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-01</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-02</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-03</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-04</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-05</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-06</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-07</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-08</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-09</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-10</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-11</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-12</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-13</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-14</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-15</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-16</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-17</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-18</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-19</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-20</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-21</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-22</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-23</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-24</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-25</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-26</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-27</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-28</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-29</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-30</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-31</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-32</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-33</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-34</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-35</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-36</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-37</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-38</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-39</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/articles/article-40</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/contact</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/legal/editorial-policy</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/legal/privacy</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/legal/terms</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/services/</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/services/ben-gurion-emergency</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/services/citizenship</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/services/entry-permits</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/services/tourist-visas</loc>
-  </url>
-  <url>
-    <loc>https://immigration.the-israeli-lawyer.com/ua/services/work-visas</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://immigration.the-israeli-lawyer.com/services/work-visas" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://immigration.the-israeli-lawyer.com/en/services/work-visas" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://immigration.the-israeli-lawyer.com/ru/services/work-visas" />
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://immigration.the-israeli-lawyer.com/ua/services/work-visas" />
+    <lastmod>2026-04-02</lastmod>
   </url>
 </urlset>

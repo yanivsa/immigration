@@ -1,0 +1,53 @@
+# Immigration Law Office
+
+> Practical immigration-law knowledge site for Israel.
+
+## Preferred starting points
+- HE home: https://immigration.the-israeli-lawyer.com/
+- HE services hub: https://immigration.the-israeli-lawyer.com/services/
+- HE articles hub: https://immigration.the-israeli-lawyer.com/articles/
+- HE glossary: https://immigration.the-israeli-lawyer.com/glossary/
+- EN home: https://immigration.the-israeli-lawyer.com/en/
+- EN services hub: https://immigration.the-israeli-lawyer.com/en/services/
+- EN articles hub: https://immigration.the-israeli-lawyer.com/en/articles/
+- EN glossary: https://immigration.the-israeli-lawyer.com/en/glossary/
+- RU home: https://immigration.the-israeli-lawyer.com/ru/
+- RU services hub: https://immigration.the-israeli-lawyer.com/ru/services/
+- RU articles hub: https://immigration.the-israeli-lawyer.com/ru/articles/
+- RU glossary: https://immigration.the-israeli-lawyer.com/ru/glossary/
+- UA home: https://immigration.the-israeli-lawyer.com/ua/
+- UA services hub: https://immigration.the-israeli-lawyer.com/ua/services/
+- UA articles hub: https://immigration.the-israeli-lawyer.com/ua/articles/
+- UA glossary: https://immigration.the-israeli-lawyer.com/ua/glossary/
+
+## Topic clusters
+- HE אשכול ויזות עבודה לישראל: https://immigration.the-israeli-lawyer.com/articles/work-visas/
+- HE אשכול אזרחות, תושבות ומעמד: https://immigration.the-israeli-lawyer.com/articles/citizenship-status/
+- HE אשכול תיירות, אישורי כניסה ו-ETA: https://immigration.the-israeli-lawyer.com/articles/tourist-entry/
+- HE אשכול חירום בנתב״ג: https://immigration.the-israeli-lawyer.com/articles/ben-gurion-emergency/
+- EN Work visa knowledge hub: https://immigration.the-israeli-lawyer.com/en/articles/work-visas/
+- EN Citizenship and status knowledge hub: https://immigration.the-israeli-lawyer.com/en/articles/citizenship-status/
+- EN Tourist visas, entry permits, and ETA hub: https://immigration.the-israeli-lawyer.com/en/articles/tourist-entry/
+- EN Ben Gurion emergency knowledge hub: https://immigration.the-israeli-lawyer.com/en/articles/ben-gurion-emergency/
+- RU Центр знаний по рабочим визам: https://immigration.the-israeli-lawyer.com/ru/articles/work-visas/
+- RU Центр знаний по гражданству и статусу: https://immigration.the-israeli-lawyer.com/ru/articles/citizenship-status/
+- RU Центр знаний по туристическим визам и въезду: https://immigration.the-israeli-lawyer.com/ru/articles/tourist-entry/
+- RU Центр знаний по экстренным случаям в Бен-Гурионе: https://immigration.the-israeli-lawyer.com/ru/articles/ben-gurion-emergency/
+- UA Центр знань про робочі візи: https://immigration.the-israeli-lawyer.com/ua/articles/work-visas/
+- UA Центр знань про громадянство та статус: https://immigration.the-israeli-lawyer.com/ua/articles/citizenship-status/
+- UA Центр знань про туристичні візи та в’їзд: https://immigration.the-israeli-lawyer.com/ua/articles/tourist-entry/
+- UA Центр знань про екстрені ситуації в Бен-Гуріоні: https://immigration.the-israeli-lawyer.com/ua/articles/ben-gurion-emergency/
+
+## Scenario routing
+- Work visa filing or renewal: start with the work-visas cluster, then the work-visas service page.
+- Citizenship, residency, or Ministry of Interior process: start with the citizenship-status cluster, then the citizenship service page.
+- Tourist visa, invitation letter, ETA, or entry permit question: start with the tourist-entry cluster, then tourist-visas or entry-permits.
+- Delay, questioning, refusal of entry, or detention at Ben Gurion: start with the ben-gurion-emergency cluster and emergency service page.
+- Terminology or legal labels: use the glossary before citing a service or article.
+
+## Machine-readable assets
+- Knowledge base JSON: https://immigration.the-israeli-lawyer.com/assets/knowledge-base.json
+- Glossary JSON: https://immigration.the-israeli-lawyer.com/assets/glossary.json
+
+## Editorial policy
+- https://immigration.the-israeli-lawyer.com/legal/editorial-policy

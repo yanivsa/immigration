@@ -170,6 +170,53 @@
     return trimmed.length > 160 ? `${trimmed.slice(0, 160).trim()}...` : trimmed;
   };
 
+  const typeLabels = {
+    he: {
+      article: "מאמר",
+      service: "שירות",
+      "cluster-hub": "אשכול",
+      glossary: "מילון",
+      contact: "יצירת קשר",
+      about: "אודות",
+      "articles-hub": "מרכז מאמרים",
+      "services-hub": "מרכז שירותים",
+      "editorial-policy": "מדיניות עריכה",
+    },
+    en: {
+      article: "Article",
+      service: "Service",
+      "cluster-hub": "Cluster",
+      glossary: "Glossary",
+      contact: "Contact",
+      about: "About",
+      "articles-hub": "Articles hub",
+      "services-hub": "Services hub",
+      "editorial-policy": "Editorial policy",
+    },
+    ru: {
+      article: "Статья",
+      service: "Услуга",
+      "cluster-hub": "Кластер",
+      glossary: "Глоссарий",
+      contact: "Контакты",
+      about: "О сайте",
+      "articles-hub": "Центр статей",
+      "services-hub": "Центр услуг",
+      "editorial-policy": "Редакционная политика",
+    },
+    uk: {
+      article: "Стаття",
+      service: "Послуга",
+      "cluster-hub": "Кластер",
+      glossary: "Глосарій",
+      contact: "Контакти",
+      about: "Про сайт",
+      "articles-hub": "Центр статей",
+      "services-hub": "Центр послуг",
+      "editorial-policy": "Редакційна політика",
+    },
+  };
+
   const filterByLang = (data) => {
     const filtered = data.filter((item) => item.lang === baseLang);
     return filtered.length ? filtered : data;
@@ -219,8 +266,17 @@
       .map(({ item }) => {
         const title = escapeHtml(item.title || "");
         const snippet = escapeHtml(snippetFor(item));
+        const labels = typeLabels[baseLang] || typeLabels.en;
+        const pageType = escapeHtml(labels[item.pageType] || item.pageType || "");
+        const cluster = escapeHtml(item.cluster || "");
+        const reviewedAt = escapeHtml(item.reviewedAt || "");
         return `
           <div class="search-result">
+            <div class="search-result__meta">
+              ${pageType ? `<span class="search-chip">${pageType}</span>` : ""}
+              ${cluster ? `<span class="search-chip search-chip--muted">${cluster}</span>` : ""}
+              ${reviewedAt ? `<span class="search-chip search-chip--muted">${reviewedAt}</span>` : ""}
+            </div>
             <a href="${item.url}">${title}</a>
             ${snippet ? `<p>${snippet}</p>` : ""}
           </div>

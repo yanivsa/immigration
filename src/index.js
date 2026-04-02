@@ -1,9 +1,69 @@
 const hasFileExtension = (pathname) => /\.[^/]+$/.test(pathname);
 
+const cleanPath = (pathname) => pathname.replace(/\/{2,}/g, "/");
+
+const localeRoots = new Set(["en", "ru", "ua"]);
+const directoryRoots = new Set(["articles", "services"]);
+
+const shouldHaveTrailingSlash = (pathname) => {
+  const segments = pathname.split("/").filter(Boolean);
+  if (segments.length === 1 && localeRoots.has(segments[0])) {
+    return true;
+  }
+
+  if (segments.length === 1 && directoryRoots.has(segments[0])) {
+    return true;
+  }
+
+  if (
+    segments.length === 2 &&
+    localeRoots.has(segments[0]) &&
+    directoryRoots.has(segments[1])
+  ) {
+    return true;
+  }
+
+  return false;
+};
+
+const buildRedirectResponse = (request, pathname, status = 301) => {
+  const url = new URL(request.url);
+  url.pathname = pathname;
+  return Response.redirect(url.toString(), status);
+};
+
 const buildAssetRequest = (request, pathname) => {
   const url = new URL(request.url);
   url.pathname = pathname;
   return new Request(url, request);
+};
+
+const normalizeRedirectPath = (pathname) => {
+  let next = cleanPath(pathname);
+
+  if (/\.html\/+$/i.test(next)) {
+    next = next.replace(/\/+$/g, "");
+  }
+
+  if (next.endsWith("/index.html")) {
+    next = next.replace(/index\.html$/, "");
+  }
+
+  if (next.endsWith(".html") && next !== "/404.html") {
+    next = next.slice(0, -5);
+  }
+
+  if (!hasFileExtension(next) && next !== "/") {
+    if (next.endsWith("/") && !shouldHaveTrailingSlash(next)) {
+      next = next.slice(0, -1);
+    }
+
+    if (!next.endsWith("/") && shouldHaveTrailingSlash(next)) {
+      next = `${next}/`;
+    }
+  }
+
+  return next || "/";
 };
 
 const fetchAsset = async (request, env, pathname) => {
@@ -18,8 +78,10 @@ export default {
     const nonce = btoa(String.fromCharCode(...nonceBytes));
 
     const url = new URL(request.url);
-    const { pathname } = url;
+    const rawPathname = url.pathname;
+    const pathname = normalizeRedirectPath(rawPathname);
     let response = null;
+    let notFound = false;
 
     if (pathname === "/api/submit-form" && request.method === "POST") {
       const url = new URL(request.url);
@@ -46,9 +108,22 @@ export default {
       }
     }
 
-    if (hasFileExtension(pathname)) {
+    if (rawPathname !== pathname) {
+      return buildRedirectResponse(request, pathname);
+    }
+
+    if (pathname === "/404" || pathname === "/404.html") {
+      const notFoundResponse = await fetchAsset(request, env, "/404.html");
+      if (!notFoundResponse) {
+        return new Response("Not Found", { status: 404 });
+      }
+      response = notFoundResponse;
+      notFound = true;
+    }
+
+    if (!response && hasFileExtension(pathname)) {
       response = await env.ASSETS.fetch(request);
-    } else {
+    } else if (!response) {
       if (pathname === "/") {
         response = await fetchAsset(request, env, "/index.html");
       } else if (pathname.endsWith("/")) {
@@ -65,8 +140,14 @@ export default {
       }
     }
 
-    if (!response) {
-      return new Response("Not Found", { status: 404 });
+    if (!response || response.status === 404) {
+      const notFoundResponse = await fetchAsset(request, env, "/404.html");
+      if (notFoundResponse) {
+        response = notFoundResponse;
+        notFound = true;
+      } else {
+        return new Response("Not Found", { status: 404 });
+      }
     }
 
     const headers = new Headers(response.headers);
@@ -121,7 +202,7 @@ export default {
         })
         .transform(
           new Response(response.body, {
-            status: response.status,
+            status: notFound || response.status === 404 ? 404 : response.status,
             statusText: response.statusText,
             headers,
           })
@@ -129,7 +210,7 @@ export default {
     }
 
     return new Response(response.body, {
-      status: response.status,
+      status: notFound || response.status === 404 ? 404 : response.status,
       statusText: response.statusText,
       headers,
     });

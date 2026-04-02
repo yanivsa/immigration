@@ -1,0 +1,38 @@
+name: Daily Article Publish
+
+on:
+  schedule:
+    - cron: '0 6 * * *' # Runs every day at 09:00 AM Israel Time (06:00 UTC)
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Publish Next Article
+        run: node scripts/publish-next.mjs
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }} # User will need to add this to GitHub Secrets
+
+      - name: Run SEO Repair
+        run: node scripts/repair-seo.mjs
+
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Auto-publish: New article from queue" || echo "No changes to commit"
+          git push

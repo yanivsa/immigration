@@ -1,0 +1,90 @@
+{
+  "he": [
+    {
+      "term": "היתר עבודה מול ויזה",
+      "definition": "היתר עבודה מתייחס בדרך כלל לאישור ההעסקה, בעוד שהויזה מתייחסת לכניסה ולשהייה בפועל. בשאלות של עובדים זרים חשוב להבין איזה שלב של ההליך אתם בודקים."
+    },
+    {
+      "term": "אישור כניסה",
+      "definition": "אישור כניסה הוא שכבת אישור מקדימה או נפרדת מהסטטוס עצמו, ולעיתים הוא נדרש בנוסף לויזה או ל-ETA."
+    },
+    {
+      "term": "הסדרת מעמד",
+      "definition": "הסדרת מעמד היא תהליך כללי להשגת סטטוס חוקי בישראל, זמני או קבוע, לפי מסלול רלוונטי ונסיבות אישיות."
+    },
+    {
+      "term": "תושבות מול אזרחות",
+      "definition": "תושבות ואזרחות אינן אותו דבר. הן שונות בזכויות, בחובות ובמסלול ההליך מול משרד הפנים ורשות האוכלוסין."
+    },
+    {
+      "term": "תשאול בנתב״ג",
+      "definition": "תשאול בנתב״ג הוא שלב בדיקה שבו מבקשים להבין את מטרת הכניסה, המסמכים והעקביות של הסיפור שמוצג על ידי הנוסע."
+    }
+  ],
+  "en": [
+    {
+      "term": "Work permit vs visa",
+      "definition": "A work permit usually refers to the employment approval layer, while the visa relates to entry and stay. In foreign-worker cases it matters which stage you are asking about."
+    },
+    {
+      "term": "Entry permit",
+      "definition": "An entry permit is an approval layer that may sit alongside, before, or separate from the visa or ETA itself."
+    },
+    {
+      "term": "Status regularization",
+      "definition": "Status regularization is the broader process of obtaining lawful status in Israel, whether temporary or more durable, through the relevant track."
+    },
+    {
+      "term": "Residency vs citizenship",
+      "definition": "Residency and citizenship are not the same. They differ in rights, obligations, and procedural route before the Ministry of Interior and related authorities."
+    },
+    {
+      "term": "Questioning at Ben Gurion",
+      "definition": "Questioning at Ben Gurion is a review stage used to clarify visit purpose, documents, and consistency before an entry decision is finalized."
+    }
+  ],
+  "ru": [
+    {
+      "term": "Разрешение на работу и виза",
+      "definition": "Разрешение на работу обычно связано с одобрением занятости, а виза — с въездом и пребыванием. Важно понимать, на каком этапе процесса находится вопрос."
+    },
+    {
+      "term": "Разрешение на въезд",
+      "definition": "Разрешение на въезд — это отдельный или предварительный уровень одобрения, который может требоваться наряду с визой или ETA."
+    },
+    {
+      "term": "Урегулирование статуса",
+      "definition": "Урегулирование статуса — это общий процесс получения законного статуса в Израиле через подходящий правовой маршрут."
+    },
+    {
+      "term": "Резидентство и гражданство",
+      "definition": "Резидентство и гражданство — это разные статусы с разными правами, обязанностями и процессуальными маршрутами."
+    },
+    {
+      "term": "Допрос в Бен-Гурионе",
+      "definition": "Допрос в Бен-Гурионе — это этап проверки, на котором выясняют цель въезда, документы и согласованность объяснений."
+    }
+  ],
+  "ua": [
+    {
+      "term": "Дозвіл на роботу і віза",
+      "definition": "Дозвіл на роботу зазвичай пов’язаний із схваленням працевлаштування, а віза — з в’їздом і перебуванням. Важливо розуміти, про який етап процесу йдеться."
+    },
+    {
+      "term": "Дозвіл на в’їзд",
+      "definition": "Дозвіл на в’їзд — це окремий або попередній рівень схвалення, який може бути потрібний разом із візою чи ETA."
+    },
+    {
+      "term": "Урегулювання статусу",
+      "definition": "Урегулювання статусу — це загальний процес отримання законного статусу в Ізраїлі через відповідний правовий маршрут."
+    },
+    {
+      "term": "Резидентство і громадянство",
+      "definition": "Резидентство і громадянство — це різні статуси з різними правами, обов’язками та процедурними маршрутами."
+    },
+    {
+      "term": "Допит у Бен-Гуріоні",
+      "definition": "Допит у Бен-Гуріоні — це етап перевірки, на якому з’ясовують мету в’їзду, документи та послідовність пояснень."
+    }
+  ]
+}

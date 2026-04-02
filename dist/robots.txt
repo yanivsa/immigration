@@ -1,3 +1,15 @@
 User-agent: *
 Allow: /
+Allow: /legal/editorial-policy
+Allow: /en/legal/editorial-policy
+Allow: /ru/legal/editorial-policy
+Allow: /ua/legal/editorial-policy
+Disallow: /legal/privacy
+Disallow: /legal/terms
+Disallow: /en/legal/privacy
+Disallow: /en/legal/terms
+Disallow: /ru/legal/privacy
+Disallow: /ru/legal/terms
+Disallow: /ua/legal/privacy
+Disallow: /ua/legal/terms
 Sitemap: https://immigration.the-israeli-lawyer.com/sitemap.xml

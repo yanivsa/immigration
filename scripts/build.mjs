@@ -8,16 +8,20 @@ const root = path.resolve(__dirname, "..");
 const dist = path.join(root, "dist");
 
 const items = [
+  "404.html",
   "about.html",
   "contact.html",
-  "design-system.html",
   "favicon.svg",
   "index.html",
+  "llms.txt",
+  "llms-full.txt",
   "robots.txt",
   "sitemap.xml",
+  "_headers",
   "articles",
   "assets",
   "en",
+  "glossary",
   "images",
   "legal",
   "ru",

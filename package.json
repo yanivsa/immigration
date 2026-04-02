@@ -2,7 +2,9 @@
   "name": "immigration",
   "private": true,
   "scripts": {
-    "build": "node scripts/build.mjs"
+    "build": "node scripts/repair-seo.mjs && node scripts/repair-geo.mjs && node scripts/generate-search-index.mjs && node scripts/build.mjs",
+    "seo:fix": "node scripts/repair-seo.mjs",
+    "geo:fix": "node scripts/repair-geo.mjs"
   },
   "engines": {
     "node": ">=18.0.0"
