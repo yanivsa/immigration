@@ -1,7 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-ROOT="/Users/ninja/Documents/law"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 NODE_BIN="${NODE_BIN:-/Users/ninja/.nvm/versions/node/v22.21.1/bin/node}"
 MAX_PER_RUN="${MAX_PER_RUN:-1}"
 

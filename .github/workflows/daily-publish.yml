@@ -5,34 +5,66 @@ on:
     - cron: '0 6 * * *' # Runs every day at 09:00 AM Israel Time (06:00 UTC)
   workflow_dispatch: # Allows manual trigger
 
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-article-publish-main
+  cancel-in-progress: false
+
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
+          ref: main
+          persist-credentials: true
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: '20'
+          node-version: '22'
+          cache: npm
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Publish Next Article
         run: node scripts/publish-next.mjs
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }} # User will need to add this to GitHub Secrets
 
-      - name: Run SEO Repair
-        run: node scripts/repair-seo.mjs
+      - name: Rebuild Site Assets
+        run: npm run build
 
       - name: Commit and Push Changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add .
-          git commit -m "Auto-publish: New article from queue" || echo "No changes to commit"
-          git push
+          git add -- \
+            404.html \
+            about.html \
+            articles \
+            assets \
+            contact.html \
+            dist \
+            en \
+            glossary \
+            index.html \
+            keyword-queue.csv \
+            legal \
+            llms-full.txt \
+            llms.txt \
+            robots.txt \
+            ru \
+            services \
+            sitemap.xml \
+            ua
+          if git diff --cached --quiet; then
+            echo "No publish changes"
+            exit 0
+          fi
+          git commit -m "Auto-publish: New article from queue"
+          git push origin HEAD:main

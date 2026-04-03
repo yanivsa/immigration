@@ -144,7 +144,12 @@ const getLocale = (relativePath) => {
   return "he";
 };
 
-const clusterOf = (relativePath) => {
+const extractArticleClusterMeta = (html) => {
+  const match = html.match(/<meta[^>]*name=["']article-cluster["'][^>]*content=["']([^"']+)["']/i);
+  return match ? match[1].trim() : "";
+};
+
+const clusterOf = (relativePath, html = "") => {
   if (/services\/work-visas\.html$/.test(relativePath)) return "work-visas";
   if (/services\/citizenship\.html$/.test(relativePath)) return "citizenship-status";
   if (/services\/tourist-visas\.html$/.test(relativePath)) return "tourist-entry";
@@ -154,6 +159,9 @@ const clusterOf = (relativePath) => {
   if (/articles\/citizenship-status\/index\.html$/.test(relativePath)) return "citizenship-status";
   if (/articles\/tourist-entry\/index\.html$/.test(relativePath)) return "tourist-entry";
   if (/articles\/ben-gurion-emergency\/index\.html$/.test(relativePath)) return "ben-gurion-emergency";
+
+  const explicitCluster = extractArticleClusterMeta(html);
+  if (explicitCluster) return explicitCluster;
 
   const articleMatch = relativePath.match(/articles\/article-(\d+)\.html$/);
   if (!articleMatch) return null;
@@ -324,7 +332,7 @@ const buildIndex = async () => {
     if (pageType === "legal") {
       continue;
     }
-    const detectedCluster = clusterOf(relativePath);
+    const detectedCluster = clusterOf(relativePath, html);
     const cluster =
       detectedCluster ||
       (pageType === "article" || pageType === "service" || pageType === "cluster-hub"

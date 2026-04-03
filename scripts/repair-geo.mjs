@@ -975,6 +975,10 @@ const clusterOf = (relativePath, html = "") => {
   if (/services\/tourist-visas\.html$/.test(relativePath)) return "tourist-entry";
   if (/services\/entry-permits\.html$/.test(relativePath)) return "tourist-entry";
   if (/services\/ben-gurion-emergency\.html$/.test(relativePath)) return "ben-gurion-emergency";
+  const explicitClusterMatch = html.match(
+    /<meta[^>]*name=["']article-cluster["'][^>]*content=["']([^"']+)["']/i
+  );
+  if (explicitClusterMatch) return explicitClusterMatch[1].trim();
   const articleMatch = relativePath.match(/articles\/article-(\d+)\.html$/);
   if (!articleMatch) return null;
   const num = Number.parseInt(articleMatch[1], 10);
