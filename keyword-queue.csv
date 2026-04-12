@@ -1,5 +1,4 @@
 scheduled_at,cluster,intent,keyword_he,keyword_en,keyword_ru,keyword_uk
-2026-02-02 11:00,work-visa,b1-visa-national-insurance,ויזה B1 ביטוח לאומי,B1 visa national insurance,виза B1 и национальное страхование,віза B1 та національне страхування
 2026-02-03 11:00,work-visa,work-visa-status-check,בדיקת אשרת עבודה,check work visa status,проверка рабочей визы,перевірка робочої візи
 2026-02-04 11:00,work-visa,work-visa-processing-times,זמני טיפול בויזות עבודה,work visa processing times,сроки оформления рабочей визы,строки оформлення робочої візи
 2026-02-05 11:00,work-visa,foreign-worker-approval,אישור עובד זר,foreign worker approval,одобрение иностранного работника,схвалення іноземного працівника
