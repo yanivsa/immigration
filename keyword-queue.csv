@@ -1,5 +1,4 @@
 scheduled_at,cluster,intent,keyword_he,keyword_en,keyword_ru,keyword_uk
-2026-02-09 11:00,entry-permit,who-needs-visa,מי צריך אשרה כניסה לישראל,who needs a visa to Israel,кому нужна виза в Израиль,кому потрібна віза в Ізраїль
 2026-02-10 11:00,entry-permit,eta-il,ויזה אלקטרונית לישראל,ETA-IL Israel,электронное разрешение ETA-IL Израиль,електронний дозвіл ETA-IL Ізраїль
 2026-02-11 11:00,tourist-visa,invitation-letter-template,מכתב הזמנה לאורח מחו״ל דוגמא,invitation letter to Israel template,письмо-приглашение в Израиль образец,лист-запрошення до Ізраїлю зразок
 2026-02-12 11:00,tourist-visa,invite-tourist,הזמנת תייר לישראל,invite a tourist to Israel,приглашение туриста в Израиль,запрошення туриста до Ізраїлю
