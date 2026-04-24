@@ -964,11 +964,6 @@ const inferClusterFromText = (value) => {
   return null;
 };
 
-const slugToServicePath = (locale, slug) => {
-  const prefix = localePrefixOf(locale);
-  return `${prefix}/services/${slug}` || `/services/${slug}`;
-};
-
 const clusterOf = (relativePath, html = "") => {
   if (/services\/work-visas\.html$/.test(relativePath)) return "work-visas";
   if (/services\/citizenship\.html$/.test(relativePath)) return "citizenship-status";
