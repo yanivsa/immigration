@@ -1448,29 +1448,38 @@ const generateSitemap = async () => {
     left[0].localeCompare(right[0], "en")
   );
 
-  for (const [neutralPath, pageGroup] of groupedEntries) {
-    const pages = [];
+  const sitemapData = await Promise.all(
+    groupedEntries.map(async ([neutralPath, pageGroup]) => {
+      const pages = (
+        await Promise.all(
+          pageGroup.map(async (page) => {
+            const relativePath =
+              page.locale === "he" ? neutralPath : `${page.locale}/${neutralPath}`;
+            const pageType = getPageType(relativePath);
+            if (pageType === "internal-template" || pageType === "private-legal") {
+              return null;
+            }
+            const filePath = path.join(root, relativePath);
+            const html = await fs.readFile(filePath, "utf8");
+            const robots = extractMeta(html, "name", "robots").toLowerCase();
+            if (robots.includes("noindex")) {
+              return null;
+            }
 
-    for (const page of pageGroup) {
-      const relativePath = page.locale === "he" ? neutralPath : `${page.locale}/${neutralPath}`;
-      const pageType = getPageType(relativePath);
-      if (pageType === "internal-template" || pageType === "private-legal") {
-        continue;
-      }
-      const filePath = path.join(root, relativePath);
-      const html = await fs.readFile(filePath, "utf8");
-      const robots = extractMeta(html, "name", "robots").toLowerCase();
-      if (robots.includes("noindex")) {
-        continue;
-      }
+            const stats = await fs.stat(filePath);
+            return {
+              ...page,
+              mtime: stats.mtime,
+            };
+          })
+        )
+      ).filter(Boolean);
 
-      const stats = await fs.stat(filePath);
-      pages.push({
-        ...page,
-        mtime: stats.mtime,
-      });
-    }
+      return { neutralPath, pages };
+    })
+  );
 
+  for (const { neutralPath, pages } of sitemapData) {
     if (!pages.length) {
       continue;
     }
