@@ -1,5 +1,4 @@
 scheduled_at,cluster,intent,keyword_he,keyword_en,keyword_ru,keyword_uk
-2026-02-14 11:00,entry-permit,entry-permit-documents,מסמכי אישור כניסה,entry permit documents,документы для разрешения на въезд,документи для дозволу на в'їзд
 2026-02-15 11:00,tourist-visa,tourist-visa-refusal-reasons,סיבות לסירוב ויזת תייר,tourist visa refusal reasons,причины отказа в туристической визе,причини відмови у туристичній візі
 2026-02-16 11:00,entry-permit,border-control-interview,ראיון גבול,border control interview Israel,интервью на границе Израиля,співбесіда на кордоні Ізраїлю
 2026-02-17 11:00,entry-permit,types-of-entry-visas,סוגי אשרות כניסה לישראל,types of entry visas Israel,виды виз для въезда в Израиль,типи віз для в'їзду до Ізраїлю
