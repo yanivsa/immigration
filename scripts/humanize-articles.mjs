@@ -99,21 +99,20 @@ let processed = 0;
 let changed = 0;
 const report = [];
 
-for (const filePath of files) {
+const filePromises = files.map(async (filePath) => {
   const relPath = normalizePath(filePath);
   const locale = detectLocale(relPath);
 
   if (localeFilter && !localeFilter.has(locale)) {
-    continue;
+    return null;
   }
 
   const replacements = replacementsByLocale[locale] || [];
   if (!replacements.length) {
-    continue;
+    return null;
   }
 
-  processed += 1;
-  const original = fs.readFileSync(filePath, "utf8");
+  const original = await fs.promises.readFile(filePath, "utf8");
   let updated = original;
   const fileChanges = [];
 
@@ -134,16 +133,37 @@ for (const filePath of files) {
     });
   }
 
+  let fileChanged = false;
+  let reportItem = null;
+
   if (fileChanges.length) {
-    changed += 1;
+    fileChanged = true;
     if (write) {
-      fs.writeFileSync(filePath, updated, "utf8");
+      await fs.promises.writeFile(filePath, updated, "utf8");
     }
-    report.push({
+    reportItem = {
       file: relPath,
       locale,
       changes: fileChanges,
-    });
+    };
+  }
+
+  return {
+    processed: 1,
+    changed: fileChanged ? 1 : 0,
+    reportItem,
+  };
+});
+
+const results = await Promise.all(filePromises);
+
+for (const res of results) {
+  if (res) {
+    processed += res.processed;
+    changed += res.changed;
+    if (res.reportItem) {
+      report.push(res.reportItem);
+    }
   }
 }
 
