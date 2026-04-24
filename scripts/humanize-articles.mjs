@@ -99,21 +99,20 @@ let processed = 0;
 let changed = 0;
 const report = [];
 
-for (const filePath of files) {
+const processingPromises = files.map(async (filePath) => {
   const relPath = normalizePath(filePath);
   const locale = detectLocale(relPath);
 
   if (localeFilter && !localeFilter.has(locale)) {
-    continue;
+    return null;
   }
 
   const replacements = replacementsByLocale[locale] || [];
   if (!replacements.length) {
-    continue;
+    return null;
   }
 
-  processed += 1;
-  const original = fs.readFileSync(filePath, "utf8");
+  const original = await fs.promises.readFile(filePath, "utf8");
   let updated = original;
   const fileChanges = [];
 
@@ -135,15 +134,32 @@ for (const filePath of files) {
   }
 
   if (fileChanges.length) {
-    changed += 1;
     if (write) {
-      fs.writeFileSync(filePath, updated, "utf8");
+      await fs.promises.writeFile(filePath, updated, "utf8");
     }
-    report.push({
-      file: relPath,
-      locale,
-      changes: fileChanges,
-    });
+    return {
+      processed: true,
+      changed: true,
+      reportItem: {
+        file: relPath,
+        locale,
+        changes: fileChanges,
+      },
+    };
+  }
+
+  return { processed: true, changed: false };
+});
+
+const results = await Promise.all(processingPromises);
+
+for (const result of results) {
+  if (result && result.processed) {
+    processed += 1;
+    if (result.changed) {
+      changed += 1;
+      report.push(result.reportItem);
+    }
   }
 }
 
@@ -151,6 +167,6 @@ const action = write ? "Updated" : "Would update";
 console.log(`${action} ${changed}/${processed} files.`);
 
 if (reportPath) {
-  fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
+  await fs.promises.writeFile(reportPath, JSON.stringify(report, null, 2));
   console.log(`Wrote report to ${reportPath}.`);
 }
