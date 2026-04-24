@@ -1039,28 +1039,6 @@ const buildSourceList = (locale) =>
     )
     .join("\n");
 
-const buildKnowledgePath = (locale, clusterKey) => {
-  const labels = locales[locale].labels;
-  const glossaryIndex = Object.values(glossaryRelationMap).findIndex(
-    (entry) => entry.cluster === clusterKey
-  );
-  const articleNumber =
-    Object.values(glossaryRelationMap).find((entry) => entry.cluster === clusterKey)?.articleNumber ||
-    clusters[clusterKey].articleRange[0];
-  return `<section class="section">
-  <div class="container">
-    <div class="geo-note">
-      <h2 class="title-md">${escapeHtml(labels.knowledgePath)}</h2>
-      <ul>
-        <li><strong>${escapeHtml(labels.clusterRoute)}:</strong> <a href="${localizedPath(locale, `/articles/${clusters[clusterKey].copy[locale].slug}/`)}">${escapeHtml(clusters[clusterKey].copy[locale].title)}</a></li>
-        <li><strong>${escapeHtml(labels.glossary)}:</strong> <a href="${glossaryIndex >= 0 ? glossaryHrefFor(locale, glossaryIndex) : localizedPath(locale, "/glossary/")}">${escapeHtml(labels.glossary)}</a></li>
-        <li><strong>${escapeHtml(labels.foundationalGuide)}:</strong> <a href="${localizedPath(locale, `/articles/article-${String(articleNumber).padStart(2, "0")}`)}">${escapeHtml(labels.articles)}</a></li>
-      </ul>
-    </div>
-  </div>
-</section>`;
-};
-
 const buildEmergencyPrepSection = (locale) => {
   const labels = locales[locale].labels;
   const body = {
