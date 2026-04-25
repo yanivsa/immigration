@@ -1,29 +1,24 @@
 const hasFileExtension = (pathname) => /\.[^/]+$/.test(pathname);
 
-const cleanPath = (pathname) => pathname.replace(/\/{2,}/g, "/");
+const cleanPath = (pathname) => {
+  if (!pathname.includes('//')) return pathname;
+  return pathname.replace(/\/{2,}/g, "/");
+};
 
-const localeRoots = new Set(["en", "ru", "ua"]);
-const directoryRoots = new Set(["articles", "services"]);
+// ⚡ Bolt: Cache known trailing slash paths for O(1) lookup
+// Eliminates expensive string splitting and multiple Set lookups on every request
+const TRAILING_SLASH_PATHS = new Set([
+  "en", "ru", "ua",
+  "articles", "services",
+  "en/articles", "ru/articles", "ua/articles",
+  "en/services", "ru/services", "ua/services"
+]);
 
 const shouldHaveTrailingSlash = (pathname) => {
-  const segments = pathname.split("/").filter(Boolean);
-  if (segments.length === 1 && localeRoots.has(segments[0])) {
-    return true;
-  }
-
-  if (segments.length === 1 && directoryRoots.has(segments[0])) {
-    return true;
-  }
-
-  if (
-    segments.length === 2 &&
-    localeRoots.has(segments[0]) &&
-    directoryRoots.has(segments[1])
-  ) {
-    return true;
-  }
-
-  return false;
+  let p = pathname;
+  if (p.startsWith('/')) p = p.slice(1);
+  if (p.endsWith('/')) p = p.slice(0, -1);
+  return TRAILING_SLASH_PATHS.has(p);
 };
 
 const buildRedirectResponse = (request, pathname, status = 301) => {
