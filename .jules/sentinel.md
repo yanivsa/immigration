@@ -1,0 +1,4 @@
+## 2024-05-24 - SSRF via Path Traversal in StartsWith
+**Vulnerability:** The application was vulnerable to Server-Side Request Forgery (SSRF) because it validated proxy URLs using a simple string `startsWith` check (`destination.startsWith("https://docs.google.com/forms")`). An attacker could supply a URL like `https://docs.google.com/forms/../../spreadsheets` to bypass the check and force the server to request arbitrary endpoints on the `docs.google.com` origin.
+**Learning:** Checking if a URL string starts with a trusted prefix is insufficient for SSRF protection because URL parsing normalizes paths (handling `..`, `.`). A malicious string can start with the trusted prefix but resolve to a different path or even a different domain if parsed carelessly.
+**Prevention:** Always parse untrusted URLs using the `URL` API and validate the `origin` and `pathname` properties directly, rather than performing string matching on the raw URL.
