@@ -542,36 +542,7 @@ const articleUrlFor = (locale, articleNumber) => {
   return `${prefix}/articles/article-${String(articleNumber).padStart(2, "0")}`.replace(/\/+/g, "/");
 };
 
-const renderArticle = ({ locale, articleNumber, localeInputs, clusterKey, publishedAt }) => {
-  const config = localeConfigs[locale];
-  const current = localeInputs[locale];
-  const title = current.title;
-  const keyword = current.keyword || title;
-  const canonicalUrl = `https://immigration.the-israeli-lawyer.com${articleUrlFor(locale, articleNumber)}`;
-  const description = buildDescription(locale, title, clusterKey);
-  const displayDate = formatDisplayDate(publishedAt, locale);
-  const relatedUrl = buildRelatedPath(locale, clusterKey);
-  const serviceUrl = `${config.prefix}${clusterMeta[clusterKey].servicePath}`.replace(/\/+/g, "/");
-  const overview = buildOverview(locale, title, keyword, clusterKey);
-  const checklist = buildChecklist(locale, keyword, clusterKey);
-  const pitfalls = buildPitfalls(locale, clusterKey);
-  const faqs = clusterMeta[clusterKey].questionSets[locale];
-  const sourceLinks = officialSources[locale]
-    .map(([label, url]) => `<li><a href="${url}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a></li>`)
-    .join("\n");
-  const alternates = Object.keys(localeConfigs)
-    .map((other) => {
-      const href = `https://immigration.the-israeli-lawyer.com${articleUrlFor(other, articleNumber)}`;
-      return `    <link rel="alternate" hreflang="${localeConfigs[other].htmlLang}" href="${href}" />`;
-    })
-    .join("\n");
-  const langSwitch = Object.keys(localeConfigs)
-    .map((other) => `<a href="${articleUrlFor(other, articleNumber)}">${other === "uk" ? "UA" : other.toUpperCase()}</a>`)
-    .join("\n          ");
-
-  return `<!doctype html>
-<html lang="${config.htmlLang}" dir="${config.dir}">
-  <head>
+const renderHead = ({ title, description, clusterKey, current, canonicalUrl, config, alternates, publishedAt }) => `  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>${escapeHtml(title)}</title>
@@ -610,10 +581,9 @@ ${alternates}
         url: "https://immigration.the-israeli-lawyer.com/",
       },
     })}</script>
-  </head>
-  <body>
-    <a class="skip-link" href="#main">Skip</a>
-    <div class="emergency-strip">
+  </head>`;
+
+const renderHeader = ({ config, serviceUrl, langSwitch }) => `    <div class="emergency-strip">
       <div class="container">${escapeHtml(config.businessName)}. <a href="${serviceUrl}">${escapeHtml(config.emergency)}</a></div>
     </div>
     <header class="site-header">
@@ -632,9 +602,9 @@ ${alternates}
           ${langSwitch}
         </div>
       </div>
-    </header>
-    <main id="main" class="page">
-      <nav class="breadcrumbs" aria-label="Breadcrumbs">
+    </header>`;
+
+const renderBreadcrumbs = ({ config, title }) => `      <nav class="breadcrumbs" aria-label="Breadcrumbs">
         <div class="container">
           <ol>
             <li><a href="https://immigration.the-israeli-lawyer.com${config.prefix || "/"}">${escapeHtml(config.home)}</a></li>
@@ -642,19 +612,18 @@ ${alternates}
             <li aria-current="page">${escapeHtml(title)}</li>
           </ol>
         </div>
-      </nav>
-      <section class="section">
-        <div class="container stack">
-          <div class="cta-band accent">
+      </nav>`;
+
+const renderCtaBand = ({ config }) => `          <div class="cta-band accent">
             <h2 class="title-md">${escapeHtml(config.ctaHeading)}</h2>
             <p>${escapeHtml(config.ctaBody)}</p>
             <div class="cta-actions">
               <a class="button button--primary" href="${config.prefix}/contact".replace(/\/+/g, "/")>${escapeHtml(config.ctaPrimary)}</a>
               <a class="button button--secondary" href="${config.prefix}/contact".replace(/\/+/g, "/")>${escapeHtml(config.ctaSecondary)}</a>
             </div>
-          </div>
-          <div class="article-layout">
-            <article class="stack">
+          </div>`;
+
+const renderArticleBody = ({ title, config, displayDate, description, keyword, clusterKey, overview, checklist, pitfalls, faqs, sourceLinks, relatedUrl, serviceUrl }) => `            <article class="stack">
               <h1 class="title-xl">${escapeHtml(title)}</h1>
               <p class="footer-note" data-last-reviewed="true">${escapeHtml(config.reviewLabel)}: ${escapeHtml(displayDate)} | ${escapeHtml(config.disclaimer)}</p>
               <p class="lede">${escapeHtml(description)}</p>
@@ -710,7 +679,48 @@ ${alternates}
                 <p><a href="${relatedUrl}">${escapeHtml(clusterKey)}</a></p>
                 <p><a href="${serviceUrl}">${escapeHtml(config.services)}</a></p>
               </div>
-            </article>
+            </article>`;
+
+const renderArticle = ({ locale, articleNumber, localeInputs, clusterKey, publishedAt }) => {
+  const config = localeConfigs[locale];
+  const current = localeInputs[locale];
+  const title = current.title;
+  const keyword = current.keyword || title;
+  const canonicalUrl = `https://immigration.the-israeli-lawyer.com${articleUrlFor(locale, articleNumber)}`;
+  const description = buildDescription(locale, title, clusterKey);
+  const displayDate = formatDisplayDate(publishedAt, locale);
+  const relatedUrl = buildRelatedPath(locale, clusterKey);
+  const serviceUrl = `${config.prefix}${clusterMeta[clusterKey].servicePath}`.replace(/\/+/g, "/");
+  const overview = buildOverview(locale, title, keyword, clusterKey);
+  const checklist = buildChecklist(locale, keyword, clusterKey);
+  const pitfalls = buildPitfalls(locale, clusterKey);
+  const faqs = clusterMeta[clusterKey].questionSets[locale];
+  const sourceLinks = officialSources[locale]
+    .map(([label, url]) => `<li><a href="${url}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a></li>`)
+    .join("\n");
+  const alternates = Object.keys(localeConfigs)
+    .map((other) => {
+      const href = `https://immigration.the-israeli-lawyer.com${articleUrlFor(other, articleNumber)}`;
+      return `    <link rel="alternate" hreflang="${localeConfigs[other].htmlLang}" href="${href}" />`;
+    })
+    .join("\n");
+  const langSwitch = Object.keys(localeConfigs)
+    .map((other) => `<a href="${articleUrlFor(other, articleNumber)}">${other === "uk" ? "UA" : other.toUpperCase()}</a>`)
+    .join("\n          ");
+
+  return `<!doctype html>
+<html lang="${config.htmlLang}" dir="${config.dir}">
+${renderHead({ title, description, clusterKey, current, canonicalUrl, config, alternates, publishedAt })}
+  <body>
+    <a class="skip-link" href="#main">Skip</a>
+${renderHeader({ config, serviceUrl, langSwitch })}
+    <main id="main" class="page">
+${renderBreadcrumbs({ config, title })}
+      <section class="section">
+        <div class="container stack">
+${renderCtaBand({ config })}
+          <div class="article-layout">
+${renderArticleBody({ title, config, displayDate, description, keyword, clusterKey, overview, checklist, pitfalls, faqs, sourceLinks, relatedUrl, serviceUrl })}
           </div>
         </div>
       </section>
