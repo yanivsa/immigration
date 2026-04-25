@@ -1,4 +1,4 @@
-const hasFileExtension = (pathname) => /\.[^/]+$/.test(pathname);
+export const hasFileExtension = (pathname) => /\.[^/]+$/.test(pathname);
 
 const cleanPath = (pathname) => pathname.replace(/\/{2,}/g, "/");
 
