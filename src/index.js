@@ -1,6 +1,6 @@
 const hasFileExtension = (pathname) => /\.[^/]+$/.test(pathname);
 
-const cleanPath = (pathname) => pathname.replace(/\/{2,}/g, "/");
+export const cleanPath = (pathname) => pathname.replace(/\/{2,}/g, "/");
 
 const localeRoots = new Set(["en", "ru", "ua"]);
 const directoryRoots = new Set(["articles", "services"]);
