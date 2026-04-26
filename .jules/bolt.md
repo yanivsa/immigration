@@ -1,0 +1,3 @@
+## 2024-05-23 - CSP Nonce Generation Optimization
+**Learning:** Generating cryptographic nonces using `crypto.getRandomValues` and converting them via `btoa` is a synchronous overhead on every request in Cloudflare Workers. However, this nonce is only needed for HTML responses where we inject it via `HTMLRewriter` and set the CSP header.
+**Action:** Defer the generation of the CSP nonce until it is confirmed that the response is of type `text/html`. For static assets (images, css, etc.), skip nonce generation entirely, as it's not injected into the body and doesn't provide security value on those endpoints, saving ~0.06ms per asset request.

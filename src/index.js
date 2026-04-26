@@ -74,9 +74,6 @@ const fetchAsset = async (request, env, pathname) => {
 
 export default {
   async fetch(request, env) {
-    const nonceBytes = crypto.getRandomValues(new Uint8Array(16));
-    const nonce = btoa(String.fromCharCode(...nonceBytes));
-
     const url = new URL(request.url);
     const rawPathname = url.pathname;
     const pathname = normalizeRedirectPath(rawPathname);
@@ -151,24 +148,6 @@ export default {
     }
 
     const headers = new Headers(response.headers);
-    headers.set(
-      "Content-Security-Policy",
-      [
-        "default-src 'self'",
-        "base-uri 'self'",
-        "object-src 'none'",
-        "frame-ancestors 'none'",
-        "img-src 'self' data:",
-        "font-src 'self'",
-        "style-src 'self' 'unsafe-inline'", // unsafe-inline often needed for styles, verify if needed
-        `script-src 'self' 'nonce-${nonce}'`,
-        "script-src-attr 'none'",
-        "frame-src https://docs.google.com",
-        "form-action 'self' https://docs.google.com",
-        "connect-src 'self' https://docs.google.com https://www.gstatic.com",
-        "preconnect-src 'self' https://docs.google.com https://www.gstatic.com",
-      ].join("; ")
-    );
     headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
     headers.set("X-Content-Type-Options", "nosniff");
     headers.set("X-Frame-Options", "DENY");
@@ -192,12 +171,43 @@ export default {
     headers.delete("Etag");
 
     const contentType = headers.get("content-type") ?? "";
+    let cspScriptSrc = "script-src 'self'";
+    let nonce = "";
+
+    if (contentType.includes("text/html")) {
+      // Bolt: defer nonce generation until we know it's HTML to save time on asset requests
+      const nonceBytes = crypto.getRandomValues(new Uint8Array(16));
+      nonce = btoa(String.fromCharCode(...nonceBytes));
+      cspScriptSrc = `script-src 'self' 'nonce-${nonce}'`;
+    }
+
+    headers.set(
+      "Content-Security-Policy",
+      [
+        "default-src 'self'",
+        "base-uri 'self'",
+        "object-src 'none'",
+        "frame-ancestors 'none'",
+        "img-src 'self' data:",
+        "font-src 'self'",
+        "style-src 'self' 'unsafe-inline'", // unsafe-inline often needed for styles, verify if needed
+        cspScriptSrc,
+        "script-src-attr 'none'",
+        "frame-src https://docs.google.com",
+        "form-action 'self' https://docs.google.com",
+        "connect-src 'self' https://docs.google.com https://www.gstatic.com",
+        "preconnect-src 'self' https://docs.google.com https://www.gstatic.com",
+      ].join("; ")
+    );
+
     if (contentType.includes("text/html")) {
       // Use HTMLRewriter for robust injection
       return new HTMLRewriter()
         .on("script", {
           element(element) {
-            element.setAttribute("nonce", nonce);
+            if (nonce) {
+              element.setAttribute("nonce", nonce);
+            }
           },
         })
         .transform(
