@@ -1,0 +1,4 @@
+## 2024-05-18 - [Fix SSRF bypass caused by naive String.startsWith check]
+**Vulnerability:** The `/api/submit-form` endpoint used a naive `destination.startsWith("https://docs.google.com/forms")` check, which could be bypassed using URLs like `https://docs.google.com/forms@attacker.com` or `https://docs.google.com/forms/../attacker.com`, enabling Server-Side Request Forgery (SSRF) and acting as an open proxy or exposing data to attacker-controlled paths on Google properties.
+**Learning:** Checking URL validity using simple string matching logic like `startsWith` or regexes can easily lead to bypasses, as URL parsing behaves in nuanced ways.
+**Prevention:** Always use the built-in URL parsing capabilities, e.g., `new URL(destination)`, and perform strict validation against explicitly allowed origins (via `destUrl.hostname`) and expected path structure (via `destUrl.pathname`).
