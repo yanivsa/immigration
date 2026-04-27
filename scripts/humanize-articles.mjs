@@ -126,7 +126,7 @@ for (const filePath of files) {
     const variant = pickVariant(replacement.to, key);
     const count = countOccurrences(updated, replacement.from);
 
-    updated = updated.split(replacement.from).join(variant);
+    updated = updated.replaceAll(replacement.from, variant);
     fileChanges.push({
       from: replacement.from,
       to: variant,
