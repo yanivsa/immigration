@@ -1,0 +1,4 @@
+## 2024-05-15 - Insecure destination validation
+**Vulnerability:** The proxy endpoint `/api/submit-form` uses `.startsWith('https://docs.google.com/forms')` to validate the `destination` parameter. This is vulnerable to SSRF (Server-Side Request Forgery) / Open Redirect, because malicious inputs like `https://docs.google.com/forms@attacker.com` or `https://docs.google.com/forms.attacker.com` bypass the check. Additionally, path traversal within the same origin is possible (e.g. `https://docs.google.com/forms/../../document/d/123`).
+**Learning:** String-matching for URL validation is fundamentally insecure because URL parsing handles credentials (user@host), host structures (.attacker.com vs /), and path resolution (/../) differently than simple string prefixes.
+**Prevention:** Always parse the URL using `new URL()` and strictly validate the `hostname` (e.g., `url.hostname === 'docs.google.com'`) and the structured path (e.g., `url.pathname.startsWith('/forms/')`).

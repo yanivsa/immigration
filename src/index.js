@@ -87,7 +87,19 @@ export default {
       const url = new URL(request.url);
       const destination = url.searchParams.get("destination");
 
-      if (!destination || !destination.startsWith("https://docs.google.com/forms")) {
+      let destUrl;
+      try {
+        destUrl = destination ? new URL(destination) : null;
+      } catch (e) {
+        destUrl = null;
+      }
+
+      // Security: Prevent SSRF / Open Redirect by strictly validating hostname and path
+      if (
+        !destUrl ||
+        destUrl.hostname !== "docs.google.com" ||
+        !destUrl.pathname.startsWith("/forms/")
+      ) {
         return new Response("Invalid form destination", { status: 400 });
       }
 
