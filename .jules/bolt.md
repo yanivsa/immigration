@@ -1,0 +1,3 @@
+## 2026-04-28 - Defer cryptographic nonce generation
+**Learning:** In Cloudflare Workers, generating cryptographic nonces via `crypto.getRandomValues` adds measurable synchronous overhead. Doing this blindly for every request wastes compute time on static assets (images, css, etc.).
+**Action:** When working with Cloudflare Workers acting as reverse proxies or static asset servers, always defer expensive crypto operations until after checking the response type (e.g., waiting to ensure `text/html` before generating a CSP nonce).

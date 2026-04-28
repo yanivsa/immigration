@@ -74,9 +74,6 @@ const fetchAsset = async (request, env, pathname) => {
 
 export default {
   async fetch(request, env) {
-    const nonceBytes = crypto.getRandomValues(new Uint8Array(16));
-    const nonce = btoa(String.fromCharCode(...nonceBytes));
-
     const url = new URL(request.url);
     const rawPathname = url.pathname;
     const pathname = normalizeRedirectPath(rawPathname);
@@ -151,6 +148,18 @@ export default {
     }
 
     const headers = new Headers(response.headers);
+
+    // Defer nonce generation and CSP script-src modifications until we know it's HTML
+    // to save synchronous compute time on static assets.
+    const contentType = headers.get("content-type") ?? "";
+    const isHtml = contentType.includes("text/html");
+    let nonce = "";
+
+    if (isHtml) {
+      const nonceBytes = crypto.getRandomValues(new Uint8Array(16));
+      nonce = btoa(String.fromCharCode(...nonceBytes));
+    }
+
     headers.set(
       "Content-Security-Policy",
       [
@@ -161,7 +170,7 @@ export default {
         "img-src 'self' data:",
         "font-src 'self'",
         "style-src 'self' 'unsafe-inline'", // unsafe-inline often needed for styles, verify if needed
-        `script-src 'self' 'nonce-${nonce}'`,
+        `script-src 'self' ${isHtml ? `'nonce-${nonce}'` : "'self'"}`,
         "script-src-attr 'none'",
         "frame-src https://docs.google.com",
         "form-action 'self' https://docs.google.com",
@@ -191,8 +200,7 @@ export default {
     headers.delete("Content-Encoding");
     headers.delete("Etag");
 
-    const contentType = headers.get("content-type") ?? "";
-    if (contentType.includes("text/html")) {
+    if (isHtml) {
       // Use HTMLRewriter for robust injection
       return new HTMLRewriter()
         .on("script", {
