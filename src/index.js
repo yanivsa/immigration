@@ -87,7 +87,21 @@ export default {
       const url = new URL(request.url);
       const destination = url.searchParams.get("destination");
 
-      if (!destination || !destination.startsWith("https://docs.google.com/forms")) {
+      let isValidDestination = false;
+      try {
+        if (destination) {
+          const destUrl = new URL(destination);
+          // 🛡️ Sentinel: Fix SSRF vulnerability by explicitly validating hostname and pathname
+          // instead of using a string prefix which could be bypassed (e.g. docs.google.com.attacker.com)
+          if (destUrl.protocol === "https:" && destUrl.hostname === "docs.google.com" && destUrl.pathname.startsWith("/forms/")) {
+            isValidDestination = true;
+          }
+        }
+      } catch (e) {
+        // Ignore invalid URL formatting errors
+      }
+
+      if (!isValidDestination) {
         return new Response("Invalid form destination", { status: 400 });
       }
 
