@@ -74,9 +74,6 @@ const fetchAsset = async (request, env, pathname) => {
 
 export default {
   async fetch(request, env) {
-    const nonceBytes = crypto.getRandomValues(new Uint8Array(16));
-    const nonce = btoa(String.fromCharCode(...nonceBytes));
-
     const url = new URL(request.url);
     const rawPathname = url.pathname;
     const pathname = normalizeRedirectPath(rawPathname);
@@ -151,24 +148,6 @@ export default {
     }
 
     const headers = new Headers(response.headers);
-    headers.set(
-      "Content-Security-Policy",
-      [
-        "default-src 'self'",
-        "base-uri 'self'",
-        "object-src 'none'",
-        "frame-ancestors 'none'",
-        "img-src 'self' data:",
-        "font-src 'self'",
-        "style-src 'self' 'unsafe-inline'", // unsafe-inline often needed for styles, verify if needed
-        `script-src 'self' 'nonce-${nonce}'`,
-        "script-src-attr 'none'",
-        "frame-src https://docs.google.com",
-        "form-action 'self' https://docs.google.com",
-        "connect-src 'self' https://docs.google.com https://www.gstatic.com",
-        "preconnect-src 'self' https://docs.google.com https://www.gstatic.com",
-      ].join("; ")
-    );
     headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
     headers.set("X-Content-Type-Options", "nosniff");
     headers.set("X-Frame-Options", "DENY");
@@ -193,6 +172,29 @@ export default {
 
     const contentType = headers.get("content-type") ?? "";
     if (contentType.includes("text/html")) {
+      // Optimization: Defer nonce generation to save compute time on static resources
+      const nonceBytes = crypto.getRandomValues(new Uint8Array(16));
+      const nonce = btoa(String.fromCharCode(...nonceBytes));
+
+      headers.set(
+        "Content-Security-Policy",
+        [
+          "default-src 'self'",
+          "base-uri 'self'",
+          "object-src 'none'",
+          "frame-ancestors 'none'",
+          "img-src 'self' data:",
+          "font-src 'self'",
+          "style-src 'self' 'unsafe-inline'", // unsafe-inline often needed for styles, verify if needed
+          `script-src 'self' 'nonce-${nonce}'`,
+          "script-src-attr 'none'",
+          "frame-src https://docs.google.com",
+          "form-action 'self' https://docs.google.com",
+          "connect-src 'self' https://docs.google.com https://www.gstatic.com",
+          "preconnect-src 'self' https://docs.google.com https://www.gstatic.com",
+        ].join("; ")
+      );
+
       // Use HTMLRewriter for robust injection
       return new HTMLRewriter()
         .on("script", {
@@ -208,6 +210,25 @@ export default {
           })
         );
     }
+
+    headers.set(
+      "Content-Security-Policy",
+      [
+        "default-src 'self'",
+        "base-uri 'self'",
+        "object-src 'none'",
+        "frame-ancestors 'none'",
+        "img-src 'self' data:",
+        "font-src 'self'",
+        "style-src 'self' 'unsafe-inline'", // unsafe-inline often needed for styles, verify if needed
+        "script-src 'self'",
+        "script-src-attr 'none'",
+        "frame-src https://docs.google.com",
+        "form-action 'self' https://docs.google.com",
+        "connect-src 'self' https://docs.google.com https://www.gstatic.com",
+        "preconnect-src 'self' https://docs.google.com https://www.gstatic.com",
+      ].join("; ")
+    );
 
     return new Response(response.body, {
       status: notFound || response.status === 404 ? 404 : response.status,
