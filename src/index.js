@@ -87,7 +87,16 @@ export default {
       const url = new URL(request.url);
       const destination = url.searchParams.get("destination");
 
-      if (!destination || !destination.startsWith("https://docs.google.com/forms")) {
+      try {
+        const destUrl = new URL(destination);
+        if (
+          destUrl.protocol !== "https:" ||
+          destUrl.hostname !== "docs.google.com" ||
+          !destUrl.pathname.startsWith("/forms/")
+        ) {
+          throw new Error("Invalid URL");
+        }
+      } catch (e) {
         return new Response("Invalid form destination", { status: 400 });
       }
 
