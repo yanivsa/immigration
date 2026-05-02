@@ -1,0 +1,4 @@
+## 2024-05-02 - SSRF vulnerability via URL string manipulation
+**Vulnerability:** A `.startsWith()` check was used for validating form destination URLs (`destination.startsWith("https://docs.google.com/forms")`). This allowed attackers to craft URLs like `https://docs.google.com/forms@attacker.com/` which pass the `.startsWith()` check but resolve to an attacker-controlled hostname (`attacker.com`). This constitutes an SSRF and Open Redirect vulnerability.
+**Learning:** URL string manipulation is unsafe for validating destination domains because URL parsing handles credentials, host structures, and path resolution differently than string prefixes.
+**Prevention:** When validating destination URLs, always parse the input using `new URL()` and explicitly validate the `hostname` (and potentially `protocol` and `pathname`). Avoid using simple string matching like `.startsWith()` for URL origin validation.
