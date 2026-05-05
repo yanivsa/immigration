@@ -72,6 +72,8 @@ const fetchAsset = async (request, env, pathname) => {
   return response.status === 404 ? null : response;
 };
 
+export { hasFileExtension, cleanPath, shouldHaveTrailingSlash, normalizeRedirectPath };
+
 export default {
   async fetch(request, env) {
     const nonceBytes = crypto.getRandomValues(new Uint8Array(16));
