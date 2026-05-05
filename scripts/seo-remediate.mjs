@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { walk } from "./utils/fs.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -224,29 +225,6 @@ const stripTags = (value) =>
     .trim();
 
 const normalizeText = (value) => decodeEntities(value).replace(/\s+/g, " ").trim();
-
-const walk = async (dir) => {
-  const entries = await fs.readdir(dir, { withFileTypes: true });
-  const files = [];
-
-  for (const entry of entries) {
-    if (entry.name.startsWith(".")) {
-      continue;
-    }
-
-    const fullPath = path.join(dir, entry.name);
-    if (entry.isDirectory()) {
-      if (ignoreDirs.has(entry.name)) {
-        continue;
-      }
-      files.push(...(await walk(fullPath)));
-    } else if (entry.isFile() && entry.name.endsWith(".html")) {
-      files.push(fullPath);
-    }
-  }
-
-  return files;
-};
 
 const detectLocale = (html, relativePath) => {
   const match = html.match(/<html[^>]*\blang=["']([^"']+)["']/i);
@@ -567,7 +545,7 @@ const updateMetadata = (html, relativePath, locale) => {
 };
 
 const main = async () => {
-  const files = await walk(root);
+  const files = await walk(root, { ignoreDirs });
   let changedCount = 0;
 
   for (const filePath of files) {

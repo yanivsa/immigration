@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { walk } from "./utils/fs.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -292,26 +293,16 @@ const buildEntities = (title, headings, clusterKey, glossaryData) => {
   return unique(entities);
 };
 
-const walk = async (dir) => {
-  const entries = await fs.readdir(dir, { withFileTypes: true });
-  const files = [];
-  for (const entry of entries) {
-    if (entry.name.startsWith(".")) continue;
-    const fullPath = path.join(dir, entry.name);
-    if (entry.isDirectory()) {
-      if (ignoreDirs.has(entry.name)) continue;
-      files.push(...(await walk(fullPath)));
-    } else if (entry.isFile() && entry.name.endsWith(".html")) {
-      if (ignoreFiles.has(entry.name) || /template/i.test(entry.name)) continue;
-      files.push(fullPath);
-    }
-  }
-  return files;
-};
-
 const buildIndex = async () => {
   const glossaryData = await readJson(path.join(root, "assets", "glossary.json"));
-  const htmlFiles = await walk(root);
+  const htmlFiles = await walk(root, {
+    ignoreDirs,
+    fileFilter: (entry) =>
+      entry.isFile() &&
+      entry.name.endsWith(".html") &&
+      !ignoreFiles.has(entry.name) &&
+      !/template/i.test(entry.name)
+  });
   const items = [];
 
   for (const file of htmlFiles) {

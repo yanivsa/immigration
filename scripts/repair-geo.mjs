@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { walk } from "./utils/fs.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -2238,24 +2239,9 @@ const repairServiceHero = async (relativePath) => {
   await write(relativePath, html);
 };
 
-const walkLocaleHtml = async (dir) => {
-  const entries = await fs.readdir(path.join(root, dir), { withFileTypes: true });
-  const files = [];
-  for (const entry of entries) {
-    const relative = path.join(dir, entry.name).replace(/\\/g, "/");
-    if (entry.isDirectory()) {
-      files.push(...(await walkLocaleHtml(relative)));
-      continue;
-    }
-    if (entry.isFile() && entry.name.endsWith(".html")) {
-      files.push(relative);
-    }
-  }
-  return files;
-};
-
 const repairUkrainianLocale = async () => {
-  const files = await walkLocaleHtml("ua");
+  const files = (await walk(path.join(root, "ua"), { ignoreDirs: new Set() }))
+    .map(p => path.relative(root, p).replace(/\\/g, "/"));
   for (const relativePath of files) {
     let html = await read(relativePath);
     html = html
@@ -2305,22 +2291,6 @@ const generateClusterAndGlossaryPages = async () => {
   await write("assets/glossary.json", JSON.stringify(glossaryTerms, null, 2));
 };
 
-const walkArticles = async (dir) => {
-  const entries = await fs.readdir(path.join(root, dir), { withFileTypes: true });
-  const files = [];
-  for (const entry of entries) {
-    const relative = path.join(dir, entry.name).replace(/\\/g, "/");
-    if (entry.isDirectory()) {
-      files.push(...(await walkArticles(relative)));
-      continue;
-    }
-    if (entry.isFile() && /article-\d+\.html$/.test(relative)) {
-      files.push(relative);
-    }
-  }
-  return files;
-};
-
 const main = async () => {
   await repairRobots();
   await generateClusterAndGlossaryPages();
@@ -2348,7 +2318,10 @@ const main = async () => {
 
   const articleDirs = ["articles", "en/articles", "ru/articles", "ua/articles"];
   for (const dir of articleDirs) {
-    const files = await walkArticles(dir);
+    const files = (await walk(path.join(root, dir), {
+      ignoreDirs: new Set(),
+      fileFilter: (entry) => entry.isFile() && /article-\d+\.html$/.test(entry.name)
+    })).map(p => path.relative(root, p).replace(/\\/g, "/"));
     for (const file of files) {
       await repairArticlePage(file);
     }
