@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { escapeHtml } from "./escape-html.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -205,13 +206,6 @@ const decodeEntities = (value) =>
     .replace(/&quot;/g, "\"")
     .replace(/&#39;/g, "'")
     .replace(/&nbsp;/g, " ");
-
-const escapeHtml = (value) =>
-  value
-    .replace(/&/g, "&amp;")
-    .replace(/"/g, "&quot;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
 
 const stripTags = (value) =>
   decodeEntities(

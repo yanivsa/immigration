@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { escapeHtml } from "./escape-html.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -272,14 +273,6 @@ const officialSources = {
     ["Міністерство внутрішніх справ", "https://www.gov.il/he/departments/ministry_of_interior"],
   ],
 };
-
-const escapeHtml = (value) =>
-  String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
 
 const normalizeCluster = (value) => queueClusterMap[value] || "citizenship-status";
 

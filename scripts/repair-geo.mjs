@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { escapeHtml } from "./escape-html.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -916,14 +917,6 @@ const getLocaleFromPath = (relativePath) => {
 };
 
 const localePrefixOf = (locale) => locales[locale].pathPrefix;
-
-const escapeHtml = (value) =>
-  value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
 
 const read = async (relativePath) =>
   fs.readFile(path.join(root, relativePath), "utf8");
