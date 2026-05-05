@@ -1507,14 +1507,8 @@ const generateSitemap = async () => {
   await fs.writeFile(path.join(root, "sitemap.xml"), `${lines.join("\n")}\n`, "utf8");
 };
 
-let updated = 0;
-
-for (const filePath of htmlFiles) {
-  const changed = await repairFile(filePath);
-  if (changed) {
-    updated += 1;
-  }
-}
+const results = await Promise.all(htmlFiles.map(repairFile));
+const updated = results.filter(Boolean).length;
 
 await generateSitemap();
 
