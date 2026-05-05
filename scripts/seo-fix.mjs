@@ -154,11 +154,11 @@ function escapeHtmlText(value = "") {
     .replace(/>/g, "&gt;");
 }
 
-function normalizeWhitespace(value = "") {
+export function normalizeWhitespace(value = "") {
   return value.replace(/\s+/g, " ").trim();
 }
 
-function clipText(value, max = 155) {
+export function clipText(value, max = 155) {
   const text = normalizeWhitespace(value).replace(/[ ,;:]+$/u, "");
   if (text.length <= max) {
     return text;
@@ -760,4 +760,6 @@ async function main() {
   await generateSitemap(indexableFiles);
 }
 
-await main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  await main();
+}
