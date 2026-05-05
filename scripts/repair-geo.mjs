@@ -1802,14 +1802,8 @@ ${altTags}
 `;
 };
 
-const buildGlossaryPage = (locale) => {
-  const localeData = locales[locale];
-  const canonical = `${siteUrl}${localizedPath(locale, "/glossary/")}`;
-  const altTags = Object.keys(locales)
-    .map((other) => `    <link rel="alternate" hreflang="${locales[other].htmlLang}" href="${siteUrl}${localizedPath(other, "/glossary/")}" />`)
-    .join("\n");
-  const defaultCanonical = `${siteUrl}${localizedPath("he", "/glossary/")}`;
-  const items = glossaryTerms[locale]
+const buildGlossaryItemsHTML = (locale) => {
+  return glossaryTerms[locale]
     .map((item) => {
       const relatedCluster = inferClusterFromText(item.term) || "citizenship-status";
       return `<div class="definition-card" id="${slugifyTerm(item.term)}">
@@ -1819,7 +1813,10 @@ const buildGlossaryPage = (locale) => {
 </div>`;
     })
     .join("\n");
-  const glossarySchema = {
+};
+
+const buildGlossarySchema = (locale, canonical, localeData) => {
+  return {
     "@context": "https://schema.org",
     "@graph": [
       {
@@ -1865,6 +1862,19 @@ const buildGlossaryPage = (locale) => {
       },
     ],
   };
+};
+
+const buildGlossaryPage = (locale) => {
+  const localeData = locales[locale];
+  const canonical = `${siteUrl}${localizedPath(locale, "/glossary/")}`;
+  const altTags = Object.keys(locales)
+    .map((other) => `    <link rel="alternate" hreflang="${locales[other].htmlLang}" href="${siteUrl}${localizedPath(other, "/glossary/")}" />`)
+    .join("\n");
+  const defaultCanonical = `${siteUrl}${localizedPath("he", "/glossary/")}`;
+
+  const items = buildGlossaryItemsHTML(locale);
+  const glossarySchema = buildGlossarySchema(locale, canonical, localeData);
+
   return `<!doctype html>
 <html lang="${localeData.htmlLang}" dir="${localeData.dir}">
   <head>
