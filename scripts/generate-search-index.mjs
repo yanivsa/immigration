@@ -312,63 +312,66 @@ const walk = async (dir) => {
 const buildIndex = async () => {
   const glossaryData = await readJson(path.join(root, "assets", "glossary.json"));
   const htmlFiles = await walk(root);
-  const items = [];
+  // ⚡ Bolt: Use Promise.all to map over htmlFiles and process them concurrently for better performance.
+  const items = (
+    await Promise.all(
+      htmlFiles.map(async (file) => {
+        const relativePath = path.relative(root, file).replace(/\\/g, "/");
+        const html = await fs.readFile(file, "utf8");
+        const stat = await fs.stat(file);
 
-  for (const file of htmlFiles) {
-    const relativePath = path.relative(root, file).replace(/\\/g, "/");
-    const html = await fs.readFile(file, "utf8");
-    const stat = await fs.stat(file);
+        const title = extractTag(html, /<title>([\s\S]*?)<\/title>/i);
+        const description = extractTag(
+          html,
+          /<meta[^>]*name=["']description["'][^>]*content=["']([^"']+)["']/i
+        );
+        const headings = extractHeadings(html);
+        const content = extractContent(html, relativePath);
+        const lang = extractLang(html) || getLocale(relativePath);
+        const url = toUrl(relativePath);
+        const pageType = pageTypeOf(relativePath);
+        if (pageType === "legal") {
+          return null;
+        }
+        const detectedCluster = clusterOf(relativePath, html);
+        const cluster =
+          detectedCluster ||
+          (pageType === "article" || pageType === "service" || pageType === "cluster-hub"
+            ? inferClusterFromContent(title, description, content)
+            : null);
+        const sources = extractGovSources(html);
+        const reviewed = extractReviewedAt(html, stat);
+        const entities = buildEntities(title, headings, cluster, glossaryData);
+        const scenario = scenarioListOf(pageType, cluster, content);
+        const answerType = answerTypeOf(pageType);
+        const geoAnswer = extractGeoAnswerMetadata(html);
+        const clusterTitle = cluster ? clusterDefinitions[cluster]?.entities?.[0] || cluster.replace(/-/g, " ") : "";
+        const localePrefix = lang === "he" ? "" : `/${lang === "uk" ? "ua" : lang}`;
+        const recommendedNextPage = cluster ? `${localePrefix}/articles/${cluster}/`.replace(/\/+/g, "/") : "";
 
-    const title = extractTag(html, /<title>([\s\S]*?)<\/title>/i);
-    const description = extractTag(
-      html,
-      /<meta[^>]*name=["']description["'][^>]*content=["']([^"']+)["']/i
-    );
-    const headings = extractHeadings(html);
-    const content = extractContent(html, relativePath);
-    const lang = extractLang(html) || getLocale(relativePath);
-    const url = toUrl(relativePath);
-    const pageType = pageTypeOf(relativePath);
-    if (pageType === "legal") {
-      continue;
-    }
-    const detectedCluster = clusterOf(relativePath, html);
-    const cluster =
-      detectedCluster ||
-      (pageType === "article" || pageType === "service" || pageType === "cluster-hub"
-        ? inferClusterFromContent(title, description, content)
-        : null);
-    const sources = extractGovSources(html);
-    const reviewed = extractReviewedAt(html, stat);
-    const entities = buildEntities(title, headings, cluster, glossaryData);
-    const scenario = scenarioListOf(pageType, cluster, content);
-    const answerType = answerTypeOf(pageType);
-    const geoAnswer = extractGeoAnswerMetadata(html);
-    const clusterTitle = cluster ? clusterDefinitions[cluster]?.entities?.[0] || cluster.replace(/-/g, " ") : "";
-    const localePrefix = lang === "he" ? "" : `/${lang === "uk" ? "ua" : lang}`;
-    const recommendedNextPage = cluster ? `${localePrefix}/articles/${cluster}/`.replace(/\/+/g, "/") : "";
-
-    items.push({
-      title,
-      description,
-      headings: headings.join(" | "),
-      content,
-      lang,
-      url,
-      pageType,
-      cluster,
-      entities,
-      scenario,
-      sources,
-      reviewedAt: reviewed.reviewedAt,
-      reviewedAtDisplay: reviewed.reviewedAtDisplay,
-      answerType,
-      shortAnswer: geoAnswer.shortAnswer,
-      urgentEscalation: geoAnswer.urgentEscalation,
-      clusterTitle,
-      recommendedNextPage,
-    });
-  }
+        return {
+          title,
+          description,
+          headings: headings.join(" | "),
+          content,
+          lang,
+          url,
+          pageType,
+          cluster,
+          entities,
+          scenario,
+          sources,
+          reviewedAt: reviewed.reviewedAt,
+          reviewedAtDisplay: reviewed.reviewedAtDisplay,
+          answerType,
+          shortAnswer: geoAnswer.shortAnswer,
+          urgentEscalation: geoAnswer.urgentEscalation,
+          clusterTitle,
+          recommendedNextPage,
+        };
+      })
+    )
+  ).filter(Boolean);
 
   const knowledgeBase = {
     generatedAt: new Date().toISOString(),
