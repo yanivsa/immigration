@@ -2325,34 +2325,30 @@ const main = async () => {
   await repairRobots();
   await generateClusterAndGlossaryPages();
 
-  for (const file of indexPages) {
-    await repairIndexPage(file);
-  }
+  // Optimize: Batch concurrent processing of index pages
+  await Promise.all(indexPages.map(file => repairIndexPage(file)));
 
-  for (const file of servicePages) {
+  // Optimize: Batch concurrent processing of service pages
+  await Promise.all(servicePages.map(async file => {
     await repairServicePage(file);
     await repairServiceHero(file);
-  }
+  }));
 
-  for (const file of aboutPages) {
-    await repairAboutPage(file);
-  }
+  // Optimize: Batch concurrent processing of about pages
+  await Promise.all(aboutPages.map(file => repairAboutPage(file)));
 
-  for (const file of editorialPolicyPages) {
-    await repairEditorialPolicy(file);
-  }
+  // Optimize: Batch concurrent processing of editorial policy pages
+  await Promise.all(editorialPolicyPages.map(file => repairEditorialPolicy(file)));
 
-  for (const file of contactPages) {
-    await repairContactPage(file);
-  }
+  // Optimize: Batch concurrent processing of contact pages
+  await Promise.all(contactPages.map(file => repairContactPage(file)));
 
   const articleDirs = ["articles", "en/articles", "ru/articles", "ua/articles"];
-  for (const dir of articleDirs) {
+  // Optimize: Batch concurrent processing of all article files across all directories
+  await Promise.all(articleDirs.map(async dir => {
     const files = await walkArticles(dir);
-    for (const file of files) {
-      await repairArticlePage(file);
-    }
-  }
+    await Promise.all(files.map(file => repairArticlePage(file)));
+  }));
 
   await repairUkrainianLocale();
 
