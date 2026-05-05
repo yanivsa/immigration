@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { ensureSentence } from "./utils/text.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -338,17 +339,6 @@ const isUsefulParagraph = (text) => {
     "Невелика консультація",
   ];
   return !ignored.some((snippet) => text.includes(snippet));
-};
-
-const ensureSentence = (value) => {
-  const text = value.trim();
-  if (!text) {
-    return text;
-  }
-  if (/[.!?։»”"]$/.test(text)) {
-    return text;
-  }
-  return `${text}.`;
 };
 
 const clampText = (value, max = 155) => {

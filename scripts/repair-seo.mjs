@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { ensureSentence } from "./utils/text.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -651,14 +652,6 @@ const trimAtWord = (value, max) => {
     .slice(0, cutoff)
     .replace(/[|:;,.\-–—־\s]+$/g, "")
     .trim();
-};
-
-const ensureSentence = (value) => {
-  if (!value) {
-    return value;
-  }
-
-  return /[.!?…»”]$/.test(value) ? value : `${value}.`;
 };
 
 const fitCompleteSentences = (value, max = 158) => {
