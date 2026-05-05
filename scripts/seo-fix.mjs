@@ -214,7 +214,7 @@ function getLocalizedRel(baseRel, locale) {
   return `${locale}/${baseRel}`;
 }
 
-function toPathname(relPath) {
+export function toPathname(relPath) {
   if (relPath === "index.html") {
     return "/";
   }
@@ -760,4 +760,6 @@ async function main() {
   await generateSitemap(indexableFiles);
 }
 
-await main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  await main();
+}
