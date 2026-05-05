@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { extractGeoTitle as extractTitle } from "./utils/html-utils.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -987,11 +988,6 @@ const clusterOf = (relativePath, html = "") => {
   if (num >= 21 && num <= 30) return "tourist-entry";
   if (num >= 31 && num <= 40) return "ben-gurion-emergency";
   return inferClusterFromText(`${relativePath} ${extractTitle(html)} ${extractDescription(html)} ${html}`);
-};
-
-const extractTitle = (html) => {
-  const titleMatch = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i) || html.match(/<title>([\s\S]*?)<\/title>/i);
-  return titleMatch ? titleMatch[1].replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim() : "";
 };
 
 const extractDescription = (html) => {

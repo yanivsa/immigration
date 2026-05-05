@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { extractSeoTitle as extractTitle, decodeEntities } from "./utils/html-utils.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -613,15 +614,6 @@ const getNeutralPath = (relativePath) => {
   return relativePath.replace(new RegExp(`^${locale}/`), "");
 };
 
-const decodeEntities = (value) =>
-  value
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, "\"")
-    .replace(/&#39;/g, "'")
-    .replace(/&nbsp;/g, " ");
-
 const stripTags = (value) =>
   decodeEntities(
     value
@@ -691,11 +683,6 @@ const escapeHtml = (value) =>
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
-
-const extractTitle = (html) => {
-  const match = html.match(/<title>([\s\S]*?)<\/title>/i);
-  return match ? decodeEntities(match[1]).replace(/\s+/g, " ").trim() : "";
-};
 
 const extractMeta = (html, attr, name) => {
   const match = html.match(
