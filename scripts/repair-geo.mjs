@@ -2325,34 +2325,20 @@ const main = async () => {
   await repairRobots();
   await generateClusterAndGlossaryPages();
 
-  for (const file of indexPages) {
-    await repairIndexPage(file);
-  }
-
-  for (const file of servicePages) {
+  await Promise.all(indexPages.map(file => repairIndexPage(file)));
+  await Promise.all(servicePages.map(async (file) => {
     await repairServicePage(file);
     await repairServiceHero(file);
-  }
-
-  for (const file of aboutPages) {
-    await repairAboutPage(file);
-  }
-
-  for (const file of editorialPolicyPages) {
-    await repairEditorialPolicy(file);
-  }
-
-  for (const file of contactPages) {
-    await repairContactPage(file);
-  }
+  }));
+  await Promise.all(aboutPages.map(file => repairAboutPage(file)));
+  await Promise.all(editorialPolicyPages.map(file => repairEditorialPolicy(file)));
+  await Promise.all(contactPages.map(file => repairContactPage(file)));
 
   const articleDirs = ["articles", "en/articles", "ru/articles", "ua/articles"];
-  for (const dir of articleDirs) {
+  await Promise.all(articleDirs.map(async (dir) => {
     const files = await walkArticles(dir);
-    for (const file of files) {
-      await repairArticlePage(file);
-    }
-  }
+    await Promise.all(files.map(file => repairArticlePage(file)));
+  }));
 
   await repairUkrainianLocale();
 
