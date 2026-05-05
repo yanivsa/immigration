@@ -568,28 +568,32 @@ const updateMetadata = (html, relativePath, locale) => {
 
 const main = async () => {
   const files = await walk(root);
-  let changedCount = 0;
 
-  for (const filePath of files) {
-    const relativePath = path.relative(root, filePath).replace(/\\/g, "/");
-    const original = await fs.readFile(filePath, "utf8");
-    let html = original;
-    const locale = detectLocale(html, relativePath);
+  const results = await Promise.all(
+    files.map(async (filePath) => {
+      const relativePath = path.relative(root, filePath).replace(/\\/g, "/");
+      const original = await fs.readFile(filePath, "utf8");
+      let html = original;
+      const locale = detectLocale(html, relativePath);
 
-    html = html.replace(/\bhreflang=(["'])uk-UA\1/gi, 'hreflang="uk"');
-    html = updateMetadata(html, relativePath, locale);
-    html = setImageAttributes(html);
+      html = html.replace(/\bhreflang=(["'])uk-UA\1/gi, 'hreflang="uk"');
+      html = updateMetadata(html, relativePath, locale);
+      html = setImageAttributes(html);
 
-    if (/\/articles\/article-|^articles\/article-/.test(relativePath)) {
-      html = replaceFooterNote(html, locale);
-      html = replaceArticleAuthor(html, locale);
-    }
+      if (/\/articles\/article-|^articles\/article-/.test(relativePath)) {
+        html = replaceFooterNote(html, locale);
+        html = replaceArticleAuthor(html, locale);
+      }
 
-    if (html !== original) {
-      await fs.writeFile(filePath, html);
-      changedCount += 1;
-    }
-  }
+      if (html !== original) {
+        await fs.writeFile(filePath, html);
+        return 1;
+      }
+      return 0;
+    })
+  );
+
+  const changedCount = results.reduce((a, b) => a + b, 0);
 
   console.log(`SEO remediation updated ${changedCount} HTML files.`);
 };
