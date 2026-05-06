@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { decodeEntities, stripTags, normalizeWhitespace } from "./utils/html.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -613,25 +614,6 @@ const getNeutralPath = (relativePath) => {
   return relativePath.replace(new RegExp(`^${locale}/`), "");
 };
 
-const decodeEntities = (value) =>
-  value
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, "\"")
-    .replace(/&#39;/g, "'")
-    .replace(/&nbsp;/g, " ");
-
-const stripTags = (value) =>
-  decodeEntities(
-    value
-      .replace(/<script[\s\S]*?<\/script>/gi, " ")
-      .replace(/<style[\s\S]*?<\/style>/gi, " ")
-      .replace(/<[^>]+>/g, " ")
-  )
-    .replace(/\s+/g, " ")
-    .trim();
-
 const trimAtWord = (value, max) => {
   if (value.length <= max) {
     return value;
@@ -751,7 +733,7 @@ const replaceHtmlLang = (html, locale) => {
 
 const extractH1 = (html) => {
   const match = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i);
-  return match ? stripTags(match[1]) : "";
+  return match ? normalizeWhitespace(stripTags(match[1])) : "";
 };
 
 const extractLead = (html) => {
@@ -760,7 +742,7 @@ const extractLead = (html) => {
     /<p\b[^>]*class=["'][^"']*\blede\b[^"']*["'][^>]*>([\s\S]*?)<\/p>/i
   );
   if (ledeMatch) {
-    const lede = stripTags(ledeMatch[1]);
+    const lede = normalizeWhitespace(stripTags(ledeMatch[1]));
     if (lede.length >= 40) {
       return lede;
     }
@@ -769,7 +751,7 @@ const extractLead = (html) => {
   const candidates = Array.from(
     main.matchAll(/<(p|li)\b[^>]*>([\s\S]*?)<\/\1>/gi)
   )
-    .map((match) => stripTags(match[2]))
+    .map((match) => normalizeWhitespace(stripTags(match[2])))
     .filter(
       (value) =>
         value.length >= 35 &&
@@ -796,7 +778,7 @@ const extractDescriptionCandidates = (html) => {
   const seen = new Set();
 
   const addCandidate = (raw) => {
-    const text = stripTags(raw).replace(/\s+/g, " ").trim();
+    const text = normalizeWhitespace(stripTags(raw));
     if (!text || text.length < 45) {
       return;
     }
@@ -1248,7 +1230,7 @@ const buildItemList = (html, locale) => {
     }
     unique.set(href, {
       url: `${siteUrl}${href}`,
-      name: stripTags(match[2]),
+      name: normalizeWhitespace(stripTags(match[2])),
       number: Number.parseInt(number, 10),
     });
   }

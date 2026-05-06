@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { decodeEntities, stripTags, normalizeWhitespace } from "./utils/html.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -71,24 +72,7 @@ const clusterDefinitions = {
   },
 };
 
-const decodeEntities = (value) =>
-  value
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, "\"")
-    .replace(/&#39;/g, "'")
-    .replace(/&nbsp;/g, " ");
-
-const stripTags = (value) =>
-  decodeEntities(
-    value
-      .replace(/<script[\s\S]*?<\/script>/gi, " ")
-      .replace(/<style[\s\S]*?<\/style>/gi, " ")
-      .replace(/<[^>]+>/g, " ")
-  );
-
-const normalizeText = (value) => stripTags(value).replace(/\s+/g, " ").trim();
+const normalizeText = (value) => normalizeWhitespace(stripTags(value));
 
 const extractTag = (html, regex) => {
   const match = html.match(regex);

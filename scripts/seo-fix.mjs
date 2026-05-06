@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { decodeEntities, stripTags, normalizeWhitespace } from "./utils/html.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -121,24 +122,6 @@ const noindexPatterns = [
   /(^|\/)legal\/terms\.html$/,
 ];
 
-const stripTags = (value) =>
-  decodeEntities(
-    value
-      .replace(/<script[\s\S]*?<\/script>/gi, " ")
-      .replace(/<style[\s\S]*?<\/style>/gi, " ")
-      .replace(/<[^>]+>/g, " ")
-  );
-
-function decodeEntities(value = "") {
-  return value
-    .replace(/&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&quot;/g, "\"")
-    .replace(/&#39;/g, "'")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">");
-}
-
 function escapeAttribute(value = "") {
   return value
     .replace(/&/g, "&amp;")
@@ -152,10 +135,6 @@ function escapeHtmlText(value = "") {
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
-}
-
-function normalizeWhitespace(value = "") {
-  return value.replace(/\s+/g, " ").trim();
 }
 
 function clipText(value, max = 155) {

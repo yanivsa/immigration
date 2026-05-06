@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { decodeEntities, stripTags, normalizeWhitespace } from "./utils/html.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -197,31 +198,12 @@ const pageSchemaTypes = {
   "ua/contact.html": "ContactPage",
 };
 
-const decodeEntities = (value) =>
-  value
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, "\"")
-    .replace(/&#39;/g, "'")
-    .replace(/&nbsp;/g, " ");
-
 const escapeHtml = (value) =>
   value
     .replace(/&/g, "&amp;")
     .replace(/"/g, "&quot;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
-
-const stripTags = (value) =>
-  decodeEntities(
-    value
-      .replace(/<script[\s\S]*?<\/script>/gi, " ")
-      .replace(/<style[\s\S]*?<\/style>/gi, " ")
-      .replace(/<[^>]+>/g, " ")
-  )
-    .replace(/\s+/g, " ")
-    .trim();
 
 const normalizeText = (value) => decodeEntities(value).replace(/\s+/g, " ").trim();
 
@@ -296,13 +278,13 @@ const getCanonical = (html) => {
 
 const extractH1 = (html) => {
   const match = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
-  return match ? stripTags(match[1]) : "";
+  return match ? normalizeWhitespace(stripTags(match[1])) : "";
 };
 
 const extractParagraphs = (html) => {
   const main = html.match(/<main[\s\S]*?<\/main>/i)?.[0] ?? html;
   return Array.from(main.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi))
-    .map((match) => stripTags(match[1]))
+    .map((match) => normalizeWhitespace(stripTags(match[1])))
     .filter(Boolean);
 };
 
