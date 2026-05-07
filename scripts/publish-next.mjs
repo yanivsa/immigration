@@ -622,10 +622,10 @@ ${alternates}
         <nav aria-label="Primary">
           <ul class="nav-list">
             <li><a class="nav-link" href="${config.prefix || "/"}">${escapeHtml(config.home)}</a></li>
-            <li><a class="nav-link" href="${config.prefix}/services/".replace(/\/+/g, "/")>${escapeHtml(config.services)}</a></li>
-            <li><a class="nav-link" href="${config.prefix}/articles/".replace(/\/+/g, "/")>${escapeHtml(config.articles)}</a></li>
-            <li><a class="nav-link" href="${config.prefix}/about".replace(/\/+/g, "/")>${escapeHtml(config.about)}</a></li>
-            <li><a class="nav-link" href="${config.prefix}/contact".replace(/\/+/g, "/")>${escapeHtml(config.contact)}</a></li>
+            <li><a class="nav-link" href="${`${config.prefix}/services/`.replace(/\/+/g, "/")}">${escapeHtml(config.services)}</a></li>
+            <li><a class="nav-link" href="${`${config.prefix}/articles/`.replace(/\/+/g, "/")}">${escapeHtml(config.articles)}</a></li>
+            <li><a class="nav-link" href="${`${config.prefix}/about`.replace(/\/+/g, "/")}">${escapeHtml(config.about)}</a></li>
+            <li><a class="nav-link" href="${`${config.prefix}/contact`.replace(/\/+/g, "/")}">${escapeHtml(config.contact)}</a></li>
           </ul>
         </nav>
         <div class="lang-switch" aria-label="Language switcher">
@@ -649,8 +649,8 @@ ${alternates}
             <h2 class="title-md">${escapeHtml(config.ctaHeading)}</h2>
             <p>${escapeHtml(config.ctaBody)}</p>
             <div class="cta-actions">
-              <a class="button button--primary" href="${config.prefix}/contact".replace(/\/+/g, "/")>${escapeHtml(config.ctaPrimary)}</a>
-              <a class="button button--secondary" href="${config.prefix}/contact".replace(/\/+/g, "/")>${escapeHtml(config.ctaSecondary)}</a>
+              <a class="button button--primary" href="${`${config.prefix}/contact`.replace(/\/+/g, "/")}">${escapeHtml(config.ctaPrimary)}</a>
+              <a class="button button--secondary" href="${`${config.prefix}/contact`.replace(/\/+/g, "/")}">${escapeHtml(config.ctaSecondary)}</a>
             </div>
           </div>
           <div class="article-layout">
