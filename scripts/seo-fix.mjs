@@ -147,7 +147,7 @@ function escapeAttribute(value = "") {
     .replace(/>/g, "&gt;");
 }
 
-function escapeHtmlText(value = "") {
+export function escapeHtmlText(value = "") {
   return value
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
@@ -760,4 +760,6 @@ async function main() {
   await generateSitemap(indexableFiles);
 }
 
-await main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  await main();
+}
