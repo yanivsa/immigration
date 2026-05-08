@@ -1,0 +1,5 @@
+🎯 **What:** The `extractLang` function inside `scripts/generate-search-index.mjs` lacked test coverage. It plays a critical part in extracting the language attribute during the build of the knowledge base indexing. We exported it and added unit tests, making the script easily testable by avoiding direct execution during imports.
+
+📊 **Coverage:** Tests now verify the extraction of the `lang` attribute from `<html>` tags with variations, including single vs double quotes, surrounding attributes, upper/lowercase combinations, as well as fallback states (missing attributes or no `<html>` tag at all).
+
+✨ **Result:** Test coverage for this regex parsing logic has significantly improved, ensuring the search index accurately determines locale and cluster relationships without regressions.

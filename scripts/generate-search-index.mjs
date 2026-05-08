@@ -112,7 +112,7 @@ const extractContent = (html, filePath = "unknown file") => {
   return normalizeText(mainMatch[0]).slice(0, 1200);
 };
 
-const extractLang = (html) => {
+export const extractLang = (html) => {
   const match = html.match(/<html[^>]*\blang=["']([^"']+)["']/i);
   return match ? match[1].toLowerCase().split("-")[0] : "";
 };
@@ -388,4 +388,6 @@ const buildIndex = async () => {
   console.log(`Knowledge base generated: ${path.relative(root, knowledgeBasePath)}`);
 };
 
-await buildIndex();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  await buildIndex();
+}
