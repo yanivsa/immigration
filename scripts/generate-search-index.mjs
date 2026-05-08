@@ -117,7 +117,7 @@ const extractLang = (html) => {
   return match ? match[1].toLowerCase().split("-")[0] : "";
 };
 
-const toUrl = (relativePath) => {
+export const toUrl = (relativePath) => {
   if (relativePath === "index.html") {
     return "/";
   }
@@ -388,4 +388,6 @@ const buildIndex = async () => {
   console.log(`Knowledge base generated: ${path.relative(root, knowledgeBasePath)}`);
 };
 
-await buildIndex();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  await buildIndex();
+}
