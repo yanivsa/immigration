@@ -760,4 +760,7 @@ async function main() {
   await generateSitemap(indexableFiles);
 }
 
-await main();
+export { clipText };
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  await main();
+}
