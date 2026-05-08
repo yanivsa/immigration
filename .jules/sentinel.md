@@ -1,0 +1,4 @@
+## 2024-05-08 - Fix insecure URL validation in form destination
+**Vulnerability:** The `/api/submit-form` endpoint in `src/index.js` validated the `destination` URL using a simple string prefix check (`destination.startsWith("https://docs.google.com/forms")`). This allowed SSRF/Open Redirect attacks via bypasses like `https://docs.google.com/forms@evil.com/` (where `evil.com` is the actual host).
+**Learning:** URL structures are complex and `startsWith` is insufficient for validating origins or endpoints. Attackers can leverage the credentials section (e.g., `@`), subdomains (e.g., `.evil.com`), or path traversal (e.g., `/../`) to manipulate the actual destination while satisfying string prefix checks.
+**Prevention:** Always parse untrusted URLs using `new URL()` and explicitly validate the `protocol`, `hostname`, and `pathname` properties against an allowlist instead of relying on string matching.
