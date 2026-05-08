@@ -632,7 +632,7 @@ const stripTags = (value) =>
     .replace(/\s+/g, " ")
     .trim();
 
-const trimAtWord = (value, max) => {
+export const trimAtWord = (value, max) => {
   if (value.length <= max) {
     return value;
   }
@@ -653,7 +653,7 @@ const trimAtWord = (value, max) => {
     .trim();
 };
 
-const ensureSentence = (value) => {
+export const ensureSentence = (value) => {
   if (!value) {
     return value;
   }
@@ -661,7 +661,7 @@ const ensureSentence = (value) => {
   return /[.!?…»”]$/.test(value) ? value : `${value}.`;
 };
 
-const fitCompleteSentences = (value, max = 158) => {
+export const fitCompleteSentences = (value, max = 158) => {
   const normalized = value.replace(/\s+/g, " ").trim();
   if (!normalized) {
     return normalized;
@@ -1311,7 +1311,7 @@ const rebuildArticleHub = (html, locale) => {
   );
 };
 
-const repairFile = async (filePath) => {
+const repairFile = async (filePath, buildAlternateTags, webpImages) => {
   const relativePath = normalizePath(filePath);
   const locale = getLocale(relativePath);
   const pageType = getPageType(relativePath);
@@ -1392,6 +1392,8 @@ const repairFile = async (filePath) => {
   await fs.writeFile(filePath, html, "utf8");
   return true;
 };
+
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
 
 const htmlFiles = await walk(root);
 const webpImages = new Set(
@@ -1510,7 +1512,7 @@ const generateSitemap = async () => {
 let updated = 0;
 
 for (const filePath of htmlFiles) {
-  const changed = await repairFile(filePath);
+  const changed = await repairFile(filePath, buildAlternateTags, webpImages);
   if (changed) {
     updated += 1;
   }
@@ -1519,3 +1521,4 @@ for (const filePath of htmlFiles) {
 await generateSitemap();
 
 console.log(`SEO repair updated ${updated} HTML files.`);
+}
