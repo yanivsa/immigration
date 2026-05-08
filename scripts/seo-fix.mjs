@@ -208,7 +208,7 @@ function stripLocalePrefix(relPath) {
   return relPath.replace(/^(en|ru|ua)\//, "");
 }
 
-function getLocalizedRel(baseRel, locale) {
+export function getLocalizedRel(baseRel, locale) {
   if (locale === "he") return baseRel;
   if (locale === "uk") return `ua/${baseRel}`;
   return `${locale}/${baseRel}`;
@@ -760,4 +760,6 @@ async function main() {
   await generateSitemap(indexableFiles);
 }
 
-await main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  await main();
+}
