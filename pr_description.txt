@@ -1,0 +1,9 @@
+🎯 **What:** The `extractTag` helper function in `scripts/generate-search-index.mjs` lacked test coverage, which left its string extraction, tag stripping, and whitespace normalization logic vulnerable to regressions. I refactored the script to be testable without side-effects (exporting the helper and guarding the top-level execution block) and added a dedicated unit test suite.
+
+📊 **Coverage:**
+- Happy path extraction of text with regex groups.
+- Null checks when regex finds no match (returning an empty string).
+- Stripping of nested HTML tags within the match.
+- Decoding and normalizing HTML entities within the extracted string.
+
+✨ **Result:** Enhanced test coverage guarantees the structural and logical integrity of the text extraction logic for search indexing, making future refactoring significantly safer.

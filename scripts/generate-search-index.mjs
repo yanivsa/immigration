@@ -90,7 +90,7 @@ const stripTags = (value) =>
 
 const normalizeText = (value) => stripTags(value).replace(/\s+/g, " ").trim();
 
-const extractTag = (html, regex) => {
+export const extractTag = (html, regex) => {
   const match = html.match(regex);
   return match ? normalizeText(match[1]) : "";
 };
@@ -388,4 +388,6 @@ const buildIndex = async () => {
   console.log(`Knowledge base generated: ${path.relative(root, knowledgeBasePath)}`);
 };
 
-await buildIndex();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  await buildIndex();
+}
