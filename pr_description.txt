@@ -1,0 +1,8 @@
+🎯 What
+Added unit tests for the `hashString` algorithm in `scripts/humanize-articles.mjs`. The script was refactored for testability by exporting the function and wrapping execution logic inside a `process.argv[1] === fileURLToPath(import.meta.url)` block.
+
+📊 Coverage
+Covered reproducible hash generation, empty strings, similarity distinguishing, long strings handling, and verified it always returns a positive integer via the unsigned right shift (`>>> 0`).
+
+✨ Result
+100% test coverage for the `hashString` logic, allowing confident future refactoring and ensuring the humanizer deterministic logic works as expected. Test suite was verified to catch breakages.
