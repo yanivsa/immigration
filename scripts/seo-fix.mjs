@@ -623,13 +623,13 @@ async function walkHtml(dir) {
 }
 
 async function generateSitemap(indexableFiles) {
-  const entries = [];
-
-  for (const relPath of collectFilesByPriority(indexableFiles)) {
+  const entriesPromises = collectFilesByPriority(indexableFiles).map(async (relPath) => {
     const filePath = path.join(root, relPath);
-    const html = await fs.readFile(filePath, "utf8");
+    const [html, stat] = await Promise.all([
+      fs.readFile(filePath, "utf8"),
+      fs.stat(filePath)
+    ]);
     const canonical = readLinkHref(html, "canonical") || toAbsoluteUrl(relPath);
-    const stat = await fs.stat(filePath);
     const alternates = [...html.matchAll(/<link\b[^>]*rel=["']alternate["'][^>]*>/gi)]
       .map((match) => ({
         hreflang: extractAttribute(match[0], "hreflang"),
@@ -637,12 +637,14 @@ async function generateSitemap(indexableFiles) {
       }))
       .filter((item) => item.hreflang && item.href);
 
-    entries.push({
+    return {
       canonical,
       alternates,
       lastmod: stat.mtime.toISOString().split("T")[0],
-    });
-  }
+    };
+  });
+
+  const entries = await Promise.all(entriesPromises);
 
   const lines = [
     "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
