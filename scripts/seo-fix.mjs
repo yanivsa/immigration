@@ -760,4 +760,8 @@ async function main() {
   await generateSitemap(indexableFiles);
 }
 
-await main();
+export { stripLocalePrefix };
+
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  await main();
+}
