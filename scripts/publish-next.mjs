@@ -136,7 +136,7 @@ const queueClusterMap = {
   status: "citizenship-status",
   family: "citizenship-status",
   immigration: "citizenship-status",
-  "law-of-return": "citizenship-status",
+  "law-of-return": "law-of-return",
   admin: "citizenship-status",
   documents: "citizenship-status",
   emergency: "ben-gurion-emergency",
@@ -144,6 +144,33 @@ const queueClusterMap = {
 };
 
 const clusterMeta = {
+  "law-of-return": {
+    servicePath: "/services/citizenship",
+    hubSlug: "law-of-return",
+    image: "/images/family-citizenship-israel.jpg",
+    questionSets: {
+      he: [
+        ["מי זכאי לעלות מכוח חוק השבות?", "יהודים, ילדיהם ונכדיהם, וכן בני ובנות זוגם, בתנאי שלא המירו את דתם מרצון."],
+        ["איזה מסמכים צריך כדי להוכיח יהדות?", "תעודות לידה רשמיות, תעודות נישואין של הורים וסבים, מכתב מקהילה יהודית מוכרת, ומסמכי ארכיון מקוריים."],
+        ["מה קורה אם יש רישום פלילי?", "רישום פלילי דורש בדיקה מעמיקה מראש, שכן הוא עלול לעכב או למנוע אישור עלייה."],
+      ],
+      en: [
+        ["Who is eligible under the Law of Return?", "Jews, their children, and grandchildren, as well as their spouses, provided they have not voluntarily changed their religion."],
+        ["What documents prove Jewish roots?", "Official birth certificates, marriage records of parents and grandparents, a letter from a recognized Jewish community, and original archive documents."],
+        ["What happens if there is a criminal record?", "A criminal record requires thorough review beforehand, as it can delay or prevent Aliyah approval."],
+      ],
+      ru: [
+        ["Кто имеет право на репатриацию по Закону о возвращении?", "Евреи, их дети и внуки, а также их супруги, при условии, что они добровольно не сменили религию."],
+        ["Какие документы доказывают еврейские корни?", "Официальные свидетельства о рождении, свидетельства о браке родителей и бабушек/дедушек, письмо от признанной еврейской общины и оригинальные архивные документы."],
+        ["Что делать, если есть судимость?", "Наличие судимости требует тщательной предварительной проверки, так как это может задержать или заблокировать право на алию."],
+      ],
+      uk: [
+        ["Хто має право на репатріацію за Законом про повернення?", "Євреї, їхні діти та онуки, а також їхні дружини/чоловіки, за умови, що вони добровільно не змінили релігію."],
+        ["Які документи доводять єврейське коріння?", "Офіційні свідоцтва про народження, свідоцтва про шлюб батьків та дідусів/бабусь, лист від визнаної єврейської громади та оригінальні архівні документи."],
+        ["Що робити, якщо є судимість?", "Наявність судимості вимагає ретельної попередньої перевірки, оскільки це може затримати або заблокувати право на алію."],
+      ],
+    },
+  },
   "work-visas": {
     servicePath: "/services/work-visas",
     hubSlug: "work-visas",
@@ -440,7 +467,30 @@ const buildDescription = (locale, title, clusterKey) => {
   return descriptions[locale];
 };
 
+
 const buildOverview = (locale, title, keyword, clusterKey) => {
+  if (clusterKey === "law-of-return") {
+    const lorOverview = {
+      he: [
+        `ההליך לקבלת מעמד בישראל מכוח חוק השבות עבור ${keyword} מחייב הכנה יסודית של מסמכים, שכן מטרת הרשויות היא לאמת מעל לכל ספק את הקשר המשפחתי והשורשים היהודיים.`,
+        `במקום להסתמך על מידע חלקי, כדאי לגשת לנושא של ${keyword} דרך בניית עץ יוחסין מגובה במסמכים מקוריים, בדיקת זכאות עקרונית מול רשויות ההגירה, ורק אז תכנון המעבר לישראל.`
+      ],
+      en: [
+        `The process of obtaining status in Israel under the Law of Return regarding ${keyword} requires meticulous document preparation, as the authorities aim to verify family ties and Jewish roots beyond any doubt.`,
+        `Rather than relying on partial information, approaching ${keyword} should start with building a family tree backed by original civil records, confirming eligibility in principle, and only then planning the relocation to Israel.`
+      ],
+      ru: [
+        `Процесс получения статуса в Израиле по Закону о возвращении в связи с ${keyword} требует тщательной подготовки документов, поскольку цель властей — безошибочно подтвердить родственные связи и еврейские корни.`,
+        `Вместо того чтобы полагаться на отрывочную информацию, правильный подход к ${keyword} начинается с построения генеалогического древа, подкрепленного оригинальными записями актов гражданского состояния, подтверждения принципиального права на репатриацию и лишь затем — планирования переезда в Израиль.`
+      ],
+      uk: [
+        `Процес отримання статусу в Ізраїлі за Законом про повернення у зв'язку з ${keyword} вимагає ретельної підготовки документів, оскільки мета органів влади — безпомилково підтвердити родинні зв'язки та єврейське коріння.`,
+        `Замість того, щоб покладатися на часткову інформацію, правильний підхід до ${keyword} починається з побудови генеалогічного дерева, підкріпленого оригінальними записами актів цивільного стану, підтвердження принципового права на репатріацію і лише потім — планування переїзду до Ізраїлю.`
+      ]
+    };
+    return lorOverview[locale];
+  }
+
   const byLocale = {
     he: [
       `${title} הוא נושא שמבלבל לא מעט אנשים, בעיקר כאשר מנסים להבין איזה מסלול רלוונטי, אילו מסמכים באמת חשובים, ומה משתנה לפי נסיבות אישיות או שלב ההליך.`,
@@ -474,7 +524,17 @@ const buildOverview = (locale, title, keyword, clusterKey) => {
   return byLocale[locale];
 };
 
+
 const buildChecklist = (locale, keyword, clusterKey) => {
+  if (clusterKey === "law-of-return") {
+    return {
+      he: ["תעודות לידה מקוריות של המבקש ושל קרובי המשפחה הרלוונטיים (הורים, סבים).", "תעודות נישואין, גירושין או פטירה שמוכיחות את הרצף המשפחתי.", "מסמכים ציבוריים ישנים (כמו תעודות סיום לימודים או פנקסי עבודה) המציינים לאום.", "תעודת יושר עם אפוסטיל ממשטרת מדינת המוצא."],
+      en: ["Original birth certificates for the applicant and relevant relatives (parents, grandparents).", "Marriage, divorce, or death certificates that prove the family lineage.", "Old public documents (such as diplomas or work books) indicating nationality.", "A background check / police clearance with an apostille from the country of origin."],
+      ru: ["Оригиналы свидетельств о рождении заявителя и соответствующих родственников (родителей, бабушек/дедушек).", "Свидетельства о браке, разводе или смерти, подтверждающие родственную цепочку.", "Старые официальные документы (например, дипломы или трудовые книжки) с указанием национальности.", "Справка о несудимости с апостилем из страны исхода."],
+      uk: ["Оригінали свідоцтв про народження заявника та відповідних родичів (батьків, дідусів/бабусь).", "Свідоцтва про шлюб, розлучення або смерть, що підтверджують родинний ланцюг.", "Старі офіційні документи (наприклад, дипломи або трудові книжки) із зазначенням національності.", "Довідка про несудимість з апостилем із країни походження."],
+    }[locale];
+  }
+
   const defaultLists = {
     he: [
       `רשימת מסמכים שקשורים ל-${keyword}.`,
@@ -512,7 +572,17 @@ const buildChecklist = (locale, keyword, clusterKey) => {
   return defaultLists[locale];
 };
 
+
 const buildPitfalls = (locale, clusterKey) => {
+  if (clusterKey === "law-of-return") {
+    return {
+      he: ["הגעה הקונסוליה או ללשכת רשות האוכלוסין ללא כל שרשרת המסמכים המקורית.", "העלמת מידע על עבר פלילי, שיכולה להוביל לסירוב מיידי.", "הגשת מסמכים שעברו למינציה או שהושחתו, אשר אינם מתקבלים על ידי הקונסול.", "הסתמכות על העתקים או צילומים ללא אימות אפוסטיל היכן שנדרש."],
+      en: ["Arriving at the consulate or Population Authority office without the complete chain of original documents.", "Hiding information about a criminal record, which can lead to an immediate refusal.", "Submitting laminated or damaged documents, which are not accepted by the consul.", "Relying on copies or photocopies without an apostille certification where required."],
+      ru: ["Прибытие в консульство или в Управление народонаселения без полной цепочки оригинальных документов.", "Сокрытие информации о судимости, что может привести к немедленному отказу.", "Подача заламинированных или поврежденных документов, которые не принимаются консулом.", "Использование копий или ксерокопий без апостиля там, где он требуется."],
+      uk: ["Прибуття до консульства або Управління народонаселення без повного ланцюга оригінальних документів.", "Приховування інформації про судимість, що може призвести до негайної відмови.", "Подання заламінованих або пошкоджених документів, які не приймаються консулом.", "Використання копій або ксерокопій без апостиля там, де він потрібен."],
+    }[locale];
+  }
+
   const base = {
     he: ["לא להסתמך על מסמך אחד בלבד אם יש עוד מסמכים שמסבירים את התמונה.", "לא להשאיר פער בין הסבר בעל פה לבין מה שכתוב במסמכים.", "לא להמתין לרגע האחרון אם כבר יש דחיפות או בקשה להשלמה."],
     en: ["Do not rely on a single document when the broader context matters.", "Do not let the spoken explanation drift away from the written file.", "Do not wait until the last minute once urgency or a request for evidence already exists."],
@@ -741,7 +811,7 @@ async function publishNext() {
   const articleNumber = await nextArticleNumber();
   const localeInputs = await loadLocaleInputs(row);
   const clusterKey = normalizeCluster(row.cluster);
-  const publishedAt = now;
+  const publishedAt = scheduledAt;
 
   for (const locale of Object.keys(localeConfigs)) {
     const outputPath = articlePathFor(locale, articleNumber);
