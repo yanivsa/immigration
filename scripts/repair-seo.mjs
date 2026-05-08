@@ -632,7 +632,7 @@ const stripTags = (value) =>
     .replace(/\s+/g, " ")
     .trim();
 
-const trimAtWord = (value, max) => {
+export const trimAtWord = (value, max) => {
   if (value.length <= max) {
     return value;
   }
@@ -653,7 +653,7 @@ const trimAtWord = (value, max) => {
     .trim();
 };
 
-const ensureSentence = (value) => {
+export const ensureSentence = (value) => {
   if (!value) {
     return value;
   }
@@ -661,7 +661,7 @@ const ensureSentence = (value) => {
   return /[.!?…»”]$/.test(value) ? value : `${value}.`;
 };
 
-const fitCompleteSentences = (value, max = 158) => {
+export const fitCompleteSentences = (value, max = 158) => {
   const normalized = value.replace(/\s+/g, " ").trim();
   if (!normalized) {
     return normalized;
@@ -1311,7 +1311,7 @@ const rebuildArticleHub = (html, locale) => {
   );
 };
 
-const repairFile = async (filePath) => {
+export const repairFile = async (filePath, buildAlternateTags, webpImages) => {
   const relativePath = normalizePath(filePath);
   const locale = getLocale(relativePath);
   const pageType = getPageType(relativePath);
@@ -1393,129 +1393,132 @@ const repairFile = async (filePath) => {
   return true;
 };
 
-const htmlFiles = await walk(root);
-const webpImages = new Set(
-  (await fs.readdir(path.join(root, "images")))
-    .filter((name) => name.endsWith(".webp"))
-    .map((name) => `/images/${name}`)
-);
-const alternateGroups = htmlFiles.reduce((accumulator, filePath) => {
-  const relativePath = normalizePath(filePath);
-  const pageType = getPageType(relativePath);
-  if (pageType === "404" || pageType === "design-system" || pageType === "internal-template" || pageType === "private-legal") {
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  const htmlFiles = await walk(root);
+  const webpImages = new Set(
+    (await fs.readdir(path.join(root, "images")))
+      .filter((name) => name.endsWith(".webp"))
+      .map((name) => `/images/${name}`)
+  );
+  const alternateGroups = htmlFiles.reduce((accumulator, filePath) => {
+    const relativePath = normalizePath(filePath);
+    const pageType = getPageType(relativePath);
+    if (pageType === "404" || pageType === "design-system" || pageType === "internal-template" || pageType === "private-legal") {
+      return accumulator;
+    }
+
+    const neutralPath = getNeutralPath(relativePath);
+    const pages = accumulator.get(neutralPath) || [];
+    pages.push({
+      locale: getLocale(relativePath),
+      url: getCanonicalUrl(relativePath),
+    });
+    accumulator.set(neutralPath, pages);
     return accumulator;
-  }
+  }, new Map());
 
-  const neutralPath = getNeutralPath(relativePath);
-  const pages = accumulator.get(neutralPath) || [];
-  pages.push({
-    locale: getLocale(relativePath),
-    url: getCanonicalUrl(relativePath),
-  });
-  accumulator.set(neutralPath, pages);
-  return accumulator;
-}, new Map());
-
-const buildAlternateTags = (relativePath) => {
-  const pages = (alternateGroups.get(getNeutralPath(relativePath)) || [])
-    .slice()
-    .sort(
-      (left, right) =>
-        localeOrder.indexOf(left.locale) - localeOrder.indexOf(right.locale)
-    );
-  const defaultPage = pages.find((page) => page.locale === "he") || pages[0];
-  const tags = pages.map(
-    (page) =>
-      `    <link rel="alternate" hreflang="${localeConfig[page.locale].locale}" href="${page.url}" />`
-  );
-
-  if (getNeutralPath(relativePath) === "index.html" && defaultPage) {
-    tags.push(
-      `    <link rel="alternate" hreflang="x-default" href="${defaultPage.url}" />`
-    );
-  }
-
-  return tags.join("\n");
-};
-
-const generateSitemap = async () => {
-  const lines = [
-    '<?xml version="1.0" encoding="UTF-8"?>',
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
-  ];
-
-  const groupedEntries = Array.from(alternateGroups.entries()).sort((left, right) =>
-    left[0].localeCompare(right[0], "en")
-  );
-
-  for (const [neutralPath, pageGroup] of groupedEntries) {
-    const pages = [];
-
-    for (const page of pageGroup) {
-      const relativePath = page.locale === "he" ? neutralPath : `${page.locale}/${neutralPath}`;
-      const pageType = getPageType(relativePath);
-      if (pageType === "internal-template" || pageType === "private-legal") {
-        continue;
-      }
-      const filePath = path.join(root, relativePath);
-      const html = await fs.readFile(filePath, "utf8");
-      const robots = extractMeta(html, "name", "robots").toLowerCase();
-      if (robots.includes("noindex")) {
-        continue;
-      }
-
-      const stats = await fs.stat(filePath);
-      pages.push({
-        ...page,
-        mtime: stats.mtime,
-      });
-    }
-
-    if (!pages.length) {
-      continue;
-    }
-
-    pages.sort(
-      (left, right) =>
-        localeOrder.indexOf(left.locale) - localeOrder.indexOf(right.locale)
-    );
-
+  const buildAlternateTags = (relativePath) => {
+    const pages = (alternateGroups.get(getNeutralPath(relativePath)) || [])
+      .slice()
+      .sort(
+        (left, right) =>
+          localeOrder.indexOf(left.locale) - localeOrder.indexOf(right.locale)
+      );
     const defaultPage = pages.find((page) => page.locale === "he") || pages[0];
-    const lastmod = new Date(
-      Math.max(...pages.map((page) => page.mtime.getTime()))
-    )
-      .toISOString()
-      .slice(0, 10);
+    const tags = pages.map(
+      (page) =>
+        `    <link rel="alternate" hreflang="${localeConfig[page.locale].locale}" href="${page.url}" />`
+    );
 
-    lines.push("  <url>");
-    lines.push(`    <loc>${defaultPage.url}</loc>`);
-    for (const page of pages) {
-      lines.push(
-        `    <xhtml:link rel="alternate" hreflang="${localeConfig[page.locale].locale}" href="${page.url}" />`
+    if (getNeutralPath(relativePath) === "index.html" && defaultPage) {
+      tags.push(
+        `    <link rel="alternate" hreflang="x-default" href="${defaultPage.url}" />`
       );
     }
-    if (neutralPath === "index.html") {
-      lines.push(
-        `    <xhtml:link rel="alternate" hreflang="x-default" href="${defaultPage.url}" />`
+
+    return tags.join("\n");
+  };
+
+  const generateSitemap = async () => {
+    const lines = [
+      '<?xml version="1.0" encoding="UTF-8"?>',
+      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
+    ];
+
+    const groupedEntries = Array.from(alternateGroups.entries()).sort((left, right) =>
+      left[0].localeCompare(right[0], "en")
+    );
+
+    for (const [neutralPath, pageGroup] of groupedEntries) {
+      const pages = [];
+
+      for (const page of pageGroup) {
+        const relativePath = page.locale === "he" ? neutralPath : `${page.locale}/${neutralPath}`;
+        const pageType = getPageType(relativePath);
+        if (pageType === "internal-template" || pageType === "private-legal") {
+          continue;
+        }
+        const filePath = path.join(root, relativePath);
+        const html = await fs.readFile(filePath, "utf8");
+        const robots = extractMeta(html, "name", "robots").toLowerCase();
+        if (robots.includes("noindex")) {
+          continue;
+        }
+
+        const stats = await fs.stat(filePath);
+        pages.push({
+          ...page,
+          mtime: stats.mtime,
+        });
+      }
+
+      if (!pages.length) {
+        continue;
+      }
+
+      pages.sort(
+        (left, right) =>
+          localeOrder.indexOf(left.locale) - localeOrder.indexOf(right.locale)
       );
+
+      const defaultPage = pages.find((page) => page.locale === "he") || pages[0];
+      const lastmod = new Date(
+        Math.max(...pages.map((page) => page.mtime.getTime()))
+      )
+        .toISOString()
+        .slice(0, 10);
+
+      lines.push("  <url>");
+      lines.push(`    <loc>${defaultPage.url}</loc>`);
+      for (const page of pages) {
+        lines.push(
+          `    <xhtml:link rel="alternate" hreflang="${localeConfig[page.locale].locale}" href="${page.url}" />`
+        );
+      }
+      if (neutralPath === "index.html") {
+        lines.push(
+          `    <xhtml:link rel="alternate" hreflang="x-default" href="${defaultPage.url}" />`
+        );
+      }
+      lines.push(`    <lastmod>${lastmod}</lastmod>`);
+      lines.push("  </url>");
     }
-    lines.push(`    <lastmod>${lastmod}</lastmod>`);
-    lines.push("  </url>");
+
+    lines.push("</urlset>");
+    await fs.writeFile(path.join(root, "sitemap.xml"), `${lines.join("\n")}\n`, "utf8");
+  };
+
+  let updated = 0;
+
+  for (const filePath of htmlFiles) {
+    const changed = await repairFile(filePath, buildAlternateTags, webpImages);
+    if (changed) {
+      updated += 1;
+    }
   }
 
-  lines.push("</urlset>");
-  await fs.writeFile(path.join(root, "sitemap.xml"), `${lines.join("\n")}\n`, "utf8");
-};
+  await generateSitemap();
 
-let updated = 0;
+  console.log(`SEO repair updated ${updated} HTML files.`);
 
-for (const filePath of htmlFiles) {
-  const changed = await repairFile(filePath);
-  if (changed) {
-    updated += 1;
-  }
 }
-
-await generateSitemap();
-
-console.log(`SEO repair updated ${updated} HTML files.`);
