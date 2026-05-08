@@ -1,0 +1,45 @@
+name: Jules Nightly Code Health
+
+on:
+  schedule:
+    - cron: "30 1 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: jules-nightly-code-health
+  cancel-in-progress: false
+
+jobs:
+  start-jules:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start Jules autonomous code-health session
+        env:
+          JULES_API_KEY: ${{ secrets.JULES_API_KEY }}
+        run: |
+          set -euo pipefail
+          test -n "${JULES_API_KEY:-}"
+
+          cat > payload.json <<'JSON'
+          {
+            "title": "Nightly immigration code-health sweep",
+            "prompt": "Nightly autonomous code-health sweep for yanivsa/immigration. Work from main. Act like Jules Suggested Tasks, but do not wait for manual Start/Review. Inspect the repository for small high-confidence fixes in tests, security, SEO utilities, performance, build reliability, and maintainability. Prefer issues similar to Jules Suggestions: missing unit tests, duplicated helpers, unsafe URL handling, slow synchronous file operations, brittle parsing, and small refactors with clear validation. Do not publish immigration articles in this task; the article workflow is handled separately. Keep each run focused and small: one coherent PR, or no PR if there is no high-confidence improvement. Do not ask the user for confirmation. Use the smallest repo-consistent change, run relevant tests/build checks, and create a PR automatically. PR summary must include what was changed, validation commands, and any risk or skipped checks.",
+            "sourceContext": {
+              "source": "sources/github/yanivsa/immigration",
+              "githubRepoContext": {
+                "startingBranch": "main"
+              }
+            },
+            "requirePlanApproval": false,
+            "automationMode": "AUTO_CREATE_PR"
+          }
+          JSON
+
+          curl --fail-with-body -sS \
+            -H "x-goog-api-key: ${JULES_API_KEY}" \
+            -H "Content-Type: application/json" \
+            -d @payload.json \
+            https://jules.googleapis.com/v1alpha/sessions
