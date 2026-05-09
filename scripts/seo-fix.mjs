@@ -155,6 +155,7 @@ function escapeHtmlText(value = "") {
 }
 
 function normalizeWhitespace(value = "") {
+  if (value == null) return "";
   return value.replace(/\s+/g, " ").trim();
 }
 
@@ -760,4 +761,8 @@ async function main() {
   await generateSitemap(indexableFiles);
 }
 
-await main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  await main();
+}
+
+export { splitSentences };
