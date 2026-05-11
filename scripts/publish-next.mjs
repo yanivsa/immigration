@@ -137,6 +137,8 @@ const queueClusterMap = {
   family: "citizenship-status",
   immigration: "citizenship-status",
   "law-of-return": "citizenship-status",
+  aliyah: "citizenship-status",
+  repatriation: "citizenship-status",
   admin: "citizenship-status",
   documents: "citizenship-status",
   emergency: "ben-gurion-emergency",
@@ -440,31 +442,31 @@ const buildDescription = (locale, title, clusterKey) => {
   return descriptions[locale];
 };
 
-const buildOverview = (locale, title, keyword, clusterKey) => {
+const buildOverview = (locale, title, keyword, clusterKey, intent) => {
   const byLocale = {
     he: [
-      `${title} הוא נושא שמבלבל לא מעט אנשים, בעיקר כאשר מנסים להבין איזה מסלול רלוונטי, אילו מסמכים באמת חשובים, ומה משתנה לפי נסיבות אישיות או שלב ההליך.`,
+      `${title} הוא נושא שמבלבל לא מעט אנשים, בעיקר כאשר מנסים להבין איזה מסלול רלוונטי, אילו מסמכים באמת חשובים, ומה משתנה לפי נסיבות אישיות או שלב ההליך. בהקשר של ${intent || title}, חשוב במיוחד להבין את דרישות הסף והמסמכים הנדרשים.`,
       `במקום להסתמך על תשובה קצרה מדי, עדיף לבדוק את ${keyword} דרך שלושה צירים: מסלול משפטי נכון, מסמכים עקביים, ותזמון נכון של הפעולה הבאה.`,
       clusterKey === "ben-gurion-emergency"
         ? `במקרי חירום חשוב במיוחד לא לאלתר גרסה חדשה תוך כדי לחץ, אלא לאסוף את העובדות, לשמור מסמכים, ולהבין איזו החלטה כבר ניתנה בפועל.`
         : `במרבית המקרים, הבעיה אינה רק “מה להגיש”, אלא גם איך להציג את התיק באופן עקבי כך שהרשויות יבינו את ההיגיון שמאחורי הבקשה.`,
     ],
     en: [
-      `${title} often sounds simpler than it is. In practice, the real issue is usually not only what to file, but how the legal route, the documents, and the timing fit together.`,
+      `${title} often sounds simpler than it is. In practice, the real issue is usually not only what to file, but how the legal route, the documents, and the timing fit together. Specifically regarding ${intent || title}, it is crucial to understand the eligibility criteria and required documents.`,
       `A useful way to approach ${keyword} is to check three things first: the right legal track, a consistent document set, and the practical next step that matches the current stage.`,
       clusterKey === "ben-gurion-emergency"
         ? `In live airport cases, the priority is to gather facts and documents before reacting under pressure, so the next decision is not shaped by confusion or missing context.`
         : `That is why a general guide should help you reduce confusion, narrow the decision tree, and identify when the matter stops being routine and starts requiring direct legal review.`,
     ],
     ru: [
-      `${title} обычно выглядит проще, чем есть на самом деле. На практике важно не только что подавать, но и как связаны правовой маршрут, документы и правильный момент для следующего шага.`,
+      `${title} обычно выглядит проще, чем есть на самом деле. На практике важно не только что подавать, но и как связаны правовой маршрут, документы и правильный момент для следующего шага. В контексте ${intent || title} особенно важно понимать критерии приемлемости и требуемые документы.`,
       `Полезно разбирать ${keyword} через три вопроса: какой правовой путь подходит, насколько согласованы документы и что является практическим следующим действием именно сейчас.`,
       clusterKey === "ben-gurion-emergency"
         ? `В ситуации в аэропорту приоритет — сначала собрать факты и документы, а уже потом отвечать под давлением, чтобы следующее решение не строилось на путанице.`
         : `Именно поэтому общий материал должен уменьшать хаос, сужать дерево решений и показывать, когда ситуация уже требует прямой юридической проверки.`,
     ],
     uk: [
-      `${title} зазвичай виглядає простіше, ніж є насправді. На практиці важливо не лише що подавати, а й як поєднуються правовий маршрут, документи та правильний момент для наступного кроку.`,
+      `${title} зазвичай виглядає простіше, ніж є насправді. На практиці важливо не лише що подавати, а й як поєднуються правовий маршрут, документи та правильний момент для наступного кроку. У контексті ${intent || title} особливо важливо розуміти критерії прийнятності та необхідні документи.`,
       `Корисно розбирати ${keyword} через три питання: який правовий шлях підходить, наскільки узгоджені документи і що є практичним наступним кроком саме зараз.`,
       clusterKey === "ben-gurion-emergency"
         ? `У ситуації в аеропорту пріоритет — спочатку зібрати факти й документи, а вже потім відповідати під тиском, щоб наступне рішення не будувалося на плутанині.`
@@ -552,7 +554,7 @@ const renderArticle = ({ locale, articleNumber, localeInputs, clusterKey, publis
   const displayDate = formatDisplayDate(publishedAt, locale);
   const relatedUrl = buildRelatedPath(locale, clusterKey);
   const serviceUrl = `${config.prefix}${clusterMeta[clusterKey].servicePath}`.replace(/\/+/g, "/");
-  const overview = buildOverview(locale, title, keyword, clusterKey);
+  const overview = buildOverview(locale, title, keyword, clusterKey, current.intent);
   const checklist = buildChecklist(locale, keyword, clusterKey);
   const pitfalls = buildPitfalls(locale, clusterKey);
   const faqs = clusterMeta[clusterKey].questionSets[locale];
