@@ -55,8 +55,8 @@ jobs:
             index.html \
             keyword-queue.csv \
             legal \
-            llms-full.txt \
-            llms.txt \
+            site-summary-full.txt \
+            site-summary.txt \
             robots.txt \
             ru \
             services \

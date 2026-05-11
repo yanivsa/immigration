@@ -29,7 +29,7 @@ const locales = {
       lawyerNow: "מתי נכון לפנות לייעוץ משפטי עכשיו",
       keyQuestions: "שאלות שאנשים באמת שואלים",
       sources: "מקורות רשמיים ששימשו לעמוד זה",
-      topicMap: "מפת נושאים ל-LLM ולחיפוש שיחתי",
+      topicMap: "מפת נושאים",
       topicMapText:
         "אם אתם שואלים שאלה כללית או משווים בין מסלולים, התחילו מהאשכול הרלוונטי ואז עברו למדריך או לשירות הספציפי.",
       allGuides: "כל המדריכים באשכול הזה",
@@ -63,7 +63,7 @@ const locales = {
         "כאשר מתווסף מקור רשמי חדש או משתנה דגש מקצועי, אנו מעדכנים גם את תאריך הבדיקה וגם את קטעי ההבהרה.",
         "פניות תיקון דרך טופס יצירת הקשר נבחנות כחלק מתהליך בקרת התוכן.",
       ],
-      llmsSummary:
+      siteSummary:
         "אתר ידע משפטי-מעשי על הגירה לישראל: ויזות עבודה, מעמד, אזרחות, אישורי כניסה וחירום בנתב\"ג.",
     },
   },
@@ -88,7 +88,7 @@ const locales = {
       lawyerNow: "When to contact a lawyer now",
       keyQuestions: "Questions people actually ask",
       sources: "Official sources used on this page",
-      topicMap: "Topic map for conversational search",
+      topicMap: "Topic map",
       topicMapText:
         "If you are comparing paths or asking a broad immigration question, start with the relevant cluster and then move to the specific guide or service page.",
       allGuides: "All guides in this cluster",
@@ -122,7 +122,7 @@ const locales = {
         "When a new official source or legal emphasis is added, we update both the review date and the explanation block.",
         "Correction requests sent through the contact form are reviewed as part of the editorial workflow.",
       ],
-      llmsSummary:
+      siteSummary:
         "Practical immigration-law knowledge site for Israel: work visas, status, citizenship, entry permits, tourist cases, and Ben Gurion emergencies.",
     },
   },
@@ -147,7 +147,7 @@ const locales = {
       lawyerNow: "Когда уже нужен юрист",
       keyQuestions: "Вопросы, которые реально задают",
       sources: "Официальные источники для этой страницы",
-      topicMap: "Карта тем для разговорного поиска",
+      topicMap: "Карта тем",
       topicMapText:
         "Если вы сравниваете пути или задаёте общий вопрос об иммиграции, начните с тематического кластера, а затем переходите к нужной услуге или материалу.",
       allGuides: "Все материалы этого кластера",
@@ -181,7 +181,7 @@ const locales = {
         "Когда появляется новый официальный источник или меняется акцент, мы обновляем и дату проверки, и поясняющий блок.",
         "Запросы на исправление через контактную форму рассматриваются как часть редакционного процесса.",
       ],
-      llmsSummary:
+      siteSummary:
         "Практический юридический сайт об иммиграции в Израиль: рабочие визы, статус, гражданство, въезд и экстренные ситуации в Бен-Гурионе.",
     },
   },
@@ -206,7 +206,7 @@ const locales = {
       lawyerNow: "Коли вже потрібен юрист",
       keyQuestions: "Питання, які реально ставлять",
       sources: "Офіційні джерела для цієї сторінки",
-      topicMap: "Карта тем для розмовного пошуку",
+      topicMap: "Карта тем",
       topicMapText:
         "Якщо ви порівнюєте шляхи або ставите загальне питання про імміграцію, починайте з відповідного кластера, а потім переходьте до потрібної послуги чи матеріалу.",
       allGuides: "Усі матеріали цього кластера",
@@ -240,7 +240,7 @@ const locales = {
         "Коли з’являється нове офіційне джерело або змінюється акцент, ми оновлюємо і дату перевірки, і пояснювальний блок.",
         "Запити на виправлення через контактну форму розглядаються як частина редакційного процесу.",
       ],
-      llmsSummary:
+      siteSummary:
         "Практичний юридичний сайт про імміграцію до Ізраїлю: робочі візи, статус, громадянство, в’їзд і надзвичайні ситуації в Бен-Гуріоні.",
     },
   },
@@ -1192,7 +1192,7 @@ const ctaBoundaryNote = {
 const quickReferenceCopy = {
   he: {
     heading: "טבלת התמצאות מהירה",
-    intro: "טבלת עזר קצרה ל-LLM ולקריאה מהירה. הזמנים תלויים בעומס הרשות, שלמות המסמכים ורמת הדחיפות בפועל.",
+    intro: "טבלת עזר קצרה לקריאה מהירה. הזמנים תלויים בעומס הרשות, שלמות המסמכים ורמת הדחיפות בפועל.",
     columns: ["סוג שירות", "למי זה מתאים", "מסמך מפתח", "זמן משוער"],
     bySlug: {
       "work-visas": [
@@ -1224,7 +1224,7 @@ const quickReferenceCopy = {
   },
   en: {
     heading: "Quick reference table",
-    intro: "A compact extraction layer for fast reading and LLM ingestion. Timing depends on authority workload, document completeness, and real urgency.",
+    intro: "A compact extraction layer for fast reading. Timing depends on authority workload, document completeness, and real urgency.",
     columns: ["Service type", "Who it fits", "Key document", "Estimated time"],
     bySlug: {
       "work-visas": [
@@ -1256,7 +1256,7 @@ const quickReferenceCopy = {
   },
   ru: {
     heading: "Таблица быстрой ориентации",
-    intro: "Короткий слой для быстрого чтения и LLM-извлечения. Сроки зависят от нагрузки ведомства, полноты документов и реальной срочности.",
+    intro: "Короткий слой для быстрого чтения. Сроки зависят от нагрузки ведомства, полноты документов и реальной срочности.",
     columns: ["Тип услуги", "Кому подходит", "Ключевой документ", "Оценка по времени"],
     bySlug: {
       "work-visas": [
@@ -1288,7 +1288,7 @@ const quickReferenceCopy = {
   },
   ua: {
     heading: "Таблиця швидкої орієнтації",
-    intro: "Короткий шар для швидкого читання та LLM-витягування. Строки залежать від навантаження органу, повноти документів і реальної терміновості.",
+    intro: "Короткий шар для швидкого читання. Строки залежать від навантаження органу, повноти документів і реальної терміновості.",
     columns: ["Тип послуги", "Кому підходить", "Ключовий документ", "Орієнтовний час"],
     bySlug: {
       "work-visas": [
@@ -1827,7 +1827,7 @@ const buildGlossaryPage = (locale) => {
         "@id": `${canonical}#webpage`,
         url: canonical,
         name: localeData.labels.glossary,
-        description: localeData.labels.llmsSummary,
+        description: localeData.labels.siteSummary,
         inLanguage: localeData.htmlLang,
       },
       {
@@ -1871,17 +1871,17 @@ const buildGlossaryPage = (locale) => {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>${escapeHtml(localeData.labels.glossary)} | ${escapeHtml(localeData.businessName)}</title>
-    <meta name="description" content="${escapeHtml(localeData.labels.llmsSummary)}" />
+    <meta name="description" content="${escapeHtml(localeData.labels.siteSummary)}" />
     <link rel="canonical" href="${canonical}" />
     <link rel="dns-prefetch" href="//www.gov.il" />
     <meta property="og:title" content="${escapeHtml(localeData.labels.glossary)} | ${escapeHtml(localeData.businessName)}" />
-    <meta property="og:description" content="${escapeHtml(localeData.labels.llmsSummary)}" />
+    <meta property="og:description" content="${escapeHtml(localeData.labels.siteSummary)}" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="${canonical}" />
     <meta property="og:image" content="${siteUrl}/images/law-office-scales-gavel-ashdod.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHtml(localeData.labels.glossary)} | ${escapeHtml(localeData.businessName)}" />
-    <meta name="twitter:description" content="${escapeHtml(localeData.labels.llmsSummary)}" />
+    <meta name="twitter:description" content="${escapeHtml(localeData.labels.siteSummary)}" />
 ${altTags}
     <link rel="alternate" hreflang="x-default" href="${defaultCanonical}" />
     <link rel="alternate" type="application/json" href="/assets/knowledge-base.json" title="Knowledge base" />
@@ -1910,7 +1910,7 @@ ${altTags}
         <div class="container stack">
           <p class="eyebrow">${escapeHtml(localeData.labels.glossary)}</p>
           <h1 class="title-xl">${escapeHtml(localeData.labels.glossary)}</h1>
-          <p class="lede">${escapeHtml(localeData.labels.llmsSummary)}</p>
+          <p class="lede">${escapeHtml(localeData.labels.siteSummary)}</p>
           <div class="definition-grid">${items}</div>
         </div>
       </section>
@@ -1922,7 +1922,7 @@ ${altTags}
 `;
 };
 
-const buildLlmsTxt = async () => {
+const buildSiteSummaryTxt = async () => {
   const lines = [
     "# Immigration Law Office",
     "",
@@ -1957,7 +1957,7 @@ const buildLlmsTxt = async () => {
   return `${lines.join("\n")}\n`;
 };
 
-const buildLlmsFullTxt = async () => {
+const buildSiteSummaryFullTxt = async () => {
   const lines = [
     "# Immigration Law Office",
     "",
@@ -2300,8 +2300,8 @@ const generateClusterAndGlossaryPages = async () => {
       await write(file, await buildClusterPage(locale, clusterKey));
     }
   }
-  await write("llms.txt", await buildLlmsTxt());
-  await write("llms-full.txt", await buildLlmsFullTxt());
+  await write("site-summary.txt", await buildSiteSummaryTxt());
+  await write("site-summary-full.txt", await buildSiteSummaryFullTxt());
   await write("assets/glossary.json", JSON.stringify(glossaryTerms, null, 2));
 };
 
