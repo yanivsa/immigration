@@ -72,6 +72,20 @@ const fetchAsset = async (request, env, pathname) => {
   return response.status === 404 ? null : response;
 };
 
+export const _util = {
+  isValidFormDestination(destination) {
+    if (!destination) return false;
+    try {
+      const parsed = new URL(destination);
+      return parsed.protocol === "https:" &&
+             parsed.hostname === "docs.google.com" &&
+             (parsed.pathname === "/forms" || parsed.pathname.startsWith("/forms/"));
+    } catch (e) {
+      return false;
+    }
+  }
+};
+
 export default {
   async fetch(request, env) {
     const nonceBytes = crypto.getRandomValues(new Uint8Array(16));
@@ -87,7 +101,7 @@ export default {
       const url = new URL(request.url);
       const destination = url.searchParams.get("destination");
 
-      if (!destination || !destination.startsWith("https://docs.google.com/forms")) {
+      if (!_util.isValidFormDestination(destination)) {
         return new Response("Invalid form destination", { status: 400 });
       }
 
