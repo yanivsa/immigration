@@ -1677,10 +1677,11 @@ const buildClusterPage = async (locale, clusterKey) => {
       return `    <link rel="alternate" hreflang="${locales[other].htmlLang}" href="${otherCanonical}" />`;
     })
     .join("\n");
+  const termIndexMap = new Map(glossaryTerms[locale].map((item, index) => [item.term, index]));
   const terms = copy.terms
     .map((term) => {
-      const glossaryIndex = glossaryTerms[locale].findIndex((item) => item.term === term);
-      if (glossaryIndex === -1) {
+      const glossaryIndex = termIndexMap.get(term);
+      if (glossaryIndex === undefined) {
         return `<li><span class="tag">${escapeHtml(term)}</span></li>`;
       }
       return `<li><a class="tag" href="${glossaryHrefFor(locale, glossaryIndex)}">${escapeHtml(term)}</a></li>`;
