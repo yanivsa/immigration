@@ -1,11 +1,11 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { siteUrl } from "./utils/config.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const root = path.resolve(__dirname, "..");
-const siteUrl = "https://immigration.the-israeli-lawyer.com";
 
 const ignoreDirs = new Set([
   ".git",
