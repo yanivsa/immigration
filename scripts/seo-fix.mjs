@@ -129,7 +129,7 @@ const stripTags = (value) =>
       .replace(/<[^>]+>/g, " ")
   );
 
-function decodeEntities(value = "") {
+export function decodeEntities(value = "") {
   return value
     .replace(/&nbsp;/g, " ")
     .replace(/&amp;/g, "&")
@@ -760,4 +760,6 @@ async function main() {
   await generateSitemap(indexableFiles);
 }
 
-await main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  await main();
+}
