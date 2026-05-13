@@ -203,7 +203,6 @@ function readCsv(filePath) {
   return { header, rows: dataRows };
 }
 
-// parseCsvLine removed as it is integrated into readCsv
 
 function escapeCsv(value) {
   const needsQuotes = /[",\n]/.test(value);
