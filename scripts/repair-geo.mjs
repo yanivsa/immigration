@@ -2294,11 +2294,14 @@ const generateClusterAndGlossaryPages = async () => {
     const glossaryFile = glossaryPath(locale);
     await fs.mkdir(path.dirname(path.join(root, glossaryFile)), { recursive: true });
     await write(glossaryFile, buildGlossaryPage(locale));
-    for (const clusterKey of Object.keys(clusters)) {
-      const file = clusterHubPath(locale, clusterKey);
-      await fs.mkdir(path.dirname(path.join(root, file)), { recursive: true });
-      await write(file, await buildClusterPage(locale, clusterKey));
-    }
+    await Promise.all(
+      Object.keys(clusters).map(async (clusterKey) => {
+        const file = clusterHubPath(locale, clusterKey);
+        await fs.mkdir(path.dirname(path.join(root, file)), { recursive: true });
+        const page = await buildClusterPage(locale, clusterKey);
+        await write(file, page);
+      })
+    );
   }
   await write("llms.txt", await buildLlmsTxt());
   await write("llms-full.txt", await buildLlmsFullTxt());
