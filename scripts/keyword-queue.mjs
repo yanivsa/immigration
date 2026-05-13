@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "fs/promises";
 import path from "path";
 
 const args = process.argv.slice(2);
@@ -50,7 +50,7 @@ const queuePath = path.resolve(process.cwd(), opts.queue);
 const outRoot = path.resolve(process.cwd(), opts.out);
 const now = opts.now ? parseDateTime(opts.now) : new Date();
 
-const { header, rows } = readCsv(queuePath);
+const { header, rows } = await readCsv(queuePath);
 const expectedHeader = [
   "scheduled_at",
   "cluster",
@@ -108,20 +108,26 @@ for (const row of dueRows) {
 }
 
 if (!opts.dryRun) {
+  const writePromises = [];
   for (const row of dueRows) {
     const datePart = row.scheduled_at.split(" ")[0];
     const dirName = `${datePart}-${row.intent}`;
     const dirPath = path.join(outRoot, dirName);
-    fs.mkdirSync(dirPath, { recursive: true });
 
-    const prompts = buildPrompts(row);
-    for (const [filename, content] of Object.entries(prompts)) {
-      fs.writeFileSync(path.join(dirPath, filename), content, "utf8");
-    }
+    writePromises.push(
+      fs.mkdir(dirPath, { recursive: true }).then(() => {
+        const prompts = buildPrompts(row);
+        const promptPromises = Object.entries(prompts).map(([filename, content]) =>
+          fs.writeFile(path.join(dirPath, filename), content, "utf8")
+        );
+        return Promise.all(promptPromises);
+      })
+    );
   }
+  await Promise.all(writePromises);
 
   const updatedRows = remainingRows.concat(rescheduledRows);
-  writeCsv(queuePath, expectedHeader, updatedRows);
+  await writeCsv(queuePath, expectedHeader, updatedRows);
 }
 
 console.log(`Processed ${dueRows.length} item(s).`);
@@ -134,8 +140,8 @@ if (opts.dryRun) {
   console.log("Dry run: no files written and queue not updated.");
 }
 
-function readCsv(filePath) {
-  const text = fs.readFileSync(filePath, "utf8");
+async function readCsv(filePath) {
+  const text = await fs.readFile(filePath, "utf8");
   const rows = [];
   let currentRow = [];
   let currentVal = "";
@@ -213,7 +219,7 @@ function escapeCsv(value) {
   return `"${value.replace(/"/g, '""')}"`;
 }
 
-function writeCsv(filePath, header, rows) {
+async function writeCsv(filePath, header, rows) {
   const lines = [
     header.join(","),
     ...rows.map((row) =>
@@ -223,7 +229,7 @@ function writeCsv(filePath, header, rows) {
     ),
   ];
 
-  fs.writeFileSync(filePath, `${lines.join("\n")}\n`, "utf8");
+  await fs.writeFile(filePath, `${lines.join("\n")}\n`, "utf8");
 }
 
 function parseDateTime(value) {
