@@ -6,6 +6,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const root = path.resolve(__dirname, "..");
 
+const SITE_URL = "https://immigration.the-israeli-lawyer.com";
+const POPULATION_AUTHORITY_URL = "https://www.gov.il/he/departments/population_and_immigration_authority";
+const MINISTRY_OF_INTERIOR_URL = "https://www.gov.il/he/departments/ministry_of_interior";
+
 const localeConfigs = {
   he: {
     dir: "rtl",
@@ -256,20 +260,20 @@ const clusterMeta = {
 
 const officialSources = {
   he: [
-    ["רשות האוכלוסין וההגירה", "https://www.gov.il/he/departments/population_and_immigration_authority"],
-    ["משרד הפנים", "https://www.gov.il/he/departments/ministry_of_interior"],
+    ["רשות האוכלוסין וההגירה", POPULATION_AUTHORITY_URL],
+    ["משרד הפנים", MINISTRY_OF_INTERIOR_URL],
   ],
   en: [
-    ["Population and Immigration Authority", "https://www.gov.il/he/departments/population_and_immigration_authority"],
-    ["Ministry of Interior", "https://www.gov.il/he/departments/ministry_of_interior"],
+    ["Population and Immigration Authority", POPULATION_AUTHORITY_URL],
+    ["Ministry of Interior", MINISTRY_OF_INTERIOR_URL],
   ],
   ru: [
-    ["Управление по вопросам населения и иммиграции", "https://www.gov.il/he/departments/population_and_immigration_authority"],
-    ["Министерство внутренних дел", "https://www.gov.il/he/departments/ministry_of_interior"],
+    ["Управление по вопросам населения и иммиграции", POPULATION_AUTHORITY_URL],
+    ["Министерство внутренних дел", MINISTRY_OF_INTERIOR_URL],
   ],
   uk: [
-    ["Управління з питань населення та імміграції", "https://www.gov.il/he/departments/population_and_immigration_authority"],
-    ["Міністерство внутрішніх справ", "https://www.gov.il/he/departments/ministry_of_interior"],
+    ["Управління з питань населення та імміграції", POPULATION_AUTHORITY_URL],
+    ["Міністерство внутрішніх справ", MINISTRY_OF_INTERIOR_URL],
   ],
 };
 
@@ -547,7 +551,7 @@ const renderArticle = ({ locale, articleNumber, localeInputs, clusterKey, publis
   const current = localeInputs[locale];
   const title = current.title;
   const keyword = current.keyword || title;
-  const canonicalUrl = `https://immigration.the-israeli-lawyer.com${articleUrlFor(locale, articleNumber)}`;
+  const canonicalUrl = `${SITE_URL}${articleUrlFor(locale, articleNumber)}`;
   const description = buildDescription(locale, title, clusterKey);
   const displayDate = formatDisplayDate(publishedAt, locale);
   const relatedUrl = buildRelatedPath(locale, clusterKey);
@@ -561,7 +565,7 @@ const renderArticle = ({ locale, articleNumber, localeInputs, clusterKey, publis
     .join("\n");
   const alternates = Object.keys(localeConfigs)
     .map((other) => {
-      const href = `https://immigration.the-israeli-lawyer.com${articleUrlFor(other, articleNumber)}`;
+      const href = `${SITE_URL}${articleUrlFor(other, articleNumber)}`;
       return `    <link rel="alternate" hreflang="${localeConfigs[other].htmlLang}" href="${href}" />`;
     })
     .join("\n");
@@ -584,12 +588,12 @@ const renderArticle = ({ locale, articleNumber, localeInputs, clusterKey, publis
     <meta property="og:description" content="${escapeHtml(description)}" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="${canonicalUrl}" />
-    <meta property="og:image" content="https://immigration.the-israeli-lawyer.com${clusterMeta[clusterKey].image}" />
+    <meta property="og:image" content="${SITE_URL}${clusterMeta[clusterKey].image}" />
     <meta property="og:image:alt" content="${escapeHtml(config.imageAlt)}" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHtml(title)}" />
     <meta name="twitter:description" content="${escapeHtml(description)}" />
-    <meta name="twitter:image" content="https://immigration.the-israeli-lawyer.com${clusterMeta[clusterKey].image}" />
+    <meta name="twitter:image" content="${SITE_URL}${clusterMeta[clusterKey].image}" />
 ${alternates}
     <link rel="stylesheet" href="/assets/styles.css" />
     <link rel="icon" href="/images/favicon.jpg" type="image/jpeg" />
@@ -603,11 +607,11 @@ ${alternates}
       mainEntityOfPage: canonicalUrl,
       datePublished: publishedAt.toISOString().slice(0, 10),
       dateModified: publishedAt.toISOString().slice(0, 10),
-      image: `https://immigration.the-israeli-lawyer.com${clusterMeta[clusterKey].image}`,
+      image: `${SITE_URL}${clusterMeta[clusterKey].image}`,
       publisher: {
         "@type": "Organization",
         name: config.businessName,
-        url: "https://immigration.the-israeli-lawyer.com/",
+        url: `${SITE_URL}/`,
       },
     })}</script>
   </head>
@@ -637,8 +641,8 @@ ${alternates}
       <nav class="breadcrumbs" aria-label="Breadcrumbs">
         <div class="container">
           <ol>
-            <li><a href="https://immigration.the-israeli-lawyer.com${config.prefix || "/"}">${escapeHtml(config.home)}</a></li>
-            <li><a href="https://immigration.the-israeli-lawyer.com${`${config.prefix}/articles/`.replace(/\/+/g, "/")}">${escapeHtml(config.articles)}</a></li>
+            <li><a href="${SITE_URL}${config.prefix || "/"}">${escapeHtml(config.home)}</a></li>
+            <li><a href="${SITE_URL}${`${config.prefix}/articles/`.replace(/\/+/g, "/")}">${escapeHtml(config.articles)}</a></li>
             <li aria-current="page">${escapeHtml(title)}</li>
           </ol>
         </div>
