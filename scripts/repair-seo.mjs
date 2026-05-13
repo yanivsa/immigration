@@ -1509,12 +1509,12 @@ const generateSitemap = async () => {
 
 let updated = 0;
 
-for (const filePath of htmlFiles) {
-  const changed = await repairFile(filePath);
-  if (changed) {
-    updated += 1;
-  }
-}
+await Promise.all(
+  htmlFiles.map(async (filePath) => {
+    const changed = await repairFile(filePath);
+    if (changed) updated++;
+  })
+);
 
 await generateSitemap();
 
