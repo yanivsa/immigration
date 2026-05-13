@@ -129,7 +129,7 @@ const toUrl = (relativePath) => {
 
 const unique = (values) => Array.from(new Set(values.filter(Boolean)));
 
-const readJson = async (file) => {
+export const readJson = async (file) => {
   try {
     return JSON.parse(await fs.readFile(file, "utf8"));
   } catch {
@@ -388,4 +388,6 @@ const buildIndex = async () => {
   console.log(`Knowledge base generated: ${path.relative(root, knowledgeBasePath)}`);
 };
 
-await buildIndex();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  await buildIndex();
+}
