@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 concurrency:
   group: jules-nightly-code-health
@@ -16,7 +17,53 @@ jobs:
   start-jules:
     runs-on: ubuntu-latest
     steps:
+      - name: Stop if maintenance PR backlog is open
+        id: backlog_gate
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          curl --fail-with-body -sS \
+            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls?state=open&per_page=100" \
+            > open-prs.json
+
+          python3 - <<'PY'
+          import json
+          import os
+          import re
+
+          with open("open-prs.json", encoding="utf-8") as fh:
+              prs = json.load(fh)
+
+          pattern = re.compile(
+              r"(code[- ]?health|testing|security|performance|ssrf|open redirect|"
+              r"url validation|form submission|seo|build|helper|nonce|keyword|"
+              r"search index|repair-seo|seo-remediate|decodeEntities|countOccurrences)",
+              re.I,
+          )
+          blockers = [
+              f"#{pr['number']} {pr['title']}"
+              for pr in prs
+              if pattern.search(pr.get("title") or "")
+              or pattern.search((pr.get("head") or {}).get("ref") or "")
+              or pattern.search(pr.get("body") or "")
+          ]
+          if blockers:
+              print("Open maintenance/code-health PR backlog exists; no Jules session will be started.")
+              for blocker in blockers[:25]:
+                  print(f"- {blocker}")
+              with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+                  out.write("blocked=true\n")
+              raise SystemExit(0)
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+              out.write("blocked=false\n")
+          PY
+
       - name: Start Jules autonomous code-health session
+        if: steps.backlog_gate.outputs.blocked != 'true'
         env:
           JULES_API_KEY: ${{ secrets.JULES_API_KEY }}
         run: |
@@ -26,7 +73,7 @@ jobs:
           cat > payload.json <<'JSON'
           {
             "title": "Nightly immigration code-health sweep",
-            "prompt": "Nightly autonomous code-health sweep for yanivsa/immigration. Work from main. Act like Jules Suggested Tasks, but do not wait for manual Start/Review. Inspect the repository for small high-confidence fixes in tests, security, SEO utilities, performance, build reliability, and maintainability. Prefer issues similar to Jules Suggestions: missing unit tests, duplicated helpers, unsafe URL handling, slow synchronous file operations, brittle parsing, and small refactors with clear validation. Do not publish immigration articles in this task; the article workflow is handled separately. Keep each run focused and small: one coherent PR, or no PR if there is no high-confidence improvement. Do not ask the user for confirmation. Use the smallest repo-consistent change, run relevant tests/build checks, and create a PR automatically. PR summary must include what was changed, validation commands, and any risk or skipped checks.",
+            "prompt": "Nightly immigration code-health sweep. Run fully autonomously. Do not ask the user for confirmation, clarification, plan approval, review, Start clicks, or implementation choices. Critical autonomy rule: never pause for user input; if a decision is needed, choose the smallest repo-consistent no-op or safe action yourself. Hard open-PR gate: before editing anything, inspect open PRs and branches for this repository. If any open Jules-created PR already exists for code-health, testing, security, performance, SSRF, open redirect, URL validation, SEO utilities, build scripts, duplicated helpers, nonce generation, keyword queue, search index, or similar maintenance work, do not edit files and do not create a PR. Finish as a no-op summary naming the blocking PR numbers/titles. Hard duplicate-avoidance rule: if an issue already has an open PR, merged PR, existing branch, recent session, or equivalent fix/test, skip it. Explicit freeze until backlog is cleaned: do not work on SSRF, open redirect, Google Forms destination validation, /api/submit-form destination URL validation, src/index.js URL parsing, nonce generation, SEO utility test gaps, or duplicate helper extraction if any related PR is open. Only after the backlog is clean, pick exactly one small high-confidence non-duplicate item, run relevant tests/build checks, and create one PR automatically. Do not publish immigration articles in this task.",
             "sourceContext": {
               "source": "sources/github/yanivsa/immigration",
               "githubRepoContext": {

@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: read
 
 concurrency:
   group: daily-article-publish-main
@@ -17,29 +18,78 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        if: steps.article_gate.outputs.blocked != 'true'
         with:
           fetch-depth: 0
           ref: main
           persist-credentials: true
 
+      - name: Stop if article PR is already open
+        id: article_gate
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          curl --fail-with-body -sS \
+            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls?state=open&per_page=100" \
+            > open-prs.json
+
+          python3 - <<'PY'
+          import json
+          import re
+
+          with open("open-prs.json", encoding="utf-8") as fh:
+              prs = json.load(fh)
+
+          pattern = re.compile(
+              r"(auto-publish|publish article|article-\d+|nightly article|"
+              r"content_queue|keyword-queue\.csv|article publication)",
+              re.I,
+          )
+          blockers = [
+              f"#{pr['number']} {pr['title']}"
+              for pr in prs
+              if pattern.search(pr.get("title") or "")
+              or pattern.search((pr.get("head") or {}).get("ref") or "")
+              or pattern.search(pr.get("body") or "")
+          ]
+          if blockers:
+              print("Open article publication PR exists; daily direct publish will no-op.")
+              for blocker in blockers:
+                  print(f"- {blocker}")
+              with open(__import__("os").environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+                  out.write("blocked=true\n")
+          else:
+              with open(__import__("os").environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+                  out.write("blocked=false\n")
+          PY
+
       - name: Setup Node.js
+        if: steps.article_gate.outputs.blocked != 'true'
         uses: actions/setup-node@v5
         with:
           node-version: '22'
           cache: npm
 
       - name: Install Dependencies
+        if: steps.article_gate.outputs.blocked != 'true'
         run: npm ci
 
       - name: Publish Next Article
+        if: steps.article_gate.outputs.blocked != 'true'
         run: node scripts/publish-next.mjs
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }} # User will need to add this to GitHub Secrets
 
       - name: Rebuild Site Assets
+        if: steps.article_gate.outputs.blocked != 'true'
         run: npm run build
 
       - name: Commit and Push Changes
+        if: steps.article_gate.outputs.blocked != 'true'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
