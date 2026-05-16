@@ -143,11 +143,21 @@ const queueClusterMap = {
   "ben-gurion-emergency": "ben-gurion-emergency",
 };
 
+const imageSourcePolicy = {
+  guidance: "Source high-quality, royalty-free photography primarily from Unsplash and Pexels.",
+  allowedProviders: new Set(["Unsplash", "Pexels", "existing-local-asset"]),
+  preferredProviders: new Set(["Unsplash", "Pexels"]),
+};
+
 const clusterMeta = {
   "work-visas": {
     servicePath: "/services/work-visas",
     hubSlug: "work-visas",
     image: "/images/checklist-passport-desk.jpg",
+    imageSource: {
+      provider: "existing-local-asset",
+      note: "Existing approved local site asset. New or replacement article photography should primarily use Unsplash or Pexels.",
+    },
     questionSets: {
       he: [
         ["מתי נכון להתחיל לאסוף מסמכים?", "כדאי להתחיל לפני הגשה, כדי לזהות מסמכים חסרים ופערים בין גרסאות."],
@@ -175,6 +185,10 @@ const clusterMeta = {
     servicePath: "/services/entry-permits",
     hubSlug: "tourist-entry",
     image: "/images/legal-document-checklist.jpg",
+    imageSource: {
+      provider: "existing-local-asset",
+      note: "Existing approved local site asset. New or replacement article photography should primarily use Unsplash or Pexels.",
+    },
     questionSets: {
       he: [
         ["מה חשוב להסביר מראש?", "מטרת ביקור ברורה, מסלול נסיעה עקבי והקשר בין המסמכים לסיבת הכניסה."],
@@ -202,6 +216,10 @@ const clusterMeta = {
     servicePath: "/services/citizenship",
     hubSlug: "citizenship-status",
     image: "/images/family-citizenship-israel.jpg",
+    imageSource: {
+      provider: "existing-local-asset",
+      note: "Existing approved local site asset. New or replacement article photography should primarily use Unsplash or Pexels.",
+    },
     questionSets: {
       he: [
         ["מה בודקים קודם?", "קודם מבררים איזה מסלול באמת רלוונטי, ורק אחר כך בונים תיק מסמכים לפי השלב."],
@@ -229,6 +247,10 @@ const clusterMeta = {
     servicePath: "/services/ben-gurion-emergency",
     hubSlug: "ben-gurion-emergency",
     image: "/images/ben-gurion-airport-entry.jpg",
+    imageSource: {
+      provider: "existing-local-asset",
+      note: "Existing approved local site asset. New or replacement article photography should primarily use Unsplash or Pexels.",
+    },
     questionSets: {
       he: [
         ["מה עושים קודם?", "אוספים עובדות, מסמכים ופרטי טיסה לפני שמנסים להסביר או להגיב מתוך לחץ."],
@@ -282,6 +304,21 @@ const escapeHtml = (value) =>
     .replace(/'/g, "&#39;");
 
 const normalizeCluster = (value) => queueClusterMap[value] || "citizenship-status";
+
+const validateImageSourcePolicy = () => {
+  for (const [clusterKey, meta] of Object.entries(clusterMeta)) {
+    if (!meta.image) {
+      throw new Error(`Missing article image for cluster ${clusterKey}`);
+    }
+    const provider = meta.imageSource?.provider;
+    if (!imageSourcePolicy.allowedProviders.has(provider)) {
+      throw new Error(
+        `Cluster ${clusterKey} image source must be Unsplash, Pexels, or an approved local asset. ` +
+          imageSourcePolicy.guidance
+      );
+    }
+  }
+};
 
 const parseDateTime = (value) => {
   const match = String(value).match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})$/);
@@ -739,6 +776,8 @@ ${alternates}
 };
 
 async function publishNext() {
+  validateImageSourcePolicy();
+
   const queuePath = path.join(root, "keyword-queue.csv");
   const { header, rows } = await readCsv(queuePath);
   if (!rows.length) {

@@ -9,6 +9,18 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const root = path.resolve(__dirname, "..");
 
+test("publish-next keeps an explicit royalty-free image source policy", async () => {
+  const script = await fs.readFile(path.join(root, "scripts", "publish-next.mjs"), "utf8");
+
+  assert.match(
+    script,
+    /Source high-quality, royalty-free photography primarily from Unsplash and Pexels\./,
+    "Image source guidance should be explicit for article automation"
+  );
+  assert.match(script, /allowedProviders: new Set\(\["Unsplash", "Pexels", "existing-local-asset"\]\)/);
+  assert.match(script, /validateImageSourcePolicy\(\);/);
+});
+
 test("publish-next generates 4 substantive articles without raw cluster IDs and duplicate sections", async () => {
   // Restore any previous run
   execSync("git restore keyword-queue.csv", { cwd: root });
