@@ -38,8 +38,19 @@ jobs:
           }
           JSON
 
-          curl --fail-with-body -sS \
+          response="$(curl -sS -w '\n%{http_code}' \
             -H "x-goog-api-key: ${JULES_API_KEY}" \
             -H "Content-Type: application/json" \
             -d @payload.json \
-            https://jules.googleapis.com/v1alpha/sessions
+            https://jules.googleapis.com/v1alpha/sessions || true)"
+          body="$(printf '%s' "$response" | sed '$d')"
+          status="$(printf '%s' "$response" | tail -n 1)"
+          printf '%s\n' "$body"
+          if [ "$status" = "200" ] || [ "$status" = "201" ]; then
+            exit 0
+          fi
+          if printf '%s' "$body" | grep -q 'FAILED_PRECONDITION'; then
+            echo "Jules refused to start a duplicate/concurrent session; treating this as non-fatal."
+            exit 0
+          fi
+          exit 1
