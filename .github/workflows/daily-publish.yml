@@ -38,6 +38,7 @@ jobs:
             > open-prs.json
 
           python3 - <<'PY'
+          import datetime as dt
           import json
           import re
 
@@ -49,12 +50,26 @@ jobs:
               r"content_queue|keyword-queue\.csv|article publication)",
               re.I,
           )
+          now = dt.datetime.now(dt.UTC)
+
+          def is_fresh(pr):
+              updated = dt.datetime.fromisoformat(pr["updated_at"].replace("Z", "+00:00"))
+              return now - updated <= dt.timedelta(days=3)
+
+          def is_noop(pr):
+              text = f"{pr.get('title') or ''}\n{pr.get('body') or ''}"
+              return re.search(r"\bno[- ]?op\b|no files were edited|daily direct publish will no-op", text, re.I)
+
           blockers = [
               f"#{pr['number']} {pr['title']}"
               for pr in prs
-              if pattern.search(pr.get("title") or "")
-              or pattern.search((pr.get("head") or {}).get("ref") or "")
-              or pattern.search(pr.get("body") or "")
+              if is_fresh(pr)
+              and not is_noop(pr)
+              and (
+                  pattern.search(pr.get("title") or "")
+                  or pattern.search((pr.get("head") or {}).get("ref") or "")
+                  or pattern.search(pr.get("body") or "")
+              )
           ]
           if blockers:
               print("Open article publication PR exists; daily direct publish will no-op.")
