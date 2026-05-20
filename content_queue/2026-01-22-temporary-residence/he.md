@@ -12,6 +12,8 @@ Primary keyword: "תושבות זמנית בישראל".
 Location: אשדוד, ישראל (use this exact phrasing).
 
 Requirements:
+- Start with a strong hook in this article language: one concrete immigrant/family/client situation or sharp practical question tied to the keyword and Ashdod/Israel context. Do not start with a generic definition or broad SEO introduction.
+- Follow the hook immediately with a clear answer-first paragraph before background details.
 - Calm, professional, empathetic tone; no alarmism.
 - No individualized legal advice and no outcome guarantees.
 - Use placeholders: [שם המשרד], [שם עורכת הדין], [טלפון], [אימייל].
