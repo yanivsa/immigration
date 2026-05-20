@@ -340,7 +340,7 @@ const isUsefulParagraph = (text) => {
   return !ignored.some((snippet) => text.includes(snippet));
 };
 
-const ensureSentence = (value) => {
+export const ensureSentence = (value) => {
   const text = value.trim();
   if (!text) {
     return text;
@@ -351,7 +351,7 @@ const ensureSentence = (value) => {
   return `${text}.`;
 };
 
-const clampText = (value, max = 155) => {
+export const clampText = (value, max = 155) => {
   const text = value.trim();
   if (!text) {
     return text;
@@ -594,4 +594,6 @@ const main = async () => {
   console.log(`SEO remediation updated ${changedCount} HTML files.`);
 };
 
-await main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  await main();
+}
