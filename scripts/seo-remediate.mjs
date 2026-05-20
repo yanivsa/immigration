@@ -197,7 +197,7 @@ const pageSchemaTypes = {
   "ua/contact.html": "ContactPage",
 };
 
-const decodeEntities = (value) =>
+export const decodeEntities = (value) =>
   value
     .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")
@@ -206,14 +206,14 @@ const decodeEntities = (value) =>
     .replace(/&#39;/g, "'")
     .replace(/&nbsp;/g, " ");
 
-const escapeHtml = (value) =>
+export const escapeHtml = (value) =>
   value
     .replace(/&/g, "&amp;")
     .replace(/"/g, "&quot;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 
-const stripTags = (value) =>
+export const stripTags = (value) =>
   decodeEntities(
     value
       .replace(/<script[\s\S]*?<\/script>/gi, " ")
@@ -223,9 +223,9 @@ const stripTags = (value) =>
     .replace(/\s+/g, " ")
     .trim();
 
-const normalizeText = (value) => decodeEntities(value).replace(/\s+/g, " ").trim();
+export const normalizeText = (value) => decodeEntities(value).replace(/\s+/g, " ").trim();
 
-const walk = async (dir) => {
+export const walk = async (dir) => {
   const entries = await fs.readdir(dir, { withFileTypes: true });
   const files = [];
 
@@ -248,7 +248,7 @@ const walk = async (dir) => {
   return files;
 };
 
-const detectLocale = (html, relativePath) => {
+export const detectLocale = (html, relativePath) => {
   const match = html.match(/<html[^>]*\blang=["']([^"']+)["']/i);
   if (match) {
     return match[1].toLowerCase().split("-")[0];
@@ -259,15 +259,15 @@ const detectLocale = (html, relativePath) => {
   return "he";
 };
 
-const getTitle = (html) => {
+export const getTitle = (html) => {
   const match = html.match(/<title>([\s\S]*?)<\/title>/i);
   return match ? normalizeText(match[1]) : "";
 };
 
-const setTitle = (html, value) =>
+export const setTitle = (html, value) =>
   html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(value)}</title>`);
 
-const getMeta = (html, attr, name) => {
+export const getMeta = (html, attr, name) => {
   const pattern = new RegExp(
     `<meta[^>]*${attr}="${name}"[^>]*content="([\\s\\S]*?)"[^>]*>`,
     "i"
@@ -276,7 +276,7 @@ const getMeta = (html, attr, name) => {
   return match ? normalizeText(match[1]) : "";
 };
 
-const setMeta = (html, attr, name, value) => {
+export const setMeta = (html, attr, name, value) => {
   const pattern = new RegExp(
     `(<meta[^>]*${attr}="${name}"[^>]*content=")([\\s\\S]*?)("[^>]*>)`,
     "i"
@@ -287,26 +287,26 @@ const setMeta = (html, attr, name, value) => {
   return html.replace(pattern, `$1${escapeHtml(value)}$3`);
 };
 
-const getCanonical = (html) => {
+export const getCanonical = (html) => {
   const match = html.match(
     /<link[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["'][^>]*>/i
   );
   return match ? match[1] : "";
 };
 
-const extractH1 = (html) => {
+export const extractH1 = (html) => {
   const match = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
   return match ? stripTags(match[1]) : "";
 };
 
-const extractParagraphs = (html) => {
+export const extractParagraphs = (html) => {
   const main = html.match(/<main[\s\S]*?<\/main>/i)?.[0] ?? html;
   return Array.from(main.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi))
     .map((match) => stripTags(match[1]))
     .filter(Boolean);
 };
 
-const isUsefulParagraph = (text) => {
+export const isUsefulParagraph = (text) => {
   if (!text) {
     return false;
   }
@@ -340,7 +340,7 @@ const isUsefulParagraph = (text) => {
   return !ignored.some((snippet) => text.includes(snippet));
 };
 
-const ensureSentence = (value) => {
+export const ensureSentence = (value) => {
   const text = value.trim();
   if (!text) {
     return text;
@@ -351,7 +351,7 @@ const ensureSentence = (value) => {
   return `${text}.`;
 };
 
-const clampText = (value, max = 155) => {
+export const clampText = (value, max = 155) => {
   const text = value.trim();
   if (!text) {
     return text;
@@ -368,7 +368,7 @@ const clampText = (value, max = 155) => {
   return ensureSentence(trimmed);
 };
 
-const cleanDescription = (value, locale) => {
+export const cleanDescription = (value, locale) => {
   let text = normalizeText(value);
   for (const pattern of descriptionSuffixPatterns[locale] ?? []) {
     text = text.replace(pattern, "").trim();
@@ -378,7 +378,7 @@ const cleanDescription = (value, locale) => {
   return clampText(text);
 };
 
-const buildFallbackDescription = (html, locale, h1) => {
+export const buildFallbackDescription = (html, locale, h1) => {
   const paragraphs = extractParagraphs(html).filter(isUsefulParagraph);
   const firstParagraph = paragraphs[0] ?? "";
   if (!firstParagraph) {
@@ -392,7 +392,7 @@ const buildFallbackDescription = (html, locale, h1) => {
   return clampText(`${h1}. ${firstParagraph}`);
 };
 
-const replaceFooterNote = (html, locale) => {
+export const replaceFooterNote = (html, locale) => {
   if (!/\/articles\//.test(html) && !/<p class="footer-note">/.test(html)) {
     return html;
   }
@@ -408,7 +408,7 @@ const replaceFooterNote = (html, locale) => {
   );
 };
 
-const replaceArticleAuthor = (html, locale) => {
+export const replaceArticleAuthor = (html, locale) => {
   if (!/"@type"\s*:\s*"Article"/.test(html)) {
     return html;
   }
@@ -435,7 +435,7 @@ const replaceArticleAuthor = (html, locale) => {
     .replace(/("dateModified":\s*")([^"]+)(")/, `$1${currentDate}$3`);
 };
 
-const setImageAttributes = (html) => {
+export const setImageAttributes = (html) => {
   let index = 0;
 
   const setAttribute = (attrs, name, value) => {
@@ -466,7 +466,7 @@ const setImageAttributes = (html) => {
   });
 };
 
-const injectJsonLd = (html, schemaType, schema) => {
+export const injectJsonLd = (html, schemaType, schema) => {
   if (new RegExp(`"@type"\\s*:\\s*"${schemaType}"`).test(html)) {
     return html;
   }
@@ -481,7 +481,7 @@ const injectJsonLd = (html, schemaType, schema) => {
   return html.replace("</head>", `${payload}\n  </head>`);
 };
 
-const buildCollectionSchema = (relativePath, canonical, description) => {
+export const buildCollectionSchema = (relativePath, canonical, description) => {
   const meta = collectionPageMeta[relativePath];
   if (!meta) {
     return null;
@@ -500,7 +500,7 @@ const buildCollectionSchema = (relativePath, canonical, description) => {
   };
 };
 
-const buildPageSchema = (relativePath, canonical, description, h1, locale) => {
+export const buildPageSchema = (relativePath, canonical, description, h1, locale) => {
   const type = pageSchemaTypes[relativePath];
   if (!type) {
     return null;
@@ -519,7 +519,7 @@ const buildPageSchema = (relativePath, canonical, description, h1, locale) => {
   };
 };
 
-const updateMetadata = (html, relativePath, locale) => {
+export const updateMetadata = (html, relativePath, locale) => {
   const h1 = extractH1(html);
 
   if (titleOverrides.has(relativePath)) {
@@ -566,7 +566,7 @@ const updateMetadata = (html, relativePath, locale) => {
   return html;
 };
 
-const main = async () => {
+export const main = async () => {
   const files = await walk(root);
   let changedCount = 0;
 
@@ -594,4 +594,9 @@ const main = async () => {
   console.log(`SEO remediation updated ${changedCount} HTML files.`);
 };
 
-await main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  main().catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
+}
