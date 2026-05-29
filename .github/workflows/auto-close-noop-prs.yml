@@ -1,8 +1,10 @@
 name: Auto-close no-op PRs
 
 on:
+  pull_request_target:
+    types: [opened, reopened, synchronize]
   schedule:
-    - cron: "15 3 * * *" # daily
+    - cron: "15 3 * * *" # daily fallback sweep
   workflow_dispatch:
 
 permissions:
@@ -21,14 +23,26 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
           set -euo pipefail
 
-          curl --fail-with-body -sS \
-            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-            -H "Accept: application/vnd.github+json" \
-            "https://api.github.com/repos/${REPO}/pulls?state=open&per_page=100" \
-            > open-prs.json
+          if [ "${EVENT_NAME}" = "pull_request_target" ]; then
+            python3 - <<'PY'
+          import json
+          import os
+          with open(os.environ["GITHUB_EVENT_PATH"], encoding="utf-8") as fh:
+              event = json.load(fh)
+          with open("open-prs.json", "w", encoding="utf-8") as fh:
+              json.dump([event["pull_request"]], fh)
+          PY
+          else
+            curl --fail-with-body -sS \
+              -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/${REPO}/pulls?state=open&per_page=100" \
+              > open-prs.json
+          fi
 
           python3 - <<'PY'
           import json
@@ -38,6 +52,7 @@ jobs:
           from datetime import datetime, timezone
 
           repo = os.environ["REPO"]
+          event_name = os.environ["EVENT_NAME"]
 
           def iso_to_dt(s: str):
               return datetime.fromisoformat(s.replace("Z", "+00:00")).astimezone(timezone.utc)
@@ -47,12 +62,11 @@ jobs:
           with open("open-prs.json", encoding="utf-8") as fh:
               prs = json.load(fh)
 
-          # Heuristic: only close Jules-created no-op PRs.
-          title_re = re.compile(r"(^no[- ]?op:)|(^chore:\s*no[- ]?op\b)|(\bno[- ]?op\b)", re.I)
+          title_re = re.compile(r"(^no[- ]?op:)|(^chore:\s*no[- ]?op\b)|(\bno[- ]?op\b)|(blocked by .*pr)|(blocking branch)", re.I)
           body_re = re.compile(
               r"(no[- ]?op summary|no files were edited|no files were modified|"
-              r"selector was not run|finished as a no[- ]?op|completed as a no[- ]?op|"
-              r"blocking .*pr|blocking .*branch)",
+              r"files edited:\s*(none|no)|selector was not run|finished as a no[- ]?op|"
+              r"completed as a no[- ]?op|run halted as no[- ]?op|blocking .*pr|blocking .*branch)",
               re.I,
           )
 
@@ -61,25 +75,28 @@ jobs:
               title = pr.get("title") or ""
               body = pr.get("body") or ""
               updated_at = pr.get("updated_at") or ""
-              if not (title_re.search(title) and body_re.search(body)):
+              changed_files = pr.get("changed_files")
+              looks_noop = bool(title_re.search(title) and body_re.search(body))
+              if not looks_noop or not updated_at:
                   continue
-              if not updated_at:
+
+              if event_name == "pull_request_target" and changed_files == 0:
+                  candidates.append((pr["number"], title, 0.0, "new zero-file no-op PR"))
                   continue
+
               age_h = (now - iso_to_dt(updated_at)).total_seconds() / 3600.0
-              # Give people a few hours to notice; then auto-close.
-              if age_h < 6:
-                  continue
-              candidates.append((pr["number"], title, age_h))
+              if age_h >= 6:
+                  candidates.append((pr["number"], title, age_h, "aged no-op PR"))
 
           if not candidates:
               print("No no-op PRs to close")
               raise SystemExit(0)
 
-          for number, title, age_h in candidates:
-              print(f"Closing no-op PR #{number}: {title} (age {age_h:.1f}h)")
+          for number, title, age_h, reason in candidates:
+              print(f"Closing no-op PR #{number}: {title} ({reason}, age {age_h:.1f}h)")
               comment = (
                   "Auto-closed by workflow: detected a Jules no-op PR (blocked run). "
-                  "Keeping the PR list clean so the next scheduled run is easier to spot."
+                  "Keeping the PR list clean so future scheduled runs are not obscured by empty PRs."
               )
               subprocess.run(
                   [
