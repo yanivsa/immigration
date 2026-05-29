@@ -79,7 +79,6 @@ jobs:
 
           filenames = [f.get("filename") for f in files if f.get("filename")]
 
-          # Strict allowlist: only article outputs + queue.
           allowed_re = re.compile(r"^(keyword-queue\.csv|articles/article-\d+\.html|en/articles/article-\d+\.html|ru/articles/article-\d+\.html|ua/articles/article-\d+\.html)$")
           all_allowed = all(bool(allowed_re.match(p)) for p in filenames)
 
@@ -111,7 +110,7 @@ jobs:
             (
               cd "pr-${number}"
               git init -q
-              git remote add origin "https://github.com/${repo}.git"
+              git remote add origin "https://x-access-token:${token}@github.com/${repo}.git"
               git fetch --depth 1 origin "${sha}"
               git checkout -q FETCH_HEAD
               npm ci
