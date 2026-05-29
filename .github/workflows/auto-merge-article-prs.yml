@@ -95,7 +95,7 @@ jobs:
 
           print(f"eligible={'true' if eligible else 'false'}")
           print(f"sha={(pr.get('head') or {}).get('sha') or ''}")
-          print(f"reason=\"{'ok' if eligible else 'not eligible (files/title/base/head)'}\"")
+          print("reason='ok'" if eligible else "reason='not eligible (files/title/base/head)'")
           PY
 
             . ./gate.env
