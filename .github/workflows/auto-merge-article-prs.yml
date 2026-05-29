@@ -118,10 +118,20 @@ jobs:
               npm run build
             )
 
-            api -X PUT \
+            # PR merge can legitimately be blocked (e.g. conflicts). Treat that as "not eligible" rather than failing
+            # the whole workflow run, so schedule-based runs keep operating.
+            if ! curl -sS \
+              -H "Authorization: Bearer ${token}" \
+              -H "Accept: application/vnd.github+json" \
+              -H "Content-Type: application/json" \
+              -X PUT \
               -d "{\"commit_title\":\"Auto-merge immigration article PR #${number}\",\"merge_method\":\"squash\"}" \
               "https://api.github.com/repos/${repo}/pulls/${number}/merge" \
-              > merge-result.json
+              > merge-result.json; then
+              echo "Merge request failed for PR #${number}. Leaving PR open."
+              cat merge-result.json || true
+              continue
+            fi
 
             api -X POST \
               -d "{\"body\":\"Auto-merged after validation: npm ci + node --test + npm run build.\"}" \
