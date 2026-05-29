@@ -95,7 +95,8 @@ jobs:
 
           print(f"eligible={'true' if eligible else 'false'}")
           print(f"sha={(pr.get('head') or {}).get('sha') or ''}")
-          print(f"reason={'ok' if eligible else 'not eligible (files/title/base/head)'}")
+          # Keep this bash-safe (no spaces/parens) because we `source` gate.env.
+          print(f\"reason={'ok' if eligible else 'not_eligible_files_title_base_head'}\")
           PY
 
             . ./gate.env
