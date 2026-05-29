@@ -53,9 +53,28 @@ jobs:
 
           repo = os.environ["REPO"]
           event_name = os.environ["EVENT_NAME"]
+          token = os.environ["GITHUB_TOKEN"]
 
           def iso_to_dt(s: str):
               return datetime.fromisoformat(s.replace("Z", "+00:00")).astimezone(timezone.utc)
+
+          def fetch_pr(number: int):
+              result = subprocess.run(
+                  [
+                      "curl",
+                      "--fail-with-body",
+                      "-sS",
+                      "-H",
+                      f"Authorization: Bearer {token}",
+                      "-H",
+                      "Accept: application/vnd.github+json",
+                      f"https://api.github.com/repos/{repo}/pulls/{number}",
+                  ],
+                  check=True,
+                  text=True,
+                  capture_output=True,
+              )
+              return json.loads(result.stdout)
 
           now = datetime.now(timezone.utc)
 
@@ -75,18 +94,24 @@ jobs:
               title = pr.get("title") or ""
               body = pr.get("body") or ""
               updated_at = pr.get("updated_at") or ""
-              changed_files = pr.get("changed_files")
               looks_noop = bool(title_re.search(title) and body_re.search(body))
               if not looks_noop or not updated_at:
                   continue
 
-              if event_name == "pull_request_target" and changed_files == 0:
-                  candidates.append((pr["number"], title, 0.0, "new zero-file no-op PR"))
+              details = pr if pr.get("changed_files") is not None else fetch_pr(pr["number"])
+              changed_files = details.get("changed_files")
+              if changed_files != 0:
+                  print(f"Skipping PR #{pr['number']}: no-op text but changed_files={changed_files}")
                   continue
 
-              age_h = (now - iso_to_dt(updated_at)).total_seconds() / 3600.0
-              if age_h >= 6:
-                  candidates.append((pr["number"], title, age_h, "aged no-op PR"))
+              age_h = 0.0
+              reason = "new zero-file no-op PR"
+              if event_name != "pull_request_target":
+                  age_h = (now - iso_to_dt(updated_at)).total_seconds() / 3600.0
+                  reason = "aged zero-file no-op PR"
+                  if age_h < 6:
+                      continue
+              candidates.append((pr["number"], title, age_h, reason))
 
           if not candidates:
               print("No no-op PRs to close")
@@ -95,7 +120,7 @@ jobs:
           for number, title, age_h, reason in candidates:
               print(f"Closing no-op PR #{number}: {title} ({reason}, age {age_h:.1f}h)")
               comment = (
-                  "Auto-closed by workflow: detected a Jules no-op PR (blocked run). "
+                  "Auto-closed by workflow: detected a Jules no-op PR with zero changed files. "
                   "Keeping the PR list clean so future scheduled runs are not obscured by empty PRs."
               )
               subprocess.run(
@@ -106,7 +131,7 @@ jobs:
                       "-X",
                       "POST",
                       "-H",
-                      f"Authorization: Bearer {os.environ['GITHUB_TOKEN']}",
+                      f"Authorization: Bearer {token}",
                       "-H",
                       "Accept: application/vnd.github+json",
                       "-d",
@@ -123,7 +148,7 @@ jobs:
                       "-X",
                       "PATCH",
                       "-H",
-                      f"Authorization: Bearer {os.environ['GITHUB_TOKEN']}",
+                      f"Authorization: Bearer {token}",
                       "-H",
                       "Accept: application/vnd.github+json",
                       "-d",
