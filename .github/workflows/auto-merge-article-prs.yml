@@ -93,11 +93,11 @@ jobs:
               and all_allowed
           )
 
-          print(f"export eligible='{'true' if eligible else 'false'}'")
+          print(f"export eligible=\"{'true' if eligible else 'false'}\"")
           sha_val = (pr.get('head') or {}).get('sha') or ''
-          print(f"export sha='{sha_val}'")
+          print(f"export sha=\"{sha_val}\"")
           reason_val = 'ok' if eligible else 'not eligible (files/title/base/head)'
-          print(f"export reason='{reason_val}'")
+          print(f"export reason=\"{reason_val}\"")
           PY
 
             . ./gate.env
