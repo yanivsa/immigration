@@ -2,6 +2,8 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
+const _isMain = process.argv[1] === fileURLToPath(import.meta.url);
+if (_isMain) {
 const args = process.argv.slice(2);
 const write = args.includes("--write");
 const consistent = args.includes("--consistent");
@@ -56,51 +58,22 @@ for (const dir of contentDirs) {
   }
 }
 
-function normalizePath(filePath) {
-  return path.relative(root, filePath).split(path.sep).join("/");
-}
 
-function detectLocale(relPath) {
-  if (relPath.startsWith("en/")) return "en";
-  if (relPath.startsWith("ru/")) return "ru";
-  if (relPath.startsWith("ua/")) return "ua";
-  return "he";
-}
 
-function hashString(value) {
-  let hash = 5381;
-  for (let i = 0; i < value.length; i += 1) {
-    hash = (hash * 33) ^ value.charCodeAt(i);
-  }
-  return hash >>> 0;
-}
 
-function pickVariant(variants, key) {
-  if (!variants.length) return "";
-  if (variants.length === 1) return variants[0];
-  const index = hashString(key) % variants.length;
-  return variants[index];
-}
 
-function countOccurrences(text, search) {
-  if (!search) return 0;
-  let count = 0;
-  let index = 0;
-  while (true) {
-    index = text.indexOf(search, index);
-    if (index === -1) break;
-    count += 1;
-    index += search.length;
-  }
-  return count;
-}
+
+
+
+
+
 
 let processed = 0;
 let changed = 0;
 const report = [];
 
 for (const filePath of files) {
-  const relPath = normalizePath(filePath);
+  const relPath = normalizePath(filePath, root);
   const locale = detectLocale(relPath);
 
   if (localeFilter && !localeFilter.has(locale)) {
@@ -153,4 +126,45 @@ console.log(`${action} ${changed}/${processed} files.`);
 if (reportPath) {
   fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
   console.log(`Wrote report to ${reportPath}.`);
+}
+}
+
+
+export function hashString(value) {
+  let hash = 5381;
+  for (let i = 0; i < value.length; i += 1) {
+    hash = (hash * 33) ^ value.charCodeAt(i);
+  }
+  return hash >>> 0;
+}
+
+export function pickVariant(variants, key) {
+  if (!variants.length) return "";
+  if (variants.length === 1) return variants[0];
+  const index = hashString(key) % variants.length;
+  return variants[index];
+}
+
+export function countOccurrences(text, search) {
+  if (!search) return 0;
+  let count = 0;
+  let index = 0;
+  while (true) {
+    index = text.indexOf(search, index);
+    if (index === -1) break;
+    count += 1;
+    index += search.length;
+  }
+  return count;
+}
+
+function normalizePath(filePath, rootPath = process.cwd()) {
+  return path.relative(rootPath, filePath).split(path.sep).join("/");
+}
+
+function detectLocale(relPath) {
+  if (relPath.startsWith("en/")) return "en";
+  if (relPath.startsWith("ru/")) return "ru";
+  if (relPath.startsWith("ua/")) return "ua";
+  return "he";
 }
