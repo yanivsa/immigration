@@ -1,0 +1,96 @@
+name: Auto-close stale code-health PRs
+
+on:
+  schedule:
+    - cron: "0 4 * * *" # daily at 04:00 UTC
+  workflow_dispatch:
+
+permissions:
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: auto-close-stale-code-health-prs
+  cancel-in-progress: false
+
+jobs:
+  close-stale:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close stale code-health PRs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          curl --fail-with-body -sS \
+            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${REPO}/pulls?state=open&per_page=100" \
+            > open-prs.json
+
+          python3 - <<'PY'
+          import datetime as dt
+          import json
+          import os
+          import re
+          import subprocess
+
+          repo = os.environ["REPO"]
+          token = os.environ["GITHUB_TOKEN"]
+          now = dt.datetime.now(dt.UTC)
+
+          with open("open-prs.json", encoding="utf-8") as fh:
+              prs = json.load(fh)
+
+          TITLE_RE = re.compile(
+              r"(code health|testing improvement|performance improvement|refactor|security|fix:|chore:|⚡|🧹|🧪)",
+              re.IGNORECASE,
+          )
+
+          JULES_BRANCH_RE = re.compile(
+              r"(jules|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})",
+              re.IGNORECASE,
+          )
+
+          STALE_HOURS = 168  # 7 days
+
+          def api(url, method="GET", body=None):
+              args = [
+                  "curl","--fail-with-body","-sS",
+                  "-X", method,
+                  "-H", f"Authorization: Bearer {token}",
+                  "-H", "Accept: application/vnd.github+json",
+              ]
+              if body is not None:
+                  args += ["-H","Content-Type: application/json","-d", json.dumps(body)]
+              args.append(url)
+              out = subprocess.check_output(args)
+              return json.loads(out.decode("utf-8")) if out else {}
+
+          for pr in prs:
+              number = pr["number"]
+              title = pr.get("title", "")
+              branch = pr.get("head", {}).get("ref", "")
+
+              updated = dt.datetime.fromisoformat(pr["updated_at"].replace("Z", "+00:00"))
+              age_h = (now - updated).total_seconds() / 3600.0
+              if age_h < STALE_HOURS:
+                  continue
+
+              if not TITLE_RE.search(title):
+                  continue
+
+              if not JULES_BRANCH_RE.search(branch):
+                  continue
+
+              comment = (
+                  "Auto-closed stale Jules code-health PR (7d+). "
+                  "The nightly workflow will create fresh, non-conflicting PRs. "
+                  "Reopen manually if needed."
+              )
+              api(f"https://api.github.com/repos/{repo}/issues/{number}/comments", method="POST", body={"body": comment})
+              api(f"https://api.github.com/repos/{repo}/pulls/{number}", method="PATCH", body={"state": "closed"})
+              print(f"Closed stale code-health PR #{number}: {title}")
+          PY
