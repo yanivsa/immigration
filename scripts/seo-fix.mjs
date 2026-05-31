@@ -664,7 +664,7 @@ async function generateSitemap(indexableFiles) {
   await fs.writeFile(path.join(root, "sitemap.xml"), `${lines.join("\n")}\n`);
 }
 
-async function main() {
+export async function main() {
   const filePaths = await walkHtml(root);
   const relativeFiles = filePaths.map((filePath) => path.relative(root, filePath).replace(/\\/g, "/"));
   const allFiles = new Set(relativeFiles);
@@ -760,4 +760,6 @@ async function main() {
   await generateSitemap(indexableFiles);
 }
 
-await main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  await main();
+}
