@@ -99,39 +99,39 @@ jobs:
 
           # List branches matching our automation prefixes.
           patterns = [
-              'nightly-article-',
-              'jules-vendor-enrichment-',
-              'enrich-vendors-',
-              'vendor-enrichment-',
+              'nightly-',
+              'jules-',
+              'bolt',
+              'code-health',
+              '🧹-',
+              '🧪-',
+              'add-',
+              'test',
+              'refactor',
           ]
 
           for prefix in patterns:
-              page = 1
-              while True:
-                  url = f"https://api.github.com/repos/{repo}/git/matching-refs/heads/{urllib.parse.quote(prefix, safe='')}?per_page=100&page={page}"
-                  res = subprocess.check_output(
-                      ['curl','--fail-with-body','-sS',
+              url = f"https://api.github.com/repos/{repo}/git/matching-refs/heads/{urllib.parse.quote(prefix, safe='')}?per_page=100"
+              res = subprocess.check_output(
+                  ['curl','--fail-with-body','-sS',
+                   '-H', f'Authorization: Bearer {token}',
+                   '-H', 'Accept: application/vnd.github+json',
+                   url]
+              ).decode('utf-8')
+              refs = json.loads(res)
+              for r in refs:
+                  ref_full = r.get('ref','')
+                  head = ref_full.replace('refs/heads/','')
+                  if not head or head in open_heads:
+                      continue
+                  # delete
+                  del_url = f"https://api.github.com/repos/{repo}/git/refs/heads/{urllib.parse.quote(head, safe='')}"
+                  print('Deleting stale branch', head)
+                  subprocess.run(
+                      ['curl','--fail-with-body','-sS','-X','DELETE',
                        '-H', f'Authorization: Bearer {token}',
                        '-H', 'Accept: application/vnd.github+json',
-                       url]
-                  ).decode('utf-8')
-                  refs = json.loads(res)
-                  if not refs:
-                      break
-                  for r in refs:
-                      ref_full = r.get('ref','')
-                      head = ref_full.replace('refs/heads/','')
-                      if not head or head in open_heads:
-                          continue
-                      # delete
-                      del_url = f"https://api.github.com/repos/{repo}/git/refs/heads/{urllib.parse.quote(head, safe='')}"
-                      print('Deleting stale branch', head)
-                      subprocess.run(
-                          ['curl','--fail-with-body','-sS','-X','DELETE',
-                           '-H', f'Authorization: Bearer {token}',
-                           '-H', 'Accept: application/vnd.github+json',
-                           del_url],
-                          check=True,
-                      )
-                  page += 1
+                       del_url],
+                      check=True,
+                  )
           PY
