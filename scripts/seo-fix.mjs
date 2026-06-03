@@ -232,7 +232,7 @@ function isNoindex(relPath) {
   return noindexPatterns.some((pattern) => pattern.test(relPath));
 }
 
-function extractMainHtml(html) {
+export function extractMainHtml(html) {
   return readMatch(html, /<main[\s\S]*?>([\s\S]*?)<\/main>/i) || readMatch(html, /<body[\s\S]*?>([\s\S]*?)<\/body>/i) || html;
 }
 
