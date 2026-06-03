@@ -1,137 +1,142 @@
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 
-const args = process.argv.slice(2);
-const opts = {
-  queue: "keyword-queue.csv",
-  out: "content_queue",
-  cadenceDays: 1,
-  maxPerRun: Number.POSITIVE_INFINITY,
-  dryRun: false,
-  now: null,
-};
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  const args = process.argv.slice(2);
+  const opts = {
+    queue: "keyword-queue.csv",
+    out: "content_queue",
+    cadenceDays: 1,
+    maxPerRun: Number.POSITIVE_INFINITY,
+    dryRun: false,
+    now: null,
+  };
 
-for (let i = 0; i < args.length; i += 1) {
-  const arg = args[i];
-  if (arg === "--queue") {
-    opts.queue = args[i + 1];
-    i += 1;
-  } else if (arg === "--out") {
-    opts.out = args[i + 1];
-    i += 1;
-  } else if (arg === "--cadence-days") {
-    opts.cadenceDays = Number.parseInt(args[i + 1], 10);
-    i += 1;
-  } else if (arg === "--max-per-run") {
-    opts.maxPerRun = Number.parseInt(args[i + 1], 10);
-    i += 1;
-  } else if (arg === "--dry-run") {
-    opts.dryRun = true;
-  } else if (arg === "--now") {
-    opts.now = args[i + 1];
-    i += 1;
-  } else if (arg === "--help") {
-    printUsage();
-    process.exit(0);
-  } else {
-    throw new Error(`Unknown argument: ${arg}`);
-  }
-}
-
-if (!Number.isFinite(opts.cadenceDays) || opts.cadenceDays <= 0) {
-  throw new Error("--cadence-days must be a positive integer");
-}
-
-if (!Number.isFinite(opts.maxPerRun) || opts.maxPerRun <= 0) {
-  opts.maxPerRun = Number.POSITIVE_INFINITY;
-}
-
-const queuePath = path.resolve(process.cwd(), opts.queue);
-const outRoot = path.resolve(process.cwd(), opts.out);
-const now = opts.now ? parseDateTime(opts.now) : new Date();
-
-const { header, rows } = readCsv(queuePath);
-const expectedHeader = [
-  "scheduled_at",
-  "cluster",
-  "intent",
-  "keyword_he",
-  "keyword_en",
-  "keyword_ru",
-  "keyword_uk",
-];
-
-if (header.join(",") !== expectedHeader.join(",")) {
-  throw new Error(
-    `Unexpected CSV header. Expected: ${expectedHeader.join(",")} | Got: ${header.join(",")}`
-  );
-}
-
-const dueRows = [];
-const remainingRows = [];
-let processedCount = 0;
-
-for (let i = 0; i < rows.length; i += 1) {
-  const row = rows[i];
-  const scheduledAt = parseDateTime(row.scheduled_at);
-  const isDue = scheduledAt <= now;
-
-  if (isDue && processedCount < opts.maxPerRun) {
-    dueRows.push({ ...row, _scheduledDate: scheduledAt });
-    processedCount += 1;
-  } else {
-    remainingRows.push(...rows.slice(i));
-    break;
-  }
-}
-
-if (dueRows.length === 0) {
-  console.log("No scheduled items due.");
-  process.exit(0);
-}
-
-const maxScheduledAt = getMaxScheduledAt(remainingRows, dueRows);
-let rollingDate = maxScheduledAt;
-const rescheduledRows = [];
-
-for (const row of dueRows) {
-  rollingDate = addDays(rollingDate, opts.cadenceDays);
-  rescheduledRows.push({
-    scheduled_at: formatDateTime(rollingDate),
-    cluster: row.cluster,
-    intent: row.intent,
-    keyword_he: row.keyword_he,
-    keyword_en: row.keyword_en,
-    keyword_ru: row.keyword_ru,
-    keyword_uk: row.keyword_uk,
-  });
-}
-
-if (!opts.dryRun) {
-  for (const row of dueRows) {
-    const datePart = row.scheduled_at.split(" ")[0];
-    const dirName = `${datePart}-${row.intent}`;
-    const dirPath = path.join(outRoot, dirName);
-    fs.mkdirSync(dirPath, { recursive: true });
-
-    const prompts = buildPrompts(row);
-    for (const [filename, content] of Object.entries(prompts)) {
-      fs.writeFileSync(path.join(dirPath, filename), content, "utf8");
+  for (let i = 0; i < args.length; i += 1) {
+    const arg = args[i];
+    if (arg === "--queue") {
+      opts.queue = args[i + 1];
+      i += 1;
+    } else if (arg === "--out") {
+      opts.out = args[i + 1];
+      i += 1;
+    } else if (arg === "--cadence-days") {
+      opts.cadenceDays = Number.parseInt(args[i + 1], 10);
+      i += 1;
+    } else if (arg === "--max-per-run") {
+      opts.maxPerRun = Number.parseInt(args[i + 1], 10);
+      i += 1;
+    } else if (arg === "--dry-run") {
+      opts.dryRun = true;
+    } else if (arg === "--now") {
+      opts.now = args[i + 1];
+      i += 1;
+    } else if (arg === "--help") {
+      printUsage();
+      process.exit(0);
+    } else {
+      throw new Error(`Unknown argument: ${arg}`);
     }
   }
 
-  const updatedRows = remainingRows.concat(rescheduledRows);
-  writeCsv(queuePath, expectedHeader, updatedRows);
-}
+  if (!Number.isFinite(opts.cadenceDays) || opts.cadenceDays <= 0) {
+    throw new Error("--cadence-days must be a positive integer");
+  }
 
-console.log(`Processed ${dueRows.length} item(s).`);
-console.log(`Output directory: ${outRoot}`);
-for (let i = 0; i < dueRows.length; i += 1) {
-  const row = dueRows[i];
-  console.log(`- ${row.intent} -> ${rescheduledRows[i].scheduled_at}`);
-}
-if (opts.dryRun) {
-  console.log("Dry run: no files written and queue not updated.");
+  if (!Number.isFinite(opts.maxPerRun) || opts.maxPerRun <= 0) {
+    opts.maxPerRun = Number.POSITIVE_INFINITY;
+  }
+
+  const queuePath = path.resolve(process.cwd(), opts.queue);
+  const outRoot = path.resolve(process.cwd(), opts.out);
+  const now = opts.now ? parseDateTime(opts.now) : new Date();
+
+  const { header, rows } = readCsv(queuePath);
+  const expectedHeader = [
+    "scheduled_at",
+    "cluster",
+    "intent",
+    "keyword_he",
+    "keyword_en",
+    "keyword_ru",
+    "keyword_uk",
+  ];
+
+  if (header.join(",") !== expectedHeader.join(",")) {
+    throw new Error(
+      `Unexpected CSV header. Expected: ${expectedHeader.join(",")} | Got: ${header.join(",")}`
+    );
+  }
+
+  const dueRows = [];
+  const remainingRows = [];
+  let processedCount = 0;
+
+  for (let i = 0; i < rows.length; i += 1) {
+    const row = rows[i];
+    const scheduledAt = parseDateTime(row.scheduled_at);
+    const isDue = scheduledAt <= now;
+
+    if (isDue && processedCount < opts.maxPerRun) {
+      dueRows.push({ ...row, _scheduledDate: scheduledAt });
+      processedCount += 1;
+    } else {
+      remainingRows.push(...rows.slice(i));
+      break;
+    }
+  }
+
+  if (dueRows.length === 0) {
+    console.log("No scheduled items due.");
+    process.exit(0);
+  }
+
+  const maxScheduledAt = getMaxScheduledAt(remainingRows, dueRows);
+  let rollingDate = maxScheduledAt;
+  const rescheduledRows = [];
+
+  for (const row of dueRows) {
+    rollingDate = addDays(rollingDate, opts.cadenceDays);
+    rescheduledRows.push({
+      scheduled_at: formatDateTime(rollingDate),
+      cluster: row.cluster,
+      intent: row.intent,
+      keyword_he: row.keyword_he,
+      keyword_en: row.keyword_en,
+      keyword_ru: row.keyword_ru,
+      keyword_uk: row.keyword_uk,
+    });
+  }
+
+  if (!opts.dryRun) {
+    for (const row of dueRows) {
+      const datePart = row.scheduled_at.split(" ")[0];
+      const dirName = `${datePart}-${row.intent}`;
+      const dirPath = path.join(outRoot, dirName);
+      fs.mkdirSync(dirPath, { recursive: true });
+
+      const prompts = buildPrompts(row);
+      for (const [filename, content] of Object.entries(prompts)) {
+        fs.writeFileSync(path.join(dirPath, filename), content, "utf8");
+      }
+    }
+
+    const updatedRows = remainingRows.concat(rescheduledRows);
+    writeCsv(queuePath, expectedHeader, updatedRows);
+  }
+
+  console.log(`Processed ${dueRows.length} item(s).`);
+  console.log(`Output directory: ${outRoot}`);
+  for (let i = 0; i < dueRows.length; i += 1) {
+    const row = dueRows[i];
+    console.log(`- ${row.intent} -> ${rescheduledRows[i].scheduled_at}`);
+  }
+  if (opts.dryRun) {
+    console.log("Dry run: no files written and queue not updated.");
+  }
+
+
 }
 
 function readCsv(filePath) {
@@ -205,7 +210,7 @@ function readCsv(filePath) {
 
 // parseCsvLine removed as it is integrated into readCsv
 
-function escapeCsv(value) {
+export function escapeCsv(value) {
   const needsQuotes = /[",\n]/.test(value);
   if (!needsQuotes) {
     return value;
@@ -226,7 +231,7 @@ function writeCsv(filePath, header, rows) {
   fs.writeFileSync(filePath, `${lines.join("\n")}\n`, "utf8");
 }
 
-function parseDateTime(value) {
+export function parseDateTime(value) {
   const match = value.match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})$/);
   if (!match) {
     throw new Error(`Invalid datetime: ${value}`);
@@ -239,7 +244,7 @@ function parseDateTime(value) {
   return new Date(year, month, day, hour, minute, 0, 0);
 }
 
-function formatDateTime(date) {
+export function formatDateTime(date) {
   const pad = (num) => String(num).padStart(2, "0");
   const year = date.getFullYear();
   const month = pad(date.getMonth() + 1);
@@ -249,7 +254,7 @@ function formatDateTime(date) {
   return `${year}-${month}-${day} ${hour}:${minute}`;
 }
 
-function addDays(date, days) {
+export function addDays(date, days) {
   const next = new Date(date.getTime());
   next.setDate(next.getDate() + days);
   return next;
