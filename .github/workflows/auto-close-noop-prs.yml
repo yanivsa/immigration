@@ -81,7 +81,7 @@ jobs:
           with open("open-prs.json", encoding="utf-8") as fh:
               prs = json.load(fh)
 
-          title_re = re.compile(r"(^no[- ]?op:)|(^chore:\s*no[- ]?op\b)|(\bno[- ]?op\b)|(blocked by .*pr)|(blocking branch)", re.I)
+          title_re = re.compile(r"(^no[- ]?op:)|(^chore:\s*no[- ]?op\b)|(\bno[- ]?op\b)|(blocked by .*pr)|(blocking branch)|(workflow halted)|(\bhalted\b)", re.I)
           body_re = re.compile(
               r"(no[- ]?op summary|no files were edited|no files were modified|"
               r"files edited:\s*(none|no)|selector was not run|finished as a no[- ]?op|"
