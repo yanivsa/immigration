@@ -30,6 +30,15 @@ test("publish-next generates 4 substantive articles without raw cluster IDs and 
   const queuePath = path.join(root, "keyword-queue.csv");
   const originalQueue = await fs.readFile(queuePath, "utf8");
 
+  // Modify first row to make it due (e.g. 2000-01-01 11:00)
+  const lines = originalQueue.trim().split("\n");
+  if (lines.length > 1) {
+    const parts = lines[1].split(",");
+    parts[0] = "2000-01-01 11:00";
+    lines[1] = parts.join(",");
+    await fs.writeFile(queuePath, lines.join("\n") + "\n", "utf8");
+  }
+
   // Get current article count
   const entries = await fs.readdir(path.join(root, "articles"));
   const numbers = entries
