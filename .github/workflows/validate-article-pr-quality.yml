@@ -1,0 +1,99 @@
+name: Validate generated article PR quality
+
+on:
+  pull_request:
+    paths:
+      - "articles/article-*.html"
+      - "en/articles/article-*.html"
+      - "ru/articles/article-*.html"
+      - "ua/articles/article-*.html"
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  validate-article-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Require one complete four-locale article without known filler artifacts
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import html
+          import os
+          import pathlib
+          import re
+          import subprocess
+
+          changed = subprocess.check_output(
+              ["git", "diff", "--name-only", os.environ["BASE_SHA"], os.environ["HEAD_SHA"]],
+              text=True,
+          ).splitlines()
+          article_re = re.compile(r"^(?:(en|ru|ua)/)?articles/article-(\d+)\.html$")
+          matches = [(path, article_re.match(path)) for path in changed]
+          matches = [(path, match) for path, match in matches if match]
+          if not matches:
+              raise SystemExit("No generated article locale files changed.")
+
+          ids = {match.group(2) for _, match in matches}
+          if len(ids) != 1:
+              raise SystemExit(f"Expected exactly one article ID, found: {sorted(ids)}")
+
+          article_id = next(iter(ids))
+          expected = {
+              f"articles/article-{article_id}.html",
+              f"en/articles/article-{article_id}.html",
+              f"ru/articles/article-{article_id}.html",
+              f"ua/articles/article-{article_id}.html",
+          }
+          actual = {path for path, _ in matches}
+          if actual != expected:
+              raise SystemExit(f"Expected four locale files {sorted(expected)}, found {sorted(actual)}")
+
+          forbidden = {
+              "he": [
+                  r"הבנת תהליך\s+immigration law",
+                  r"לסיכום, אין להקל ראש בחשיבות ההכנה",
+                  r"בעזרת תכנון מקדים נכון, ניתן לעבור את התהליך בשלום",
+              ],
+              "en": [
+                  r"in conclusion, the importance of preparing",
+                  r"with proper advance planning, the process can be completed successfully",
+              ],
+              "ru": [r"immigration law"],
+              "ua": [r"immigration law", r"\brelevant\b", r"Рекомендуется"],
+          }
+          locale_for = {
+              f"articles/article-{article_id}.html": "he",
+              f"en/articles/article-{article_id}.html": "en",
+              f"ru/articles/article-{article_id}.html": "ru",
+              f"ua/articles/article-{article_id}.html": "ua",
+          }
+
+          failures = []
+          for path in sorted(expected):
+              raw = pathlib.Path(path).read_text(encoding="utf-8")
+              body_match = re.search(r'<section id="details"[^>]*>(.*?)</section>', raw, re.S | re.I)
+              if not body_match:
+                  failures.append(f"{path}: missing details section")
+                  continue
+              text = html.unescape(re.sub(r"<[^>]+>", " ", body_match.group(1)))
+              text = re.sub(r"\s+", " ", text).strip()
+              if len(text) < 1800:
+                  failures.append(f"{path}: article body is too thin ({len(text)} characters)")
+              for pattern in forbidden[locale_for[path]]:
+                  if re.search(pattern, text, re.I):
+                      failures.append(f"{path}: known generic or mixed-language artifact matched /{pattern}/")
+
+          if failures:
+              raise SystemExit("Article quality gate failed:\n- " + "\n- ".join(failures))
+          print(f"Validated article-{article_id} across he/en/ru/uk.")
+          PY
