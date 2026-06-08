@@ -3,7 +3,7 @@ import assert from "node:assert";
 import { promises as fs } from "fs";
 import path from "path";
 import os from "os";
-import { build } from "./build.mjs";
+import { build } from "../scripts/build.mjs";
 
 async function withTmpDir(fn) {
   const tmpRoot = await fs.mkdtemp(path.join(os.tmpdir(), 'build-test-'));
