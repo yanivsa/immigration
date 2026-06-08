@@ -26,102 +26,127 @@ const titleOverrides = new Map([
   ["articles/article-36.html", "חבילת מסמכים לחירום בנתב״ג: מה להכין"],
   ["articles/article-37.html", "טעויות שמחמירות מצב בחירום בנתב״ג"],
   ["en/index.html", "Immigration lawyer in Ashdod | Visas and citizenship"],
-  ["en/services/index.html", "Immigration services in Ashdod | Work, status, entry"],
-  ["en/services/work-visas.html", "Work visas in Israel | Employers and foreign workers"],
-  ["en/articles/index.html", "Immigration articles | Visas, status, Ben Gurion"],
-  ["en/articles/article-32.html", "Ben Gurion delay by the Population Authority | What to ask"],
+  [
+    "en/services/index.html",
+    "Immigration services in Ashdod | Work, status, entry",
+  ],
+  [
+    "en/services/work-visas.html",
+    "Work visas in Israel | Employers and foreign workers",
+  ],
+  [
+    "en/articles/index.html",
+    "Immigration articles | Visas, status, Ben Gurion",
+  ],
+  [
+    "en/articles/article-32.html",
+    "Ben Gurion delay by the Population Authority | What to ask",
+  ],
   ["ru/index.html", "Иммиграционный юрист в Ашдоде | Визы и статус"],
   ["ru/services/index.html", "Иммиграционные услуги в Ашдоде | Визы и статус"],
   ["ru/contact.html", "Контакты | Бесплатная консультация Zoom"],
-  ["ru/articles/article-32.html", "Задержка в Бен-Гурионе со стороны Управления | Что просить"],
-  ["ru/articles/article-33.html", "Задержание на границе в Бен-Гурионе | Что это значит"],
+  [
+    "ru/articles/article-32.html",
+    "Задержка в Бен-Гурионе со стороны Управления | Что просить",
+  ],
+  [
+    "ru/articles/article-33.html",
+    "Задержание на границе в Бен-Гурионе | Что это значит",
+  ],
   ["ua/index.html", "Імміграційний юрист в Ашдоді | Візи і статус"],
   ["ua/services/index.html", "Імміграційні послуги в Ашдоді | Візи і статус"],
   ["ua/contact.html", "Контакти | Безкоштовна консультація Zoom"],
-  ["ua/articles/article-32.html", "Затримка в Бен-Гуріоні з боку Управління | Що просити"],
-  ["ua/articles/article-33.html", "Затримання на кордоні в Бен-Гуріоні | Що це означає"],
-  ["ua/articles/article-39.html", "Допит на кордоні в Бен-Гуріоні | Як відповідати чітко"],
+  [
+    "ua/articles/article-32.html",
+    "Затримка в Бен-Гуріоні з боку Управління | Що просити",
+  ],
+  [
+    "ua/articles/article-33.html",
+    "Затримання на кордоні в Бен-Гуріоні | Що це означає",
+  ],
+  [
+    "ua/articles/article-39.html",
+    "Допит на кордоні в Бен-Гуріоні | Як відповідати чітко",
+  ],
 ]);
 
 const descriptionOverrides = new Map([
   [
     "articles/index.html",
-    "ספריית מאמרים על ויזות עבודה, אזרחות, ויזות תייר, אישורי כניסה וחירום בנתב״ג, עם מדריכים, צ'קליסטים והסברים מעשיים."
+    "ספריית מאמרים על ויזות עבודה, אזרחות, ויזות תייר, אישורי כניסה וחירום בנתב״ג, עם מדריכים, צ'קליסטים והסברים מעשיים.",
   ],
   [
     "articles/article-03.html",
-    "צ'קליסט מסמכים למעסיק ולעובד זר: מה להכין מראש, איך לתאם בין הגרסאות ואילו מסמכים עוזרים לצמצם דרישות השלמה ועיכובים."
+    "צ'קליסט מסמכים למעסיק ולעובד זר: מה להכין מראש, איך לתאם בין הגרסאות ואילו מסמכים עוזרים לצמצם דרישות השלמה ועיכובים.",
   ],
   [
     "articles/article-07.html",
-    "הסבר פשוט למה שנקרא לעיתים אישור עובד זר, איך הוא משתלב בתהליך הוויזה ומה חשוב לבדוק לפני שמתקדמים."
+    "הסבר פשוט למה שנקרא לעיתים אישור עובד זר, איך הוא משתלב בתהליך הוויזה ומה חשוב לבדוק לפני שמתקדמים.",
   ],
   [
     "articles/article-12.html",
-    "תנאים לאזרחות בישראל: אילו דרישות בסיסיות כדאי לבדוק מראש, איך להבין את הרשימה ואילו מסמכים מסייעים להיערכות נכונה."
+    "תנאים לאזרחות בישראל: אילו דרישות בסיסיות כדאי לבדוק מראש, איך להבין את הרשימה ואילו מסמכים מסייעים להיערכות נכונה.",
   ],
   [
     "articles/article-14.html",
-    "צ'קליסט מסמכים להסדרת מעמד ואזרחות: אילו מסמכים להכין, איפה נדרשים תרגומים ואיך שומרים על עקביות בין כל הגרסאות."
+    "צ'קליסט מסמכים להסדרת מעמד ואזרחות: אילו מסמכים להכין, איפה נדרשים תרגומים ואיך שומרים על עקביות בין כל הגרסאות.",
   ],
   [
     "articles/article-15.html",
-    "איך מקבלים אזרחות בישראל: מבט קצר על המסלולים העיקריים, שלבי ההיערכות ומה חשוב להבין לפני שמתחילים."
+    "איך מקבלים אזרחות בישראל: מבט קצר על המסלולים העיקריים, שלבי ההיערכות ומה חשוב להבין לפני שמתחילים.",
   ],
   [
     "articles/article-26.html",
-    "סיבות נפוצות לסירוב כניסת תיירים לישראל, מה בודקים בגבול ואיך להיערך עם מסמכים וסיפור ביקור עקבי."
+    "סיבות נפוצות לסירוב כניסת תיירים לישראל, מה בודקים בגבול ואיך להיערך עם מסמכים וסיפור ביקור עקבי.",
   ],
   [
     "articles/article-31.html",
-    "צ'קליסט ל-60 הדקות הראשונות בעת עיכוב בנתב״ג בלילה, עם דגשים למסמכים, תקשורת ובקשת סיוע."
+    "צ'קליסט ל-60 הדקות הראשונות בעת עיכוב בנתב״ג בלילה, עם דגשים למסמכים, תקשורת ובקשת סיוע.",
   ],
   [
     "contact.html",
-    "קבעו פגישת זום ראשונית, השאירו פרטים בטופס וקבלו כיוון כללי לגבי ויזה, מעמד או אישור כניסה לישראל."
+    "קבעו פגישת זום ראשונית, השאירו פרטים בטופס וקבלו כיוון כללי לגבי ויזה, מעמד או אישור כניסה לישראל.",
   ],
   [
     "en/about.html",
-    "Learn how the firm approaches immigration matters in Israel with clear process mapping, document review, and practical guidance grounded in former authority experience."
+    "Learn how the firm approaches immigration matters in Israel with clear process mapping, document review, and practical guidance grounded in former authority experience.",
   ],
   [
     "en/articles/index.html",
-    "English article library on work visas, citizenship, tourist visas, entry permits, and Ben Gurion emergencies, with practical guides and checklists."
+    "English article library on work visas, citizenship, tourist visas, entry permits, and Ben Gurion emergencies, with practical guides and checklists.",
   ],
   [
     "en/services/work-visas.html",
-    "Work visas in Israel for employers and foreign workers, with document review, process mapping, and practical guidance before filing or entry."
+    "Work visas in Israel for employers and foreign workers, with document review, process mapping, and practical guidance before filing or entry.",
   ],
   [
     "ru/index.html",
-    "Четкое юридическое сопровождение по визам, статусу и въезду в Израиль, с проверкой документов, пошаговой стратегией и консультациями в Zoom."
+    "Четкое юридическое сопровождение по визам, статусу и въезду в Израиль, с проверкой документов, пошаговой стратегией и консультациями в Zoom.",
   ],
   [
     "ru/articles/index.html",
-    "Русская библиотека статей о рабочих визах, гражданстве, въезде в Израиль и экстренных ситуациях в Бен-Гурионе, с практическими объяснениями и чек-листами."
+    "Русская библиотека статей о рабочих визах, гражданстве, въезде в Израиль и экстренных ситуациях в Бен-Гурионе, с практическими объяснениями и чек-листами.",
   ],
   [
     "ua/index.html",
-    "Чіткий юридичний супровід щодо віз, статусу та в’їзду до Ізраїлю, з практичними кроками, перевіркою документів і консультаціями в Zoom."
+    "Чіткий юридичний супровід щодо віз, статусу та в’їзду до Ізраїлю, з практичними кроками, перевіркою документів і консультаціями в Zoom.",
   ],
   [
     "ua/articles/index.html",
-    "Українська бібліотека матеріалів про робочі візи, громадянство, в’їзд до Ізраїлю та екстрені ситуації в Бен-Гуріоні."
+    "Українська бібліотека матеріалів про робочі візи, громадянство, в’їзд до Ізраїлю та екстрені ситуації в Бен-Гуріоні.",
   ],
   [
     "ua/articles/article-27.html",
-    "Практичні поради щодо подання документів на дозвіл на в’їзд: порядок, логіка та спосіб презентації на кордоні."
+    "Практичні поради щодо подання документів на дозвіл на в’їзд: порядок, логіка та спосіб презентації на кордоні.",
   ],
   [
     "ua/articles/article-26.html",
-    "Поширені причини відмови туристам на в’їзді до Ізраїлю, що перевіряють на кордоні та як підготувати послідовний пакет документів."
+    "Поширені причини відмови туристам на в’їзді до Ізраїлю, що перевіряють на кордоні та як підготувати послідовний пакет документів.",
   ],
 ]);
 
 const descriptionSuffixPatterns = {
-  he: [
-    /\s+ליווי מסודר, מסמכים ברורים, תיאום ציפיות ושירות בזום[\s\S]*$/i,
-  ],
+  he: [/\s+ליווי מסודר, מסמכים ברורים, תיאום ציפיות ושירות בזום[\s\S]*$/i],
   en: [
     /\s+Clear process, organized documents, realistic expectations, and Zoom guidance[\s\S]*$/i,
     /\s+Clear process, organized documents, realistic expectations, and Zoom support[\s\S]*$/i,
@@ -140,30 +165,34 @@ const authorConfig = {
   he: {
     name: "עורכת הדין של המשרד",
     jobTitle: "עורכת דין להגירה",
-    description: "לשעבר ברשות האוכלוסין וההגירה, עם מיקוד בויזות, מעמד ואזרחות בישראל.",
+    description:
+      "לשעבר ברשות האוכלוסין וההגירה, עם מיקוד בויזות, מעמד ואזרחות בישראל.",
     footer:
-      "נכתב, נבדק ועודכן על ידי עורכת הדין של המשרד, לשעבר ברשות האוכלוסין וההגירה."
+      "נכתב, נבדק ועודכן על ידי עורכת הדין של המשרד, לשעבר ברשות האוכלוסין וההגירה.",
   },
   en: {
     name: "Office Immigration Attorney",
     jobTitle: "Immigration attorney",
-    description: "Former Population and Immigration Authority experience, with focus on visas, status, and citizenship in Israel.",
+    description:
+      "Former Population and Immigration Authority experience, with focus on visas, status, and citizenship in Israel.",
     footer:
-      "Written, reviewed, and updated by the office immigration attorney, with former Population and Immigration Authority experience."
+      "Written, reviewed, and updated by the office immigration attorney, with former Population and Immigration Authority experience.",
   },
   ru: {
     name: "Юрист офиса по иммиграции",
     jobTitle: "Иммиграционный юрист",
-    description: "Опыт работы в Управлении по вопросам населения и иммиграции, фокус на визах, статусе и гражданстве в Израиле.",
+    description:
+      "Опыт работы в Управлении по вопросам населения и иммиграции, фокус на визах, статусе и гражданстве в Израиле.",
     footer:
-      "Материал подготовлен, проверен и обновлен юристом офиса с опытом работы в Управлении по вопросам населения и иммиграции."
+      "Материал подготовлен, проверен и обновлен юристом офиса с опытом работы в Управлении по вопросам населения и иммиграции.",
   },
   uk: {
     name: "Юрист офісу з імміграції",
     jobTitle: "Імміграційний юрист",
-    description: "Досвід роботи в Управлінні з питань населення та імміграції, фокус на візах, статусі та громадянстві в Ізраїлі.",
+    description:
+      "Досвід роботи в Управлінні з питань населення та імміграції, фокус на візах, статусі та громадянстві в Ізраїлі.",
     footer:
-      "Матеріал підготовлено, перевірено й оновлено юристом офісу з досвідом роботи в Управлінні з питань населення та імміграції."
+      "Матеріал підготовлено, перевірено й оновлено юристом офісу з досвідом роботи в Управлінні з питань населення та імміграції.",
   },
 };
 
@@ -202,7 +231,7 @@ const decodeEntities = (value) =>
     .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, "\"")
+    .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'")
     .replace(/&nbsp;/g, " ");
 
@@ -218,12 +247,13 @@ const stripTags = (value) =>
     value
       .replace(/<script[\s\S]*?<\/script>/gi, " ")
       .replace(/<style[\s\S]*?<\/style>/gi, " ")
-      .replace(/<[^>]+>/g, " ")
+      .replace(/<[^>]+>/g, " "),
   )
     .replace(/\s+/g, " ")
     .trim();
 
-const normalizeText = (value) => decodeEntities(value).replace(/\s+/g, " ").trim();
+const normalizeText = (value) =>
+  decodeEntities(value).replace(/\s+/g, " ").trim();
 
 const walk = async (dir) => {
   const entries = await fs.readdir(dir, { withFileTypes: true });
@@ -265,12 +295,15 @@ const getTitle = (html) => {
 };
 
 const setTitle = (html, value) =>
-  html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(value)}</title>`);
+  html.replace(
+    /<title>[\s\S]*?<\/title>/i,
+    `<title>${escapeHtml(value)}</title>`,
+  );
 
 const getMeta = (html, attr, name) => {
   const pattern = new RegExp(
     `<meta[^>]*${attr}="${name}"[^>]*content="([\\s\\S]*?)"[^>]*>`,
-    "i"
+    "i",
   );
   const match = html.match(pattern);
   return match ? normalizeText(match[1]) : "";
@@ -279,7 +312,7 @@ const getMeta = (html, attr, name) => {
 const setMeta = (html, attr, name, value) => {
   const pattern = new RegExp(
     `(<meta[^>]*${attr}="${name}"[^>]*content=")([\\s\\S]*?)("[^>]*>)`,
-    "i"
+    "i",
   );
   if (!pattern.test(html)) {
     return html;
@@ -289,7 +322,7 @@ const setMeta = (html, attr, name, value) => {
 
 const getCanonical = (html) => {
   const match = html.match(
-    /<link[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["'][^>]*>/i
+    /<link[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["'][^>]*>/i,
   );
   return match ? match[1] : "";
 };
@@ -362,7 +395,9 @@ const clampText = (value, max = 155) => {
 
   const sliced = text.slice(0, max + 1);
   const lastSpace = sliced.lastIndexOf(" ");
-  const trimmed = (lastSpace > 90 ? sliced.slice(0, lastSpace) : sliced.slice(0, max))
+  const trimmed = (
+    lastSpace > 90 ? sliced.slice(0, lastSpace) : sliced.slice(0, max)
+  )
     .replace(/[,\s]+$/g, "")
     .trim();
   return ensureSentence(trimmed);
@@ -404,7 +439,7 @@ const replaceFooterNote = (html, locale) => {
 
   return html.replace(
     /<p class="footer-note">([\s\S]*?)<\/p>/,
-    `<p class="footer-note">${escapeHtml(footer)}</p>`
+    `<p class="footer-note">${escapeHtml(footer)}</p>`,
   );
 };
 
@@ -431,7 +466,10 @@ const replaceArticleAuthor = (html, locale) => {
   ].join("\n");
 
   return html
-    .replace(/  "author": \{\n[\s\S]*?\n  \},\n(?=  "mainEntityOfPage")/, `${replacement}\n`)
+    .replace(
+      /  "author": \{\n[\s\S]*?\n  \},\n(?=  "mainEntityOfPage")/,
+      `${replacement}\n`,
+    )
     .replace(/("dateModified":\s*")([^"]+)(")/, `$1${currentDate}$3`);
 };
 
@@ -553,12 +591,22 @@ const updateMetadata = (html, relativePath, locale) => {
   html = setMeta(html, "name", "twitter:description", nextDescription);
 
   const canonical = getCanonical(html);
-  const collectionSchema = buildCollectionSchema(relativePath, canonical, nextDescription);
+  const collectionSchema = buildCollectionSchema(
+    relativePath,
+    canonical,
+    nextDescription,
+  );
   if (collectionSchema) {
     html = injectJsonLd(html, "CollectionPage", collectionSchema);
   }
 
-  const pageSchema = buildPageSchema(relativePath, canonical, nextDescription, h1, locale);
+  const pageSchema = buildPageSchema(
+    relativePath,
+    canonical,
+    nextDescription,
+    h1,
+    locale,
+  );
   if (pageSchema) {
     html = injectJsonLd(html, pageSchema["@type"], pageSchema);
   }
@@ -568,28 +616,32 @@ const updateMetadata = (html, relativePath, locale) => {
 
 const main = async () => {
   const files = await walk(root);
-  let changedCount = 0;
 
-  for (const filePath of files) {
-    const relativePath = path.relative(root, filePath).replace(/\\/g, "/");
-    const original = await fs.readFile(filePath, "utf8");
-    let html = original;
-    const locale = detectLocale(html, relativePath);
+  const results = await Promise.all(
+    files.map(async (filePath) => {
+      const relativePath = path.relative(root, filePath).replace(/\\/g, "/");
+      const original = await fs.readFile(filePath, "utf8");
+      let html = original;
+      const locale = detectLocale(html, relativePath);
 
-    html = html.replace(/\bhreflang=(["'])uk-UA\1/gi, 'hreflang="uk"');
-    html = updateMetadata(html, relativePath, locale);
-    html = setImageAttributes(html);
+      html = html.replace(/\bhreflang=(["'])uk-UA\1/gi, 'hreflang="uk"');
+      html = updateMetadata(html, relativePath, locale);
+      html = setImageAttributes(html);
 
-    if (/\/articles\/article-|^articles\/article-/.test(relativePath)) {
-      html = replaceFooterNote(html, locale);
-      html = replaceArticleAuthor(html, locale);
-    }
+      if (/\/articles\/article-|^articles\/article-/.test(relativePath)) {
+        html = replaceFooterNote(html, locale);
+        html = replaceArticleAuthor(html, locale);
+      }
 
-    if (html !== original) {
-      await fs.writeFile(filePath, html);
-      changedCount += 1;
-    }
-  }
+      if (html !== original) {
+        await fs.writeFile(filePath, html);
+        return 1;
+      }
+      return 0;
+    }),
+  );
+
+  const changedCount = results.reduce((acc, curr) => acc + curr, 0);
 
   console.log(`SEO remediation updated ${changedCount} HTML files.`);
 };
