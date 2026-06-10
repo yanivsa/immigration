@@ -111,7 +111,13 @@ jobs:
               if not head or head == 'main' or head in open_heads:
                   continue
               name_lower = head.lower()
-              keywords = ['nightly', 'jules', 'bolt', 'code-health', '🧹', '🧪', 'add-', 'test', 'refactor', 'sentinel', 'fix/']
+              keywords = [
+                  'nightly', 'jules', 'bolt', 'code-health', '🧹', '🧪', 
+                  'add-', 'test', 'refactor', 'sentinel', 'fix-', 'fix/',
+                  'perf-', 'perf/', 'security-', 'feat/', 'geo-', 'seo-', 
+                  'mobile-', 'kesher-', 'content-', 'feature-', 'feature/',
+                  'main-', 'vendor', 'enrich'
+              ]
               if not any(k in name_lower for k in keywords):
                   continue
               # delete
