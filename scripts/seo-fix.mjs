@@ -147,7 +147,7 @@ function escapeAttribute(value = "") {
     .replace(/>/g, "&gt;");
 }
 
-function escapeHtmlText(value = "") {
+export function escapeHtmlText(value = "") {
   return value
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
