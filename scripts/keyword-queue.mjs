@@ -317,6 +317,8 @@ function buildPrompt(languageName, languageCode, keyword, row, location) {
     "- Use placeholders: [שם המשרד], [שם עורכת הדין], [טלפון], [אימייל].",
     "- Do not invent real firm details or contact info.",
     "- Include at least one soft CTA.",
+    "- Write unique, substantive paragraphs. Do not use generic stock paragraphs or repetitive filler.",
+    `- Ensure natural phrasing. Do not awkwardly mix English keywords into the ${languageName} text. Translate or adapt keywords naturally.`,
     "- End with a short disclaimer line: general info only.",
   ];
 
