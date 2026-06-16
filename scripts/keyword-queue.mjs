@@ -1,4 +1,4 @@
-import fs from "fs";
+import { promises as fs } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -52,7 +52,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const outRoot = path.resolve(process.cwd(), opts.out);
   const now = opts.now ? parseDateTime(opts.now) : new Date();
 
-  const { header, rows } = readCsv(queuePath);
+  const { header, rows } = await readCsv(queuePath);
   const expectedHeader = [
     "scheduled_at",
     "cluster",
@@ -65,7 +65,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
 
   if (header.join(",") !== expectedHeader.join(",")) {
     throw new Error(
-      `Unexpected CSV header. Expected: ${expectedHeader.join(",")} | Got: ${header.join(",")}`
+      `Unexpected CSV header. Expected: ${expectedHeader.join(",")} | Got: ${header.join(",")}`,
     );
   }
 
@@ -114,16 +114,16 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
       const datePart = row.scheduled_at.split(" ")[0];
       const dirName = `${datePart}-${row.intent}`;
       const dirPath = path.join(outRoot, dirName);
-      fs.mkdirSync(dirPath, { recursive: true });
+      await fs.mkdir(dirPath, { recursive: true });
 
       const prompts = buildPrompts(row);
       for (const [filename, content] of Object.entries(prompts)) {
-        fs.writeFileSync(path.join(dirPath, filename), content, "utf8");
+        await fs.writeFile(path.join(dirPath, filename), content, "utf8");
       }
     }
 
     const updatedRows = remainingRows.concat(rescheduledRows);
-    writeCsv(queuePath, expectedHeader, updatedRows);
+    await writeCsv(queuePath, expectedHeader, updatedRows);
   }
 
   console.log(`Processed ${dueRows.length} item(s).`);
@@ -135,12 +135,10 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   if (opts.dryRun) {
     console.log("Dry run: no files written and queue not updated.");
   }
-
-
 }
 
-function readCsv(filePath) {
-  const text = fs.readFileSync(filePath, "utf8");
+async function readCsv(filePath) {
+  const text = await fs.readFile(filePath, "utf8");
   const rows = [];
   let currentRow = [];
   let currentVal = "";
@@ -190,7 +188,9 @@ function readCsv(filePath) {
   }
 
   // Filter empty rows
-  const nonEmptyRows = rows.filter(row => row.length > 0 && row.some(cell => cell.trim() !== ""));
+  const nonEmptyRows = rows.filter(
+    (row) => row.length > 0 && row.some((cell) => cell.trim() !== ""),
+  );
 
   if (nonEmptyRows.length === 0) {
     throw new Error("CSV file is empty");
@@ -218,17 +218,15 @@ export function escapeCsv(value) {
   return `"${value.replace(/"/g, '""')}"`;
 }
 
-function writeCsv(filePath, header, rows) {
+async function writeCsv(filePath, header, rows) {
   const lines = [
     header.join(","),
     ...rows.map((row) =>
-      header
-        .map((column) => escapeCsv(String(row[column] ?? "")))
-        .join(",")
+      header.map((column) => escapeCsv(String(row[column] ?? ""))).join(","),
     ),
   ];
 
-  fs.writeFileSync(filePath, `${lines.join("\n")}\n`, "utf8");
+  await fs.writeFile(filePath, `${lines.join("\n")}\n`, "utf8");
 }
 
 export function parseDateTime(value) {
@@ -328,10 +326,18 @@ function buildPrompt(languageName, languageCode, keyword, row, location) {
 function printUsage() {
   console.log("Usage: node scripts/keyword-queue.mjs [options]\n");
   console.log("Options:");
-  console.log("  --queue <path>       Path to keyword-queue.csv (default: keyword-queue.csv)");
-  console.log("  --out <path>         Output directory (default: content_queue)");
-  console.log("  --cadence-days <int> Days between rescheduled items (default: 1)");
-  console.log("  --max-per-run <int>  Max items to process per run (default: unlimited)");
+  console.log(
+    "  --queue <path>       Path to keyword-queue.csv (default: keyword-queue.csv)",
+  );
+  console.log(
+    "  --out <path>         Output directory (default: content_queue)",
+  );
+  console.log(
+    "  --cadence-days <int> Days between rescheduled items (default: 1)",
+  );
+  console.log(
+    "  --max-per-run <int>  Max items to process per run (default: unlimited)",
+  );
   console.log("  --dry-run            Print actions without writing files");
-  console.log("  --now \"YYYY-MM-DD HH:MM\"  Override current time for testing");
+  console.log('  --now "YYYY-MM-DD HH:MM"  Override current time for testing');
 }
