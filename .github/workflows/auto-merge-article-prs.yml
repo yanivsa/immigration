@@ -50,7 +50,7 @@ jobs:
           import json, re
           with open("open-prs.json", encoding="utf-8") as fh:
               prs = json.load(fh)
-          title_re = re.compile(r"^(?:Auto-publish:\s*article-|Publish article-)\d+\b", re.I)
+          title_re = re.compile(r"(?:Auto-publish:\s*article-|Publish article-)\d+\b", re.I)
           for pr in prs:
               if title_re.search(pr.get("title") or ""):
                   print(pr["number"])
@@ -82,7 +82,7 @@ jobs:
           allowed_re = re.compile(r"^(keyword-queue\.csv|tests/publish-next\.test\.mjs|articles/article-\d+\.html|en/articles/article-\d+\.html|ru/articles/article-\d+\.html|ua/articles/article-\d+\.html)$")
           all_allowed = all(bool(allowed_re.match(p)) for p in filenames)
 
-          title_ok = bool(re.match(r"^(?:Auto-publish:\s*article-|Publish article-)\d+\b", pr.get("title") or "", re.I))
+          title_ok = bool(re.search(r"(?:Auto-publish:\s*article-|Publish article-)\d+\b", pr.get("title") or "", re.I))
 
           eligible = (
               pr.get("state") == "open"
