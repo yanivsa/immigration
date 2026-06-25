@@ -214,7 +214,7 @@ function getLocalizedRel(baseRel, locale) {
   return `${locale}/${baseRel}`;
 }
 
-function toPathname(relPath) {
+export function toPathname(relPath) {
   if (relPath === "index.html") {
     return "/";
   }
@@ -224,11 +224,11 @@ function toPathname(relPath) {
   return `/${relPath.slice(0, -".html".length)}`;
 }
 
-function toAbsoluteUrl(relPath) {
+export function toAbsoluteUrl(relPath) {
   return `${siteUrl}${toPathname(relPath)}`;
 }
 
-function isNoindex(relPath) {
+export function isNoindex(relPath) {
   return noindexPatterns.some((pattern) => pattern.test(relPath));
 }
 
