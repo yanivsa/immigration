@@ -129,7 +129,7 @@ const stripTags = (value) =>
       .replace(/<[^>]+>/g, " ")
   );
 
-function decodeEntities(value = "") {
+export function decodeEntities(value = "") {
   return value
     .replace(/&nbsp;/g, " ")
     .replace(/&amp;/g, "&")
@@ -154,7 +154,7 @@ export function escapeHtmlText(value = "") {
     .replace(/>/g, "&gt;");
 }
 
-function normalizeWhitespace(value = "") {
+export function normalizeWhitespace(value = "") {
   return value.replace(/\s+/g, " ").trim();
 }
 
