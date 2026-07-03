@@ -121,7 +121,7 @@ const noindexPatterns = [
   /(^|\/)legal\/terms\.html$/,
 ];
 
-const stripTags = (value) =>
+export const stripTags = (value) =>
   decodeEntities(
     value
       .replace(/<script[\s\S]*?<\/script>/gi, " ")
