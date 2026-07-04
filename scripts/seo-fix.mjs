@@ -158,7 +158,7 @@ export function normalizeWhitespace(value = "") {
   return value.replace(/\s+/g, " ").trim();
 }
 
-function clipText(value, max = 155) {
+export function clipText(value, max = 155) {
   const text = normalizeWhitespace(value).replace(/[ ,;:]+$/u, "");
   if (text.length <= max) {
     return text;
