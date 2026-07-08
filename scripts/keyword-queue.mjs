@@ -258,7 +258,7 @@ export function addDays(date, days) {
   return next;
 }
 
-function getMaxScheduledAt(remainingRows, dueRows) {
+export function getMaxScheduledAt(remainingRows, dueRows) {
   let max = null;
   for (const row of remainingRows) {
     const dt = parseDateTime(row.scheduled_at);

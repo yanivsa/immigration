@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert";
-import { parseDateTime, formatDateTime, addDays, escapeCsv } from "../scripts/keyword-queue.mjs";
+import { parseDateTime, formatDateTime, addDays, escapeCsv, getMaxScheduledAt } from "../scripts/keyword-queue.mjs";
 
 test("parseDateTime parses valid datetime string", () => {
   const date = parseDateTime("2024-05-12 14:30");
@@ -31,4 +31,16 @@ test("escapeCsv escapes strings correctly", () => {
   assert.strictEqual(escapeCsv("with,comma"), '"with,comma"');
   assert.strictEqual(escapeCsv('with"quote'), '"with""quote"');
   assert.strictEqual(escapeCsv("with\nnewline"), '"with\nnewline"');
+});
+
+test("getMaxScheduledAt returns the maximum date", () => {
+  const remainingRows = [
+    { scheduled_at: "2024-05-10 10:00" },
+    { scheduled_at: "2024-05-15 10:00" },
+  ];
+  const dueRows = [
+    { scheduled_at: "2024-05-12 10:00" },
+  ];
+  const maxDate = getMaxScheduledAt(remainingRows, dueRows);
+  assert.strictEqual(formatDateTime(maxDate), "2024-05-15 10:00");
 });
