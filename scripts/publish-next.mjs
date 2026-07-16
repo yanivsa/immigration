@@ -820,6 +820,10 @@ async function publishNext() {
 
   console.log(`Published article-${String(articleNumber).padStart(2, "0")} from intent "${row.intent}" in 4 locales.`);
   console.log(`Cluster: ${clusterKey}`);
+
+  if (process.env.GITHUB_OUTPUT) {
+    await fs.appendFile(process.env.GITHUB_OUTPUT, "published=true\n", "utf8");
+  }
 }
 
 publishNext().catch((error) => {
