@@ -94,17 +94,18 @@ jobs:
         run: npm ci
 
       - name: Publish Next Article
+        id: publish_step
         if: steps.article_gate.outputs.blocked != 'true'
         run: node scripts/publish-next.mjs
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }} # User will need to add this to GitHub Secrets
 
       - name: Rebuild Site Assets
-        if: steps.article_gate.outputs.blocked != 'true'
+        if: steps.article_gate.outputs.blocked != 'true' && steps.publish_step.outputs.published == 'true'
         run: npm run build
 
       - name: Commit and Push Changes
-        if: steps.article_gate.outputs.blocked != 'true'
+        if: steps.article_gate.outputs.blocked != 'true' && steps.publish_step.outputs.published == 'true'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
