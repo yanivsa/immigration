@@ -185,13 +185,13 @@ function extractAttribute(tag, name) {
   return match ? decodeEntities(match[2].trim()) : "";
 }
 
-function readMetaContent(html, key, attribute = "name") {
+export function readMetaContent(html, key, attribute = "name") {
   const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const tag = readMatch(html, new RegExp(`(<meta[^>]*${attribute}=["']${escapedKey}["'][^>]*>)`, "i"));
   return extractAttribute(tag, "content");
 }
 
-function readLinkHref(html, relValue) {
+export function readLinkHref(html, relValue) {
   const escapedRel = relValue.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const tag = readMatch(html, new RegExp(`(<link[^>]*rel=["']${escapedRel}["'][^>]*>)`, "i"));
   return extractAttribute(tag, "href");
