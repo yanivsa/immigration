@@ -88,6 +88,7 @@ jobs:
           import re
           import subprocess
           import urllib.parse
+          import sys
 
           repo = os.environ['REPO']
           token = os.environ['GITHUB_TOKEN']
@@ -98,13 +99,18 @@ jobs:
           open_heads = set((pr.get('head') or {}).get('ref') for pr in prs)
 
           url = f"https://api.github.com/repos/{repo}/git/matching-refs/heads/"
-          res = subprocess.check_output(
+          res_proc = subprocess.run(
               ['curl','--fail-with-body','-sS',
                '-H', f'Authorization: Bearer {token}',
                '-H', 'Accept: application/vnd.github+json',
-               url]
-          ).decode('utf-8')
-          refs = json.loads(res)
+               url],
+              capture_output=True, text=True
+          )
+          if res_proc.returncode != 0:
+              print(f"Failed to fetch refs: {res_proc.stderr}")
+              sys.exit(1)
+          refs = json.loads(res_proc.stdout)
+
           for r in refs:
               ref_full = r.get('ref','')
               head = ref_full.replace('refs/heads/','')
@@ -116,18 +122,39 @@ jobs:
                   'add-', 'test', 'refactor', 'sentinel', 'fix-', 'fix/',
                   'perf-', 'perf/', 'security-', 'feat/', 'geo-', 'seo-', 
                   'mobile-', 'kesher-', 'content-', 'feature-', 'feature/',
-                  'main-', 'vendor', 'enrich'
+                  'main-', 'vendor', 'enrich', 'optimize-', 'article-'
               ]
               if not any(k in name_lower for k in keywords):
                   continue
+
+              # Check protected state via branch metadata
+              branch_url = f"https://api.github.com/repos/{repo}/branches/{urllib.parse.quote(head, safe='')}"
+              b_res = subprocess.run(
+                  ['curl', '--fail-with-body', '-sS',
+                   '-H', f'Authorization: Bearer {token}',
+                   '-H', 'Accept: application/vnd.github+json',
+                   branch_url],
+                  capture_output=True, text=True
+              )
+              if b_res.returncode != 0:
+                  print(f"Failed to lookup branch {head}: {b_res.stderr}")
+                  sys.exit(1)
+              b_data = json.loads(b_res.stdout)
+              if b_data.get('protected'):
+                  print(f"Skipping protected branch {head}")
+                  continue
+
               # delete
               del_url = f"https://api.github.com/repos/{repo}/git/refs/heads/{urllib.parse.quote(head, safe='')}"
               print('Deleting stale branch', head)
-              subprocess.run(
+              del_res = subprocess.run(
                   ['curl','--fail-with-body','-sS','-X','DELETE',
                    '-H', f'Authorization: Bearer {token}',
                    '-H', 'Accept: application/vnd.github+json',
                    del_url],
-                  check=True,
+                  capture_output=True, text=True
               )
+              if del_res.returncode != 0:
+                  print(f"Failed to delete {head}: {del_res.stderr}")
+                  sys.exit(1)
           PY
