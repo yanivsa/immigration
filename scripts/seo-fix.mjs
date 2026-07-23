@@ -175,7 +175,7 @@ function readMatch(html, pattern) {
   return match ? match[1].trim() : "";
 }
 
-function extractAttribute(tag, name) {
+export function extractAttribute(tag, name) {
   if (!tag) {
     return "";
   }
