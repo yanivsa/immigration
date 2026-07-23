@@ -444,7 +444,7 @@ function upsertCanonical(head, href) {
   return head.replace(/<\/head>/i, `${tag}\n  </head>`);
 }
 
-function removeKeywordMeta(head) {
+export function removeKeywordMeta(head) {
   return head.replace(/\n?\s*<meta[^>]*name=["']keywords["'][^>]*>/gi, "");
 }
 
