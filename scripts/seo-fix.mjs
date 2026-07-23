@@ -224,7 +224,7 @@ function toPathname(relPath) {
   return `/${relPath.slice(0, -".html".length)}`;
 }
 
-function toAbsoluteUrl(relPath) {
+export function toAbsoluteUrl(relPath) {
   return `${siteUrl}${toPathname(relPath)}`;
 }
 
