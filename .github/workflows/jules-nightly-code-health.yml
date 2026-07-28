@@ -38,6 +38,15 @@ jobs:
           }
           JSON
 
+          python3 - <<'PY'
+          import json
+          with open("payload.json", encoding="utf-8") as fh:
+              payload = json.load(fh)
+          payload["prompt"] += "\n\nAuthoritative blocker-evidence rule: never describe a branch by itself as active, ongoing, or blocking. A backlog blocker is valid only when a fresh live GitHub query returns an open, non-draft PR targeting main and the no-op summary includes that PR's number, exact title, and https://github.com/.../pull/... URL. A remote branch without that live open-PR URL is stale/non-blocking even if it still exists. If GitHub cannot be queried, mark blocker state unverified and do not convert the run to a blocker-based no-op. Before the final no-op decision, repeat the live PR query so a PR merged during the session cannot block the run."
+          with open("payload.json", "w", encoding="utf-8") as fh:
+              json.dump(payload, fh, ensure_ascii=False)
+          PY
+
           response="$(curl -sS -w '\n%{http_code}' \
             -H "x-goog-api-key: ${JULES_API_KEY}" \
             -H "Content-Type: application/json" \
