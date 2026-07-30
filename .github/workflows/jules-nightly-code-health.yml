@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 concurrency:
   group: jules-nightly-code-health
@@ -16,7 +17,64 @@ jobs:
   start-jules:
     runs-on: ubuntu-latest
     steps:
+      - name: Stop if a related maintenance PR is already open
+        id: backlog_gate
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          curl --fail-with-body -sS --retry 3 --retry-all-errors --retry-delay 2 \
+            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${REPO}/pulls?state=open&per_page=100" \
+            > open-prs.json
+
+          python3 - <<'PY'
+          import json, os, re
+
+          with open("open-prs.json", encoding="utf-8") as fh:
+              prs = json.load(fh)
+
+          article_pattern = re.compile(
+              r"article|publish|content[_ -]?queue|keyword[_ -]?queue|auto[_ -]?publish",
+              re.I,
+          )
+          maintenance_pattern = re.compile(
+              r"(?:^|[-_/ ])(?:test|tests|testing|security|ssrf|performance|"
+              r"code[-_ ]?health|maintenance|reliability|build|seo[-_ ]?fix|"
+              r"split[-_ ]?sentences|submit[-_ ]?form|parse[-_ ]?datetime)(?:$|[-_/ :])|"
+              r"🧪|⚡|🔒",
+              re.I,
+          )
+
+          blockers = []
+          for pr in prs:
+              if pr.get("draft") or (pr.get("base") or {}).get("ref") != "main":
+                  continue
+              evidence = " ".join([
+                  pr.get("title") or "",
+                  (pr.get("head") or {}).get("ref") or "",
+              ])
+              if article_pattern.search(evidence):
+                  continue
+              if maintenance_pattern.search(evidence):
+                  blockers.append(
+                      f"#{pr['number']} {pr['title']} {pr['html_url']}"
+                  )
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+              out.write(f"blocked={'true' if blockers else 'false'}\n")
+
+          if blockers:
+              print("Current open non-draft maintenance PRs block a new Jules session:")
+              print("\n".join(blockers))
+          else:
+              print("No current open non-draft maintenance PR blocks this run.")
+          PY
+
       - name: Start Jules autonomous code-health session
+        if: steps.backlog_gate.outputs.blocked != 'true'
         env:
           JULES_API_KEY: ${{ secrets.JULES_API_KEY }}
         run: |
@@ -42,7 +100,7 @@ jobs:
           import json
           with open("payload.json", encoding="utf-8") as fh:
               payload = json.load(fh)
-          payload["prompt"] += "\n\nAuthoritative blocker-evidence rule: never describe a branch by itself as active, ongoing, or blocking. A backlog blocker is valid only when a fresh live GitHub query returns an open, non-draft PR targeting main and the no-op summary includes that PR's number, exact title, and https://github.com/.../pull/... URL. A remote branch without that live open-PR URL is stale/non-blocking even if it still exists. If GitHub cannot be queried, mark blocker state unverified and do not convert the run to a blocker-based no-op. Before the final no-op decision, repeat the live PR query so a PR merged during the session cannot block the run."
+          payload["prompt"] += "\n\nAuthoritative blocker-evidence rule: never describe a branch by itself as active, ongoing, or blocking. A backlog blocker is valid only when a fresh live GitHub query returns an open, non-draft PR targeting main and the no-op summary includes that PR's number, exact title, and https://github.com/.../pull/... URL. A remote branch without that live open-PR URL is stale/non-blocking even if it still exists. If GitHub cannot be queried, mark blocker state unverified and do not convert the run to a blocker-based no-op. Before the final no-op decision, repeat the live PR query so a PR merged during the session cannot block the run.\n\nDuplicate-backlog invariant: any current open non-draft PR targeting main for tests, security, performance, reliability, build tooling, SEO utilities, or code health is a related blocker even when it changes a different file. Do not create a second maintenance PR while one exists. The GitHub Actions preflight gate is authoritative; if Jules is started, still repeat the live query before editing and before PR creation so a PR opened concurrently cannot produce another maintenance PR."
           with open("payload.json", "w", encoding="utf-8") as fh:
               json.dump(payload, fh, ensure_ascii=False)
           PY
