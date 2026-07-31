@@ -32,3 +32,7 @@ test("escapeCsv escapes strings correctly", () => {
   assert.strictEqual(escapeCsv('with"quote'), '"with""quote"');
   assert.strictEqual(escapeCsv("with\nnewline"), '"with\nnewline"');
 });
+
+test("parseDateTime throws on invalid datetime string", () => {
+  assert.throws(() => parseDateTime("invalid-date"), /Invalid datetime: invalid-date/);
+});
