@@ -278,7 +278,7 @@ function needsDescriptionRefresh(description, locale) {
   return false;
 }
 
-function splitSentences(text) {
+export function splitSentences(text) {
   return (normalizeWhitespace(text).match(/[^.!?…]+[.!?…]?/gu) || [])
     .map((sentence) => normalizeWhitespace(sentence))
     .filter(Boolean);
