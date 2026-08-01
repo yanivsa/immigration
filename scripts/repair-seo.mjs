@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { decodeEntities, stripTags } from "./seo-utils.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -612,25 +613,6 @@ const getNeutralPath = (relativePath) => {
   }
   return relativePath.replace(new RegExp(`^${locale}/`), "");
 };
-
-const decodeEntities = (value) =>
-  value
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, "\"")
-    .replace(/&#39;/g, "'")
-    .replace(/&nbsp;/g, " ");
-
-const stripTags = (value) =>
-  decodeEntities(
-    value
-      .replace(/<script[\s\S]*?<\/script>/gi, " ")
-      .replace(/<style[\s\S]*?<\/style>/gi, " ")
-      .replace(/<[^>]+>/g, " ")
-  )
-    .replace(/\s+/g, " ")
-    .trim();
 
 const trimAtWord = (value, max) => {
   if (value.length <= max) {
