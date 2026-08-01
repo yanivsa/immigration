@@ -423,7 +423,7 @@ function extractFirstImageMeta(html, relPath) {
   };
 }
 
-function upsertMetaTag(head, key, value, attribute = "name") {
+export function upsertMetaTag(head, key, value, attribute = "name") {
   const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const pattern = new RegExp(`\\n?\\s*<meta[^>]*${attribute}=["']${escapedKey}["'][^>]*>`, "i");
   const tag = `    <meta ${attribute}="${key}" content="${escapeAttribute(value)}" />`;
