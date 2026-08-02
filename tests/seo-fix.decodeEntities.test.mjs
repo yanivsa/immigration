@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert";
-import { decodeEntities } from "../scripts/seo-fix.mjs";
+import { decodeEntities } from "../scripts/seo-utils.mjs";
 
 test("decodeEntities decodes common HTML entities", () => {
   const input = "test &amp; string &quot;with&quot; &#39;entities&#39; &lt;and&gt;&nbsp;spaces";
