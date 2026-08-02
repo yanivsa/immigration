@@ -85,7 +85,8 @@ jobs:
           body_re = re.compile(
               r"(no[- ]?op summary|no files (?:were )?edited|no files (?:were )?modified|"
               r"files edited:\s*(none|no)|selector was not run|finished as a no[- ]?op|"
-              r"completed as a no[- ]?op|run halted as no[- ]?op|blocking .*pr|blocking .*branch)",
+              r"completed as a no[- ]?op|run halted as no[- ]?op|blocking .*pr|blocking .*branch|"
+              r"empty queue|no due (?:queue )?row|article id:\s*n/a)",
               re.I,
           )
 
