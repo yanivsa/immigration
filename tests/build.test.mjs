@@ -63,3 +63,27 @@ test("existing _redirects file is copied", async () => {
     assert.strictEqual(redirectsContent, "/old /new 301\n", "Expected existing _redirects file to be copied");
   });
 });
+
+test("build fails gracefully on permission error", async () => {
+  await withTmpDir(async (tmpRoot, tmpDist) => {
+    const items = ["index.html"];
+    await fs.writeFile(path.join(tmpRoot, "index.html"), "Content");
+
+    // Create an unreadable file to simulate permission error
+    const noAccessPath = path.join(tmpRoot, "index.html");
+    await fs.chmod(noAccessPath, 0o000);
+
+    let errorThrown = false;
+    try {
+      await build(tmpRoot, tmpDist, items);
+    } catch (err) {
+      errorThrown = true;
+      assert.ok(err.code === "EACCES" || err.message.includes("EACCES"), "Expected permission denied error");
+    } finally {
+      // Restore permissions so the tmpdir can be cleaned up
+      await fs.chmod(noAccessPath, 0o644);
+    }
+
+    assert.ok(errorThrown, "Expected build to fail due to permission error");
+  });
+});
