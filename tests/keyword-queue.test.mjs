@@ -26,6 +26,15 @@ test("addDays adds specified number of days", () => {
   assert.strictEqual(nextDate.getHours(), 14);
 });
 
+test("addDays handles negative days", () => {
+  const date = new Date(2024, 4, 12, 14, 30, 0, 0); // May 12, 2024
+  const prevDate = addDays(date, -3);
+  assert.strictEqual(prevDate.getFullYear(), 2024);
+  assert.strictEqual(prevDate.getMonth(), 4);
+  assert.strictEqual(prevDate.getDate(), 9);
+  assert.strictEqual(prevDate.getHours(), 14);
+});
+
 test("escapeCsv escapes strings correctly", () => {
   assert.strictEqual(escapeCsv("simple"), "simple");
   assert.strictEqual(escapeCsv("with,comma"), '"with,comma"');
