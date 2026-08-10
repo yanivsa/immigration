@@ -11,10 +11,25 @@ test("parseDateTime parses valid datetime string", () => {
   assert.strictEqual(date.getMinutes(), 30);
 });
 
+test("parseDateTime parses valid datetime string with T separator", () => {
+  const date = parseDateTime("2024-05-12T14:30");
+  assert.strictEqual(date.getFullYear(), 2024);
+  assert.strictEqual(date.getMonth(), 4); // May is 4
+  assert.strictEqual(date.getDate(), 12);
+  assert.strictEqual(date.getHours(), 14);
+  assert.strictEqual(date.getMinutes(), 30);
+});
+
 test("formatDateTime formats date to string", () => {
   const date = new Date(2024, 4, 12, 14, 30, 0, 0); // May 12, 2024, 14:30
   const str = formatDateTime(date);
   assert.strictEqual(str, "2024-05-12 14:30");
+});
+
+test("formatDateTime pads single-digit values", () => {
+  const date = new Date(2024, 0, 5, 8, 5, 0, 0); // Jan 5, 2024, 08:05
+  const str = formatDateTime(date);
+  assert.strictEqual(str, "2024-01-05 08:05");
 });
 
 test("addDays adds specified number of days", () => {
