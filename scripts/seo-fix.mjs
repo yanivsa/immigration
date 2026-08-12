@@ -382,7 +382,7 @@ function normalizeImageTags(html) {
   });
 }
 
-function extractFirstImageMeta(html, relPath) {
+export function extractFirstImageMeta(html, relPath) {
   const tag = readMatch(html, /(<img\b[^>]*>)/i);
   if (!tag) {
     return {
