@@ -123,7 +123,7 @@ const noindexPatterns = [
 ];
 
 
-function escapeAttribute(value = "") {
+export function escapeAttribute(value = "") {
   return value
     .replace(/&/g, "&amp;")
     .replace(/"/g, "&quot;")
