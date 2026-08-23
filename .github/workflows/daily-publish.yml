@@ -1,9 +1,7 @@
-name: Daily Article Publish
+name: Daily Article Publish (Legacy Manual Fallback)
 
 on:
-  schedule:
-    - cron: '0 6 * * *' # Runs every day at 09:00 AM Israel Time (06:00 UTC)
-  workflow_dispatch: # Allows manual trigger
+  workflow_dispatch: # Manual fallback only; daily publishing is handled by Jules
 
 permissions:
   contents: write
@@ -72,7 +70,7 @@ jobs:
               )
           ]
           if blockers:
-              print("Open article publication PR exists; daily direct publish will no-op.")
+              print("Open article publication PR exists; legacy direct publish will no-op.")
               for blocker in blockers:
                   print(f"- {blocker}")
               with open(__import__("os").environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
@@ -98,7 +96,7 @@ jobs:
         if: steps.article_gate.outputs.blocked != 'true'
         run: node scripts/publish-next.mjs
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }} # User will need to add this to GitHub Secrets
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
       - name: Rebuild Site Assets
         if: steps.article_gate.outputs.blocked != 'true' && steps.publish_step.outputs.published == 'true'
