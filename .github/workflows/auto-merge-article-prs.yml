@@ -79,7 +79,7 @@ jobs:
 
           filenames = [f.get("filename") for f in files if f.get("filename")]
 
-          allowed_re = re.compile(r"^(keyword-queue\.csv|tests/publish-next\.test\.mjs|articles/article-\d+\.html|en/articles/article-\d+\.html|ru/articles/article-\d+\.html|ua/articles/article-\d+\.html)$")
+          allowed_re = re.compile(r"^(keyword-queue\.csv|articles/article-\d+\.html|en/articles/article-\d+\.html|ru/articles/article-\d+\.html|ua/articles/article-\d+\.html|images/articles/article-\d+\.(?:jpe?g|png|webp))$", re.I)
           all_allowed = all(bool(allowed_re.match(p)) for p in filenames)
 
           title_ok = bool(re.search(r"(?:Auto-publish:\s*article-|Publish article-)\d+\b", pr.get("title") or "", re.I))
@@ -95,6 +95,7 @@ jobs:
 
           print(f"eligible={'true' if eligible else 'false'}")
           print(f"sha={(pr.get('head') or {}).get('sha') or ''}")
+          print(f"base_sha={(pr.get('base') or {}).get('sha') or ''}")
           # Keep this bash-safe (no spaces/parens) because we `source` gate.env.
           print(f"reason={'ok' if eligible else 'not_eligible_files_title_base_head'}")
           PY
@@ -108,12 +109,15 @@ jobs:
 
             rm -rf "pr-${number}"
             mkdir "pr-${number}"
+            cp pr.json "pr-${number}/pr.json"
             (
               cd "pr-${number}"
               git init -q
               git remote add origin "https://x-access-token:${token}@github.com/${repo}.git"
               git fetch --depth 1 origin "${sha}"
               git checkout -q FETCH_HEAD
+              git fetch --depth 1 origin "${base_sha}"
+              python3 .github/scripts/validate-immigration-article-pr.py "${base_sha}" "${sha}" pr.json
               npm ci
               node --test
               npm run build
@@ -126,7 +130,7 @@ jobs:
               -H "Accept: application/vnd.github+json" \
               -H "Content-Type: application/json" \
               -X PUT \
-              -d "{\"commit_title\":\"Auto-merge immigration article PR #${number}\",\"merge_method\":\"squash\"}" \
+              -d "{\"commit_title\":\"Auto-merge immigration article PR #${number}\",\"merge_method\":\"squash\",\"sha\":\"${sha}\"}" \
               "https://api.github.com/repos/${repo}/pulls/${number}/merge" \
               > merge-result.json; then
               echo "Merge request failed for PR #${number}. Leaving PR open."
@@ -135,7 +139,7 @@ jobs:
             fi
 
             api -X POST \
-              -d "{\"body\":\"Auto-merged after validation: npm ci + node --test + npm run build.\"}" \
+              -d "{\"body\":\"Auto-merged after trusted four-locale content, official-source, image-provenance and current-head validation; npm ci + node --test + npm run build passed.\"}" \
               "https://api.github.com/repos/${repo}/issues/${number}/comments" \
               > /dev/null
           done
