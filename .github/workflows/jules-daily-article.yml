@@ -1,0 +1,106 @@
+name: Jules Daily Immigration Article
+
+on:
+  schedule:
+    - cron: "30 0 * * *" # 03:30 Israel during UTC+3; starts Jules and exits quickly
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: jules-daily-immigration-article
+  cancel-in-progress: false
+
+jobs:
+  start-jules:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Stop if an immigration article PR is already open
+        id: article_gate
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          curl --fail-with-body -sS --retry 3 --retry-all-errors --retry-delay 2 \
+            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${REPO}/pulls?state=open&per_page=100" \
+            > open-prs.json
+
+          python3 - <<'PY'
+          import json, os, re
+
+          with open("open-prs.json", encoding="utf-8") as fh:
+              prs = json.load(fh)
+
+          article_re = re.compile(
+              r"(?:^|[-_/ ])(?:publish|article|content[-_ ]?queue|keyword[-_ ]?queue)(?:$|[-_/ :0-9])",
+              re.I,
+          )
+          blockers = []
+          for pr in prs:
+              if pr.get("draft") or (pr.get("base") or {}).get("ref") != "main":
+                  continue
+              evidence = " ".join([
+                  pr.get("title") or "",
+                  (pr.get("head") or {}).get("ref") or "",
+              ])
+              if article_re.search(evidence):
+                  blockers.append(f"#{pr['number']} {pr['title']} {pr['html_url']}")
+
+          blocked = bool(blockers)
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+              out.write(f"blocked={'true' if blocked else 'false'}\n")
+
+          if blockers:
+              print("Current open article PR blocks a duplicate Jules article session:")
+              print("\n".join(blockers))
+          else:
+              print("No open article PR blocks today's Jules session.")
+          PY
+
+      - name: Start Jules daily immigration article session
+        if: steps.article_gate.outputs.blocked != 'true'
+        env:
+          JULES_API_KEY: ${{ secrets.JULES_API_KEY }}
+        run: |
+          set -euo pipefail
+          test -n "${JULES_API_KEY:-}"
+
+          cat > payload.json <<'JSON'
+          {
+            "title": "Daily immigration article",
+            "prompt": "Create today's immigration-law article fully autonomously in yanivsa/immigration from main. Never ask the user for confirmation, plan approval, review, Start clicks, topic selection, or implementation choices. First inspect the current repository, keyword-queue.csv, existing article files, and current open PRs so the work is non-duplicate. If keyword-queue.csv contains a due row, use exactly the first due row and remove only that consumed row. If the queue is empty or has no due row, do NOT create a no-op PR merely because the queue is empty: instead choose exactly one high-value, non-duplicate Israeli immigration-law topic that fills a real gap in the existing site. In the empty-queue path, do not add a synthetic queue row and leave keyword-queue.csv unchanged. Determine the next article number from the existing articles/article-*.html files. Create exactly one article in four locales: articles/article-N.html, en/articles/article-N.html, ru/articles/article-N.html, and ua/articles/article-N.html. Keep each locale entirely in its own language, preserve the site's existing HTML structure and hub/service conventions, and reuse an existing approved local article image rather than adding a new image file. Legal and factual claims must be conservative and grounded primarily in official Israeli sources such as gov.il, the Population and Immigration Authority, legislation, regulations, or other authoritative government material; never invent requirements, deadlines, rights, statistics, or source links. The details section in every locale must be genuinely topic-specific and substantive enough to satisfy the repository quality gate (at least 1800 characters), without generic filler, repeated boilerplate, mixed-language artifacts, or keyword stuffing. Include useful sources/further-reading links in the article. Allowed edits are ONLY the four article HTML files and, only when consuming an existing due row, keyword-queue.csv. Do not edit workflows, scripts, tests, package files, configuration, secrets, hubs, or other site files during this content run. Run npm ci, node --test, and npm run build before submission. Create one non-draft PR targeting main with title exactly in the form `Publish article-N: <short-intent>` so the existing article auto-merge workflow can validate it. The PR body must state the topic/intent, article ID, all four locale paths, whether the existing hub mapping was kept and why, validation commands/results, any risks or skipped checks, and confirmation that no manual user input was required. If a safe, factual, non-duplicate article cannot be produced, finish the Jules session cleanly with zero edits and NO pull request; never create a zero-file/no-op PR.",
+            "sourceContext": {
+              "source": "sources/github/yanivsa/immigration",
+              "githubRepoContext": {
+                "startingBranch": "main"
+              }
+            },
+            "requirePlanApproval": false,
+            "automationMode": "AUTO_CREATE_PR"
+          }
+          JSON
+
+          status="$(curl --fail-with-body -sS --retry 3 --retry-all-errors --retry-delay 2 \
+            -o response.json -w '%{http_code}' \
+            -H "x-goog-api-key: ${JULES_API_KEY}" \
+            -H "Content-Type: application/json" \
+            -d @payload.json \
+            https://jules.googleapis.com/v1alpha/sessions)"
+          cat response.json
+          test "${status}" = "200" -o "${status}" = "201"
+
+          python3 - <<'PY'
+          import json
+          with open("response.json", encoding="utf-8") as fh:
+              response = json.load(fh)
+          name = response.get("name") or (response.get("session") or {}).get("name")
+          if not isinstance(name, str) or not name.startswith("sessions/"):
+              raise SystemExit("Jules did not return a session id")
+          print(f"Started {name}; GitHub runner can exit while Jules continues asynchronously.")
+          PY
