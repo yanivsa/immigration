@@ -32,7 +32,12 @@ test("publish-next generates 4 substantive articles without raw cluster IDs and 
 
   // Modify first row to make it due (e.g. 2000-01-01 11:00)
   const lines = originalQueue.trim().split("\n");
-  if (lines.length > 1) {
+  if (lines.length === 1) {
+    lines.push(
+      "2000-01-01 11:00,citizenship-status,temporary-residence,תושבות זמנית בישראל,temporary residence,временное проживание в Израиле,тимчасове проживання в Ізраїлі"
+    );
+    await fs.writeFile(queuePath, lines.join("\n") + "\n", "utf8");
+  } else {
     const parts = lines[1].split(",");
     parts[0] = "2000-01-01 11:00";
     lines[1] = parts.join(",");
@@ -52,7 +57,7 @@ test("publish-next generates 4 substantive articles without raw cluster IDs and 
 
   // Read modified queue to verify 1 row consumed
   const newQueue = await fs.readFile(queuePath, "utf8");
-  const origRows = originalQueue.trim().split("\n").length;
+  const origRows = lines.length;
   const newRows = newQueue.trim().split("\n").length;
   assert.strictEqual(newRows, origRows - 1, "Should consume exactly one queue row");
 
