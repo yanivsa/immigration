@@ -86,6 +86,19 @@ jobs:
           }
           JSON
 
+          python3 - <<'PY'
+          import json
+          path = "payload.json"
+          payload = json.load(open(path, encoding="utf-8"))
+          payload["prompt"] += (
+              "\n\nNon-interruption invariant: never ask for confirmation, feedback, permission, "
+              "review, or approval at any point. A validator failure is an instruction to repair "
+              "every reported failure and rerun all gates, never a reason to ask whether a proposed "
+              "repair sounds correct. Continue until the validated PR or clean zero-edit result is terminal."
+          )
+          json.dump(payload, open(path, "w", encoding="utf-8"), ensure_ascii=False)
+          PY
+
           status="$(curl --fail-with-body -sS --retry 3 --retry-all-errors --retry-delay 2 \
             -o response.json -w '%{http_code}' \
             -H "x-goog-api-key: ${JULES_API_KEY}" \
