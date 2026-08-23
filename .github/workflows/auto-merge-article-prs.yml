@@ -4,7 +4,7 @@ on:
   pull_request_target:
     types: [opened, synchronize, reopened, ready_for_review]
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "17 4 * * *" # daily fallback; PR events handle normal merges immediately
   workflow_dispatch:
 
 permissions:
