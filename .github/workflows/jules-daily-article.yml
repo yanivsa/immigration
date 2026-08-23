@@ -96,6 +96,16 @@ jobs:
               "every reported failure and rerun all gates, never a reason to ask whether a proposed "
               "repair sounds correct. Continue until the validated PR or clean zero-edit result is terminal."
           )
+          payload["prompt"] += (
+              "\n\nOfficial-source access fallback: direct gov.il requests may return HTTP 403 in the "
+              "Jules environment. That is not a reason to abandon the daily article. Read the same "
+              "official page through https://r.jina.ai/https://www.gov.il/... or "
+              "https://r.jina.ai/http://www.gov.il/... while keeping the canonical https://www.gov.il/... "
+              "URL in the article and PR Research Sources field. Use the proxy only as a read-only text "
+              "transport for the canonical official page; never cite r.jina.ai as the source. Cross-check "
+              "at least two distinct canonical official pages and reject any transport response whose title "
+              "or content does not clearly match the requested gov.il page."
+          )
           json.dump(payload, open(path, "w", encoding="utf-8"), ensure_ascii=False)
           PY
 
