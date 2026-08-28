@@ -188,7 +188,7 @@ function getLocale(relPath) {
   return "he";
 }
 
-function stripLocalePrefix(relPath) {
+export function stripLocalePrefix(relPath) {
   return relPath.replace(/^(en|ru|ua)\//, "");
 }
 
