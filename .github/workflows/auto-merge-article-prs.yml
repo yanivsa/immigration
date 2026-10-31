@@ -81,6 +81,9 @@ jobs:
 
           allowed_re = re.compile(r"^(keyword-queue\.csv|articles/article-\d+\.html|en/articles/article-\d+\.html|ru/articles/article-\d+\.html|ua/articles/article-\d+\.html|images/articles/article-\d+\.(?:jpe?g|png|webp))$", re.I)
           all_allowed = all(bool(allowed_re.match(p)) for p in filenames)
+          # Fail closed if GitHub's first page does not cover the complete diff.
+          complete = bool(filenames) and len(files) == pr.get("changed_files") and len(files) <= 100
+          safe_shas = all(re.fullmatch(r"[0-9a-f]{40}", (pr.get(side) or {}).get("sha", "")) for side in ("head", "base"))
 
           title_ok = bool(re.search(r"(?:Auto-publish:\s*article-|Publish article-)\d+\b", pr.get("title") or "", re.I))
 
@@ -91,6 +94,8 @@ jobs:
               and (pr.get("head") or {}).get("repo", {}).get("full_name") == (pr.get("base") or {}).get("repo", {}).get("full_name")
               and (pr.get("base") or {}).get("ref") == "main"
               and all_allowed
+              and complete
+              and safe_shas
           )
 
           print(f"eligible={'true' if eligible else 'false'}")
@@ -117,15 +122,24 @@ jobs:
               git fetch --depth 1 origin "${sha}"
               git checkout -q FETCH_HEAD
               git fetch --depth 1 origin "${base_sha}"
-              python3 .github/scripts/validate-immigration-article-pr.py "${base_sha}" "${sha}" pr.json
-              npm ci
+              # The validator is executable code: load it from the trusted base.
+              git show "${base_sha}:.github/scripts/validate-immigration-article-pr.py" > ../trusted-validator.py
+              # A prior malicious symlink at an allowed article path is not data.
+              if git diff --raw "${base_sha}" "${sha}" | grep -Eq '^:[0-7]{6} 120000 '; then
+                echo "Refusing symbolic-link changes"
+                exit 1
+              fi
+              python3 ../trusted-validator.py "${base_sha}" "${sha}" pr.json
+              # Do not leave the write credential in the checkout used by tests.
+              git remote set-url origin "https://github.com/${repo}.git"
+              npm ci --ignore-scripts
               node --test
               npm run build
             )
 
             # PR merge can legitimately be blocked (e.g. conflicts). Treat that as "not eligible" rather than failing
             # the whole workflow run, so schedule-based runs keep operating.
-            if ! curl -sS --retry 3 --retry-all-errors --retry-delay 2 \
+            if ! curl --fail-with-body -sS --retry 3 --retry-all-errors --retry-delay 2 \
               -H "Authorization: Bearer ${token}" \
               -H "Accept: application/vnd.github+json" \
               -H "Content-Type: application/json" \
@@ -137,6 +151,7 @@ jobs:
               cat merge-result.json || true
               continue
             fi
+            python3 -c 'import json; assert json.load(open("merge-result.json")).get("merged") is True'
 
             api -X POST \
               -d "{\"body\":\"Auto-merged after trusted four-locale content, official-source, image-provenance and current-head validation; npm ci + node --test + npm run build passed.\"}" \
